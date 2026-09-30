@@ -14,17 +14,10 @@ Erpy Factory is in early access and focuses on Odoo add-on repositories.
 
 ## Quick start
 
-To get from nothing to your first change, you go through these steps in order. Each step ends
-with a **Check**: something you can look at to know it worked. If a check does not match what you
-see, stop there and tell us before going on.
+Each step ends with a **Check**: something you can look at to know it worked. If a check does not
+match what you see, do not go on to the next step.
 
 1. [Install the Erpyd GitHub App](quickstart/01-install-the-app/) on one repository.
-2. Get your installation activated. *Not written yet.*
-3. Prepare your repository. *Not written yet.*
-4. Ask for your first change. *Not written yet.*
-
-A step is written only after it has been tried on a real repository, so the later ones appear as
-they are checked.
 
 ## What you need
 
