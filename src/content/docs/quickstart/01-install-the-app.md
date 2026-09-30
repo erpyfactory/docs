@@ -46,4 +46,4 @@ and to no other.
 
 Installing does not start any work yet. Erpy Factory records a new installation as pending, and
 GitHub may show it as **suspended**. That is expected: it stays that way until the installation is
-activated, which is the next step and is being added.
+activated, which is the next step, not yet written.
