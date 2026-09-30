@@ -10,8 +10,7 @@ Erpy Factory is in early access.
 
 ## Quick start
 
-Each step ends with a **Check**: something you can look at to know it worked. If a check does not
-match what you see, do not go on to the next step.
+Each step ends with a **Check**: something you can look at to know it worked.
 
 1. [Install the Erpyd GitHub App](quickstart/01-install-the-app/) on your repositories.
 
