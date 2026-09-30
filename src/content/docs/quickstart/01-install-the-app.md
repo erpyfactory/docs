@@ -44,6 +44,4 @@ and to no other.
 
 ## What to expect
 
-Installing connects Erpyd to your repository. It does not start any work: Erpy Factory records a
-new installation as pending until it is activated, and GitHub may show it as **suspended**. That
-is expected.
+Installing connects Erpyd to your repository. It does not start any work by itself.
