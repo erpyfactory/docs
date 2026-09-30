@@ -24,9 +24,12 @@ Open your installed apps:
 - for an organization: `https://github.com/organizations/<your-organization>/settings/installations`
 - for a personal account: [github.com/settings/installations](https://github.com/settings/installations)
 
-**Erpyd** is listed. Select **Configure** and confirm that the repository access is the one you
+**Erpyd** is listed, and it may be marked as suspended (see below). Select **Configure** and confirm that the repository access is the one you
 chose: all repositories, or exactly the ones you picked.
 
 ## What to expect
 
-Installing connects Erpyd to your repositories. It does not start any work by itself.
+Installing connects Erpyd to your repositories. GitHub then shows Erpyd as **suspended** on your
+installation, for example on the installation's page in your organization's settings. This is
+normal: a new installation starts suspended, and Erpyd does nothing until it is unsuspended. We
+will get in touch with you and unsuspend it.
