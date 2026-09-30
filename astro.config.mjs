@@ -10,7 +10,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Erpy Factory',
-			description: 'Turn GitHub issues into pull requests with Erpyd.',
+			description: 'A factory for Odoo projects: turn GitHub issues into pull requests.',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/erpyfactory/docs' }],
 			editLink: { baseUrl: 'https://github.com/erpyfactory/docs/edit/main/' },
 			sidebar: [
