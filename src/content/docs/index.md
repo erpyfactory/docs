@@ -17,10 +17,10 @@ Erpy Factory is in early access and focuses on Odoo add-on repositories.
 Each step ends with a **Check**: something you can look at to know it worked. If a check does not
 match what you see, do not go on to the next step.
 
-1. [Install the Erpyd GitHub App](quickstart/01-install-the-app/) on one repository.
+1. [Install the Erpyd GitHub App](quickstart/01-install-the-app/) on your repositories.
 
 ## What you need
 
-- A GitHub repository, owned by an organization or a personal account.
+- One or more GitHub repositories, owned by an organization or a personal account.
 - Permission to install a GitHub App on that account. For an organization that means being an
   owner of it.
