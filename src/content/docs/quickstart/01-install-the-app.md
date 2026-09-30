@@ -24,8 +24,8 @@ Open your installed apps:
 - for an organization: `https://github.com/organizations/<your-organization>/settings/installations`
 - for a personal account: [github.com/settings/installations](https://github.com/settings/installations)
 
-**Erpyd** is listed, and it may be marked as suspended (see below). Select **Configure** and confirm that the repository access is the one you
-chose: all repositories, or exactly the ones you picked.
+**Erpyd** is listed, marked as suspended (see below). Select **Configure** and confirm that the
+repository access is the one you chose: all repositories, or exactly the ones you picked.
 
 ## What to expect
 
