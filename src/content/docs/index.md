@@ -8,7 +8,7 @@ Erpy Factory turns the issues in your GitHub repository into pull requests.
 You describe the work in an issue. Erpy Factory plans the change, writes the code, runs your
 checks and hands the result back as a pull request for you to review. Review feedback and
 failing checks can be handed back to it the same way. The work runs on Erpy Factory's side;
-what connects it to your repository is **Erpyd**, the GitHub App you install.
+what connects it to your repositories is **Erpyd**, the GitHub App you install.
 
 Erpy Factory is in early access and focuses on Odoo add-on repositories.
 
