@@ -29,7 +29,5 @@ repository access is the one you chose: all repositories, or exactly the ones yo
 
 ## What to expect
 
-Installing connects Erpyd to your repositories. GitHub then shows Erpyd as **suspended** on your
-installation, for example on the installation's page in your organization's settings. This is
-normal: a new installation starts suspended, and Erpyd does nothing until it is unsuspended. We
-will get in touch with you and unsuspend it.
+Erpyd is installed but temporarily suspended: GitHub shows the installation as **suspended**. This
+is normal. We will activate it on our side.
