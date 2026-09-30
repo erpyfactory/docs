@@ -14,7 +14,7 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/erpyfactory/docs' }],
 			editLink: { baseUrl: 'https://github.com/erpyfactory/docs/edit/main/' },
 			sidebar: [
-				{ label: 'What is Erpy Factory', slug: 'overview' },
+				{ label: 'What is Erpy Factory', slug: 'index' },
 				{ label: 'Quick start', items: [{ autogenerate: { directory: 'quickstart' } }] },
 			],
 		}),
