@@ -59,6 +59,7 @@ Erpyd turns an issue into a pull request in two stages: it writes the requiremen
 
 - Erpyd starts the pull request as a draft, and writes its description when the change is ready for review. The description starts with `Closes #N`, and has a summary, the acceptance criteria and an overview of the changes.
 - Erpyd does not build before you approve the requirements. If you ask for it anyway, Erpyd comments "I can't build this yet because the requirements are not approved. When they are right, ask `@erpyd` in a comment here to approve them, then to build the change." and adds the label `erpy-needs-info`. Approve the requirements, then ask again.
+- If the change touches code that is broken, Erpyd fixes it in the same pull request. It opens no second pull request and no follow-up issue for it.
 - Erpyd works on one issue or pull request at a time. When many requests are waiting, Erpyd's check says it starts when capacity is free.
 - Erpyd never merges, never pushes to your default branch, and never changes your workflows, `harness.yaml` or `.harness` folder. You do.
 - A pull request that Erpyd opens carries the `erpy-factory` label, and Erpyd keeps it in order on its own, see [Automatic work](../05-automatic-work/).
