@@ -7,10 +7,10 @@ Erpyd turns an issue into a pull request in two stages: it writes the requiremen
 
 ## Before you start
 
-- Steps 1 and 2 are done: Erpyd is active on your installation, and you merged the configuration pull request.
+- Your repository is set up: Erpyd is installed and active on it, and you merged the configuration pull request, with the advanced settings if your repository needs them.
 - You have an issue that describes one small change. Write it as you would tell a colleague, for example "Add a delivery note field to sale orders".
 
-## Steps
+## Typical workflow
 
 1. Open the issue.
 2. Add this comment:
@@ -50,8 +50,8 @@ Erpyd turns an issue into a pull request in two stages: it writes the requiremen
 
 ## Check
 
-- After step 6, the issue has the label `erpy-prd-ready`.
-- After step 8, the issue has the label `erpy-in-review`, and a pull request titled with the issue number, from a branch named `issue-` followed by the issue number, closes it.
+- After you approve the requirements, the issue has the label `erpy-prd-ready`.
+- After the pull request is open, the issue has the label `erpy-in-review`, and a pull request titled with the issue number, from a branch named `issue-` followed by the issue number, closes it.
 - The pull request has a check named "Implementation".
 - After you merge the pull request, the issue closes by itself.
 
