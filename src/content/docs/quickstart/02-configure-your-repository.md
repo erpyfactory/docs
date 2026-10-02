@@ -26,7 +26,7 @@ Erpyd configures your repository from a plan that you review first. It looks at 
 
 ## What Erpyd works out from your repository
 
-Erpyd takes this on itself. It reads your repository and tries to answer each of these questions, so you do not have to. Only what it cannot work out from the repository does it ask you, in the plan, and you answer in a comment. Under each question is the reason Erpyd wants to know.
+Erpyd takes this on itself. It reads your repository and tries to answer each of these questions, so you do not have to. Most of them are what Erpyd needs to run your Odoo stack. Only what it cannot work out from the repository does it ask you, in the plan, and you answer in a comment. Under each question is the reason Erpyd wants to know.
 
 1. Which Odoo version are your add-ons written for?
 
@@ -86,7 +86,7 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
 15. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
 
-   Erpyd repairs a failing workflow by changing your code. Some failures cannot be fixed that way, for example a deploy that fails for a missing secret, so you tell it which workflows to leave alone.
+   On pull requests that carry the `erpy-factory` label, Erpyd repairs a failing workflow by changing your code, for a few attempts. Some failures cannot be fixed that way, for example a deploy that fails for a missing secret, so you tell it which workflows to leave alone.
 
 16. Should Erpyd resolve merge conflicts on its own?
 
@@ -94,7 +94,7 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
 17. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
 
-   Erpyd reads these bots' comments on its pull requests as review feedback and acts on it.
+   Erpyd reads these bots' comments as review feedback and acts on it, on pull requests that carry the `erpy-factory` label or where the bot mentions `@erpyd`.
 
 18. Erpyd configures its settings in `harness.yaml` and lets you keep customized harnesses in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
 
@@ -190,7 +190,7 @@ A workflow that Erpyd leaves alone still runs and still blocks a merge. Erpyd on
 
 - Erpyd never pushes to your default branch. It only opens the pull request.
 - Erpyd does not change your workflows. It reviews them and proposes what to do with each.
-- Your own `.claude` folder, `AGENTS.md` and `CLAUDE.md` are left as they are.
+- Your own `.claude` folder, `AGENTS.md` and `CLAUDE.md` are left as they are. Erpyd's runs do not use your `.claude` folder or `CLAUDE.md`. Put instructions for Erpyd in `.harness/AGENTS.md`.
 - Erpyd sets up `harness.yaml` and a `.harness` folder. If your repository already has them, Erpyd sees that, suggests how to proceed, and works to resolve the conflict. Nothing in them changes until you approve.
 - If you ask to configure before there is a plan, Erpyd asks you to plan first.
 - Merging the pull request starts no work by itself. After it, Erpyd works on its own only on pull requests that carry the `erpy-factory` label, which you add, or which a pull request gets from the issue it closes. On those pull requests Erpyd:
