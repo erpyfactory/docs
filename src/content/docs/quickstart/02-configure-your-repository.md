@@ -100,10 +100,6 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
    Erpyd needs to know, so that it builds on what you have and does not overwrite it unasked.
 
-19. Do you already have instructions for coding agents, in a `.claude` folder, an `AGENTS.md` or a `CLAUDE.md`?
-
-   Erpyd leaves these as they are, so it needs to know they exist.
-
 ## What Erpyd configures
 
 Everything Erpyd configures is a setting in `harness.yaml`. Every setting is in the file, with a comment above it that says what it is for. Erpyd fills in a setting from your repository when it finds evidence there, and writes it as a comment with an example value when it does not. You answer those in the plan.
