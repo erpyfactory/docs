@@ -195,4 +195,4 @@ A workflow that Erpyd leaves alone still runs and still blocks a merge. Erpyd on
   - repairs a failing check, for up to a few attempts, except in workflows you told it to leave alone;
   - resolves merge conflicts;
   - follows up when someone with write access requests changes.
-- The label comes off a pull request after seven days of inactivity. Remove it yourself to take a pull request back.
+- The label comes off a pull request seven days after it was added or Erpyd last worked on it, whichever is later. Add it again to give the pull request back to Erpyd, or remove it yourself to take it back sooner.
