@@ -42,7 +42,7 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
 4. Where does your Odoo source come from: the Odoo image you use, or a separate repository (the official one, a fork or your own)?
 
-   With an official Odoo image, Erpyd takes the Odoo source from the image. With a separate source repository, Erpyd keeps a copy of it to read while it works, and must be installed on that repository, at the branch you use.
+   With an official Odoo image, Erpyd takes the Odoo source from the image. With a public source repository, Erpyd clones it at the branch you use and keeps a copy to read while it works.
 
 5. Does your development setup run more than Odoo and Postgres, for example Redis? Do you have a Docker Compose file for it?
 
@@ -118,36 +118,37 @@ harness:
     required_check: Addons tests
     # The Odoo version your add-ons are written for. Found in your module manifests.
     odoo_version: "19.0"
-    # Whether you run Odoo Enterprise (true) or Community (false).
-    # Found in your Docker files, addons path and manifests. Without them, you answer.
-    odoo_enterprise: false
-    # Where the Odoo source comes from, and the branch it is taken at.
+    # The image Erpyd runs your code and tests on. Use the one your CI uses. It must be public.
+    # Found in your workflows, Docker Compose file or Dockerfile.
+    odoo_image: "odoo:19.0"
+    # Whether you run Odoo Enterprise (true) or Community (false). Community by default.
+    # Found in your Docker files, addons path and manifests.
+    # odoo_enterprise: false
+    # Where the Odoo source comes from: the image (the default), or a public GitHub repository.
     # Found in your workflows, Docker files or .gitmodules.
-    # odoo_core_repo: <your-organization>/odoo
-    # odoo_enterprise_repo: <your-organization>/enterprise
-    # odoo_source_ref: "19.0"
-    # The containers and the network of your development setup.
+    # odoo_source: github:odoo/odoo@19.0
+    # Your development stack: a Docker Compose file, and which of its services run Odoo and Postgres.
+    # Found in your repository. Without one, Erpyd uses its own standard stack.
+    # odoo_compose_file: docker-compose.yml
+    # odoo_compose_services: [odoo=web, postgres=db]
+    # The Odoo configuration file, when you have your own.
+    # odoo_conf: config/odoo.conf
+    # The folders that hold your add-ons, when they are not at the top of the repository.
+    # odoo_addons_paths: [addons, custom]
+    # The development database. Erpyd uses odoo_dev when you name none.
+    # odoo_dev_db: odoo_dev
+    # Where your database dump is stored. By default there is none, and tests start from a fresh database.
+    # odoo_seed: none
+    # Whether to load demo data when starting from a fresh database.
+    # odoo_with_demo: false
+    # The image for UI demos and recordings. It is the Odoo image by default.
+    # odoo_base_image: "odoo:19.0"
+    # The Docker Hub images your Docker Compose file uses besides Odoo.
     # Found in your Docker Compose file.
-    odoo_dev_container: odoo-dev
-    odoo_postgres_container: postgres-dev
-    odoo_nginx_container: nginx-dev
-    odoo_docker_network: odoo-dev-network
-    # The image the Odoo service runs, and the Docker Hub images beside it.
-    # Found in your Docker Compose file or Dockerfile.
-    odoo_base_image: "odoo:19.0"
-    odoo_hub_images: ["postgres:16", "nginx:alpine"]
-    # The development database that Erpyd restores its starting data into.
-    # Found in your Docker Compose file and scripts.
-    odoo_dev_db: odoo_dev
+    # odoo_hub_images: ["postgres:16", "nginx:alpine"]
     # The languages a new translatable term needs, besides English.
     # Found in your translation lint settings, else in your .po files. Without them, you answer.
     odoo_locales: [fr_BE, nl_NL]
-    # The image your CI runs the tests in.
-    # Found in your workflows.
-    odoo_test_image: "odoo:19.0"
-    # The bucket that holds your development database dump.
-    # Found in your workflows. If you have none, you answer.
-    # odoo_seed_bucket: my-odoo-db-dumps
     resolve_ci:
       # Branches besides the default that pull requests target and CI runs on.
       # Found in your recent pull requests and workflow branch filters.
