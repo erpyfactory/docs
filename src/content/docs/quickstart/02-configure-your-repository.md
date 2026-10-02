@@ -47,13 +47,6 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 17. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
 18. Do you already have a `harness.yaml`, a `.harness` folder, a `.claude` folder, an `AGENTS.md` or a `CLAUDE.md`? What should happen to each?
 
-## Check
-
-- The issue has a plan, and after you approved it, a pull request titled "Configure this repository for Erpy Factory", opened from a branch named `erpy/configure-` followed by the issue number.
-- The pull request adds `harness.yaml` and a `.harness` folder, and changes nothing under `.github/workflows`. A comment above each setting in `harness.yaml` says what it is for.
-- Your repository now has Erpy labels: open **Issues**, then **Labels**.
-- After you merge the pull request, the issue closes by itself.
-
 ## What Erpyd configures
 
 Everything Erpyd configures is a setting in `harness.yaml`. Every setting is in the file, with a comment above it that says what it is for. Erpyd fills in a setting from your repository when it finds evidence there, and writes it as a comment with an example value when it does not. You answer those in the plan.
@@ -132,6 +125,13 @@ harness:
 The commented-out settings are the ones Erpyd found no evidence for, or that you turn on yourself. Erpyd asks you about them in the plan. You can change any setting later with a pull request.
 
 A workflow that Erpyd leaves alone still runs and still blocks a merge. Erpyd only does not try to repair it. Workflows that deploy, run scheduled work against outside systems, or need secrets or an environment Erpyd does not have are proposed as Leave alone.
+
+## Check
+
+- The issue has a plan, and after you approved it, a pull request titled "Configure this repository for Erpy Factory", opened from a branch named `erpy/configure-` followed by the issue number.
+- The pull request adds `harness.yaml` and a `.harness` folder, and changes nothing under `.github/workflows`. A comment above each setting in `harness.yaml` says what it is for.
+- Your repository now has Erpy labels: open **Issues**, then **Labels**.
+- After you merge the pull request, the issue closes by itself.
 
 ## What to expect
 
