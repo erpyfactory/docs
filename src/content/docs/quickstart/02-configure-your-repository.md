@@ -41,8 +41,6 @@ Erpyd configures your repository from a plan that you review first. It looks at 
 7. Wait for "Pull request #N with the configuration is open for review."
 8. Review the pull request, and merge it when it looks right.
 
-If someone with write access edits the plan directly, that edit wins over the comments posted before it.
-
 ## What Erpyd works out from your repository
 
 Erpyd takes this on itself. It reads your repository and tries to answer each of these questions, so you do not have to. Most of them are what Erpyd needs to run your Odoo stack. Only what it cannot work out from the repository does it ask you, in the plan, and you answer in a comment. Under each question is the reason Erpyd wants to know.
