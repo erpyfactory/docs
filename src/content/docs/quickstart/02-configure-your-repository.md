@@ -65,7 +65,7 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
    Erpyd runs the same services, so its tests see what yours see. Without a Docker Compose file, Erpyd uses its own standard development stack.
 
-6. Which images does your development setup use, Odoo included? Each one must be readable without signing in, for example a public Docker Hub image.
+6. Which images does your development setup use besides Odoo, for example Postgres and nginx? Each one must be readable without signing in, for example a public Docker Hub image.
 
    Erpyd loads these images in advance, so it must be able to pull them.
 
@@ -73,43 +73,47 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
    Erpyd restores its starting data under that name. Without one, it starts from a fresh database.
 
-8. Do your tests run with Odoo's demo data?
+8. Do your tests start from a database dump? Is it in your own Amazon S3 bucket?
+
+   Erpyd then starts from the same data as you. It reads the dump through a role that you create in your AWS account, see [Read access in your AWS account](#read-access-in-your-aws-account). Without a dump, it starts from a fresh database with your modules installed.
+
+9. Do your tests run with Odoo's demo data?
 
    Erpyd starts its tests from the same data as yours.
 
-9. Which image does your CI run the tests in? Is it a public image?
+10. Which image does your CI run the tests in? Is it public, or in your own Amazon ECR?
 
-   This is the Odoo image Erpyd runs your code and tests on, so use the one your CI uses. It must be public.
+   This is the Odoo image Erpyd runs your code and tests on, so use the one your CI uses. It must be readable without signing in, or be in your own Amazon ECR and read through a role that you create, see [Read access in your AWS account](#read-access-in-your-aws-account).
 
-10. Which languages besides English must a new translatable term be translated into?
+11. Which languages besides English must a new translatable term be translated into?
 
    Erpyd will not finish a change that adds text without translating it into these languages.
 
-11. Which branches do pull requests target besides the default branch?
+12. Which branches do pull requests target besides the default branch?
 
    Erpyd repairs failing checks and resolves conflicts on pull requests to these branches that carry the `erpy-factory` label. When one of these branches itself goes red, Erpyd opens a fix for it.
 
-12. Does new work start from a branch other than the default branch?
+13. Does new work start from a branch other than the default branch?
 
    Erpyd starts its work from that branch and opens its pull requests against it.
 
-13. Which check must be green before a pull request can merge?
+14. Which check must be green before a pull request can merge?
 
    Erpyd watches this check on the pull requests it opens, and works until it passes.
 
-14. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
+15. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
 
    On pull requests that carry the `erpy-factory` label, Erpyd repairs a failing workflow by changing your code, for a few attempts. Some failures cannot be fixed that way, for example a deploy that fails for a missing secret, so you tell it which workflows to leave alone.
 
-15. Should Erpyd resolve merge conflicts on its own?
+16. Should Erpyd resolve merge conflicts on its own?
 
    Erpyd resolves conflicts itself on pull requests that carry the `erpy-factory` label, and you may prefer to do it yourself.
 
-16. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
+17. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
 
    Erpyd reads these bots' comments as review feedback and acts on it, on pull requests that carry the `erpy-factory` label or where the bot mentions `@erpyd`.
 
-17. Erpyd configures its settings in `harness.yaml` and lets you keep your own instructions for Erpyd in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
+18. Erpyd configures its settings in `harness.yaml` and lets you keep your own instructions for Erpyd in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
 
    Erpyd needs to know, so that it builds on what you have and does not overwrite it unasked.
 
@@ -135,7 +139,8 @@ harness:
     required_check: Addons tests
     # The Odoo version your add-ons are written for. Found in your module manifests.
     odoo_version: "19.0"
-    # The image Erpyd runs your code and tests on. Use the one your CI uses. It must be public.
+    # The image Erpyd runs your code and tests on. Use the one your CI uses.
+    # It must be public, or in your own Amazon ECR (then set odoo_aws_role).
     # Found in your workflows, Docker Compose file or Dockerfile.
     odoo_image: "odoo:19.0"
     # Whether you run Odoo Enterprise (true) or Community (false). Community by default.
@@ -160,6 +165,10 @@ harness:
     # odoo_addons_paths: [addons, custom]
     # The development database. Erpyd uses odoo_dev when you name none.
     # odoo_dev_db: odoo_dev
+    # Where your database dump is stored. Without one, tests start from a fresh database.
+    # odoo_seed: s3://<bucket>/<prefix>
+    # The read-only role in your AWS account that Erpyd uses to read your ECR image or your dump.
+    # odoo_aws_role: arn:aws:iam::<account>:role/<name>
     # Whether to load demo data when starting from a fresh database.
     # odoo_with_demo: false
     # The image for UI demos and recordings. It is the Odoo image by default.
@@ -192,6 +201,44 @@ harness:
 The commented-out settings are the ones Erpyd found no evidence for, or that you turn on yourself. Erpyd asks you about them in the plan. You can change any setting later with a pull request.
 
 A workflow that Erpyd leaves alone still runs and still blocks a merge. Erpyd only does not try to repair it. Workflows that deploy, run scheduled work against outside systems, or need secrets or an environment Erpyd does not have are proposed as Leave alone.
+
+## Read access in your AWS account
+
+Erpyd reads a private Odoo image from your Amazon ECR, or a database dump from your Amazon S3 bucket, through one read-only IAM role that you create in your AWS account. Put its ARN in `odoo_aws_role`.
+
+Give the role this trust policy. `<your installation id>` is the number at the end of your installation's settings address, `https://github.com/settings/installations/<id>`:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {"AWS": "arn:aws:iam::564589597920:role/harness-boundary-credentials"},
+      "Action": "sts:AssumeRole",
+      "Condition": {"StringEquals": {"sts:ExternalId": "<your installation id>"}}
+    }
+  ]
+}
+```
+
+Then give it only the read access it needs:
+
+- For an image in ECR: `ecr:GetAuthorizationToken`, `ecr:BatchCheckLayerAvailability`, `ecr:GetDownloadUrlForLayer` and `ecr:BatchGetImage`.
+- For a dump in S3: `s3:GetObject` on `arn:aws:s3:::<bucket>/<prefix>/*`. The bucket must be in the same AWS account as the role. If it is encrypted with your own KMS key, the role also needs `kms:Decrypt` on that key, in the role's policy and in the key's policy.
+- Keep the role's maximum session at one hour or more, which is the AWS default.
+
+Store the dump in `s3://<bucket>/<prefix>/` like this:
+
+- the dump itself, made with `pg_dump -Fc`. It holds the database only. Erpyd does not restore a filestore.
+- `latest.txt`: one line with the dump's key in the bucket, for example `seed/odoo_2026-10-01.dump`.
+- `latest.meta.json`: write it last. It must say which Odoo image the dump was built on:
+
+  ```json
+  {"base_image_digest": "sha256:<digest of the image the dump was built on>"}
+  ```
+
+Erpyd compares that digest with the `odoo_image` it starts. If Erpyd cannot read the dump, or the dump was built on a different image, it stops before any work and says on the issue what to fix. Fix it and ask again.
 
 ## Check
 
