@@ -45,6 +45,7 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 15. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
 16. Should Erpyd resolve merge conflicts on its own?
 17. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
+18. Do you already have a `harness.yaml`, a `.harness` folder, a `.claude` folder, an `AGENTS.md` or a `CLAUDE.md`?
 
 ## What Erpyd configures
 
