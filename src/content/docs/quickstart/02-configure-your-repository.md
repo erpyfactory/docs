@@ -65,7 +65,7 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
    Erpyd runs the same services, so its tests see what yours see. Without a Docker Compose file, Erpyd uses its own standard development stack.
 
-6. Which images does your development setup use besides Odoo, for example Postgres and nginx? Is any of them private?
+6. Which images does your development setup use, Odoo included? Each one must be readable without signing in, for example a public Docker Hub image.
 
    Erpyd loads these images in advance, so it must be able to pull them.
 
@@ -73,47 +73,43 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
    Erpyd restores its starting data under that name. Without one, it starts from a fresh database.
 
-8. Do your tests start from a database dump? Where is it stored?
-
-   Erpyd then starts from the same data as you, and needs to be able to read the dump. Without a dump, it starts from a fresh database.
-
-9. Do your tests run with Odoo's demo data?
+8. Do your tests run with Odoo's demo data?
 
    Erpyd starts its tests from the same data as yours.
 
-10. Which image does your CI run the tests in? Is it a public image?
+9. Which image does your CI run the tests in? Is it a public image?
 
    This is the Odoo image Erpyd runs your code and tests on, so use the one your CI uses. It must be public.
 
-11. Which languages besides English must a new translatable term be translated into?
+10. Which languages besides English must a new translatable term be translated into?
 
    Erpyd will not finish a change that adds text without translating it into these languages.
 
-12. Which branches do pull requests target besides the default branch?
+11. Which branches do pull requests target besides the default branch?
 
    Erpyd repairs failing checks and resolves conflicts on pull requests to these branches that carry the `erpy-factory` label. When one of these branches itself goes red, Erpyd opens a fix for it.
 
-13. Does new work start from a branch other than the default branch?
+12. Does new work start from a branch other than the default branch?
 
    Erpyd starts its work from that branch and opens its pull requests against it.
 
-14. Which check must be green before a pull request can merge?
+13. Which check must be green before a pull request can merge?
 
    Erpyd watches this check on the pull requests it opens, and works until it passes.
 
-15. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
+14. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
 
    On pull requests that carry the `erpy-factory` label, Erpyd repairs a failing workflow by changing your code, for a few attempts. Some failures cannot be fixed that way, for example a deploy that fails for a missing secret, so you tell it which workflows to leave alone.
 
-16. Should Erpyd resolve merge conflicts on its own?
+15. Should Erpyd resolve merge conflicts on its own?
 
    Erpyd resolves conflicts itself on pull requests that carry the `erpy-factory` label, and you may prefer to do it yourself.
 
-17. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
+16. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
 
    Erpyd reads these bots' comments as review feedback and acts on it, on pull requests that carry the `erpy-factory` label or where the bot mentions `@erpyd`.
 
-18. Erpyd configures its settings in `harness.yaml` and lets you keep your own instructions for Erpyd in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
+17. Erpyd configures its settings in `harness.yaml` and lets you keep your own instructions for Erpyd in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
 
    Erpyd needs to know, so that it builds on what you have and does not overwrite it unasked.
 
@@ -164,8 +160,6 @@ harness:
     # odoo_addons_paths: [addons, custom]
     # The development database. Erpyd uses odoo_dev when you name none.
     # odoo_dev_db: odoo_dev
-    # Where your database dump is stored. By default there is none, and tests start from a fresh database.
-    # odoo_seed: none
     # Whether to load demo data when starting from a fresh database.
     # odoo_with_demo: false
     # The image for UI demos and recordings. It is the Odoo image by default.
