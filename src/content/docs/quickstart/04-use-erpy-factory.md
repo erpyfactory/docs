@@ -61,10 +61,28 @@ Erpyd turns an issue into a pull request in two stages: it writes the requiremen
 - Erpyd does not build before you approve the requirements. If you ask for it anyway, Erpyd comments "I can't build this yet because the requirements are not approved. When they are right, ask `@erpyd` in a comment here to approve them, then to build the change." and adds the label `erpy-needs-info`. Approve the requirements, then ask again.
 - Erpyd works on one issue or pull request at a time. When many requests are waiting, Erpyd's check says it starts when capacity is free.
 - Erpyd never merges, never pushes to your default branch, and never changes your workflows, `harness.yaml` or `.harness` folder. You do.
-- A pull request that Erpyd opens carries the `erpy-factory` label. On it, Erpyd repairs a failing check for up to three attempts, resolves merge conflicts, and follows up when someone with write access requests changes. To ask for something yourself, comment on the pull request, for example:
-
-  ```text
-  @erpyd please fix the failing checks
-  ```
-
+- A pull request that Erpyd opens carries the `erpy-factory` label, and Erpyd keeps it in order on its own, see Autonomous workflows below.
 - If a run stops, the status comment and the check on the pull request say why. When it is something you can fix, such as "This repository's configuration has no `<setting>` setting, and this work needs it. Add `<setting>` to harness.yaml with a pull request.", fix it and ask again in a new comment that mentions Erpyd. Other stops say that Erpyd reported the fault to its team and will continue once it is fixed.
+
+## Autonomous workflows
+
+On a pull request that carries the `erpy-factory` label, Erpyd works on its own, without a comment from you:
+
+- **Failing checks.** When the checks on the latest commit have finished and one is red, Erpyd repairs it. It leaves alone the workflows you told it to, and makes at most three automatic attempts per pull request.
+- **Merge conflicts.** When the pull request conflicts with its base branch, Erpyd merges the base branch into it and resolves the conflicts. You can turn this off, see [Advanced settings](../03-advanced-settings/).
+
+Erpyd does this for seven days. The seven days start when the label is added, and start again each time Erpyd does work on the change itself: building it, following up on a review that asks for changes, filming its screen recordings or revising its design. Repairing checks and resolving conflicts do not start them again, and neither does a push or a comment from you unless it leads Erpyd to do one of those. After seven days the label comes off the pull request and the automatic work stops.
+
+To give the pull request back to Erpyd, add the `erpy-factory` label again. The seven days start again. Erpyd then repairs on the next run of your checks, and resolves conflicts on its next check for them.
+
+You can also ask for either at any time, whether or not the pull request has the label, with a comment that mentions Erpyd:
+
+```text
+@erpyd please fix the failing checks
+```
+
+```text
+@erpyd resolve the merge conflicts
+```
+
+Erpyd replies "I'm fixing the failing checks on this pull request now." or "I'm merging the base branch into this pull request and resolving the conflicts now." A request like this has no limit on attempts. It does not start the seven days again, and it does not bring the label back.
