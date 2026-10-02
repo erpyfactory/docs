@@ -206,7 +206,10 @@ A workflow that Erpyd leaves alone still runs and still blocks a merge. Erpyd on
 
 Erpyd reads a private Odoo image from your Amazon ECR, or a database dump from your Amazon S3 bucket, through one read-only IAM role that you create in your AWS account. Put its ARN in `odoo_aws_role`.
 
-Give the role this trust policy. `<your installation id>` is the number at the end of your installation's settings address, `https://github.com/settings/installations/<id>`:
+Give the role this trust policy. `<your installation id>` is the number at the end of the address of your installation's page. Open it from **Settings**, **GitHub Apps**, **Erpyd**, **Configure**:
+
+- for an organization: `https://github.com/organizations/<your-organization>/settings/installations/<id>`
+- for a personal account: `https://github.com/settings/installations/<id>`
 
 ```json
 {
