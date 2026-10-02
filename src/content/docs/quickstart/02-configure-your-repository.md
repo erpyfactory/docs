@@ -5,6 +5,8 @@ description: Ask Erpyd to plan your repository's configuration, answer its quest
 
 Erpyd configures your repository from a plan that you review first. It looks at the repository, writes the plan into an issue, and after you approve the plan it opens a pull request with the configuration.
 
+This step covers the simple case: a repository of Odoo add-ons with CI that runs on a public Odoo image such as `odoo:19.0`. If you run Odoo Enterprise, use your own Docker Compose setup, or keep your image or database dump in your own AWS account, you do the same steps and then go on to [Advanced settings](../03-advanced-settings/).
+
 ## Before you start
 
 - Step 1 is done and Erpyd is active on your installation. You can see its status on your installed apps page:
@@ -41,87 +43,9 @@ Erpyd configures your repository from a plan that you review first. It looks at 
 7. Wait for "Pull request #N with the configuration is open for review."
 8. Review the pull request, and merge it when it looks right.
 
-## What Erpyd works out from your repository
-
-Erpyd takes this on itself. It reads your repository and tries to answer each of these questions, so you do not have to. Most of them are what Erpyd needs to run your Odoo stack. Only what it cannot work out from the repository does it ask you, in the plan, and you answer in a comment. Under each question is the reason Erpyd wants to know.
-
-1. Which Odoo version are your add-ons written for?
-
-   Erpyd checks that its test setup runs the Odoo version your add-ons are written for.
-
-2. Do you run Odoo Community or Enterprise?
-
-   Enterprise needs its own code, so Erpyd must know whether to set it up.
-
-3. If Enterprise: which repository holds the code, and may Erpyd read it?
-
-   Erpyd clones your Enterprise code next to your repository and runs your add-ons with it. If the repository is private, Erpyd must be installed on it, in the same account or organization as your repository.
-
-4. Where does your Odoo source come from: the Odoo image you use, or a separate repository (the official one, a fork or your own)?
-
-   With an official Odoo image, Erpyd takes the Odoo source from the image. With a source repository, Erpyd clones it at the branch you use and keeps a copy to read while it works. If the repository is private, Erpyd must be installed on it, in the same account or organization as your repository.
-
-5. Does your development setup run more than Odoo and Postgres, for example Redis? Do you have a Docker Compose file for it?
-
-   Erpyd runs the same services, so its tests see what yours see. Without a Docker Compose file, Erpyd uses its own standard development stack.
-
-6. Which images does your development setup use besides Odoo, for example Postgres and nginx? Each one must be readable without signing in, for example a public Docker Hub image.
-
-   Erpyd loads these images in advance, so it must be able to pull them.
-
-7. Do you have a development database? What is it called?
-
-   Erpyd restores its starting data under that name. Without one, it starts from a fresh database.
-
-8. Do your tests start from a database dump? Is it in your own Amazon S3 bucket?
-
-   Erpyd then starts from the same data as you. It reads the dump through a role that you create in your AWS account, see [Read access in your AWS account](#read-access-in-your-aws-account). Without a dump, it starts from a fresh database with your modules installed.
-
-9. Do your tests run with Odoo's demo data?
-
-   Erpyd starts its tests from the same data as yours.
-
-10. Which image does your CI run the tests in? Is it public, or in your own Amazon ECR?
-
-   This is the Odoo image Erpyd runs your code and tests on, so use the one your CI uses. It must be readable without signing in, or be in your own Amazon ECR and read through a role that you create, see [Read access in your AWS account](#read-access-in-your-aws-account).
-
-11. Which languages besides English must a new translatable term be translated into?
-
-   Erpyd will not finish a change that adds text without translating it into these languages.
-
-12. Which branches do pull requests target besides the default branch?
-
-   Erpyd repairs failing checks and resolves conflicts on pull requests to these branches that carry the `erpy-factory` label. When one of these branches itself goes red, Erpyd opens a fix for it.
-
-13. Does new work start from a branch other than the default branch?
-
-   Erpyd starts its work from that branch and opens its pull requests against it.
-
-14. Which check must be green before a pull request can merge?
-
-   Erpyd watches this check on the pull requests it opens, and works until it passes.
-
-15. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
-
-   On pull requests that carry the `erpy-factory` label, Erpyd repairs a failing workflow by changing your code, for a few attempts. Some failures cannot be fixed that way, for example a deploy that fails for a missing secret, so you tell it which workflows to leave alone.
-
-16. Should Erpyd resolve merge conflicts on its own?
-
-   Erpyd resolves conflicts itself on pull requests that carry the `erpy-factory` label, and you may prefer to do it yourself.
-
-17. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
-
-   Erpyd reads these bots' comments as review feedback and acts on it, on pull requests that carry the `erpy-factory` label or where the bot mentions `@erpyd`.
-
-18. Erpyd configures its settings in `harness.yaml` and lets you keep your own instructions for Erpyd in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
-
-   Erpyd needs to know, so that it builds on what you have and does not overwrite it unasked.
-
 ## What Erpyd configures
 
-Everything Erpyd configures is a setting in `harness.yaml`. Every setting is in the file, with a comment above it that says what it is for. Erpyd fills in a setting from your repository when it finds evidence there, and writes it as a comment with an example value when it does not. You answer those in the plan.
-
-This is an example for a repository with a Docker setup and CI. The comments here also say where Erpyd looks:
+Erpyd writes the configuration into `harness.yaml`, with a comment above each setting that says what it is for, and creates a `.harness` folder where you can keep your own instructions for Erpyd. It fills in what it finds in your repository and asks you in the plan about what it cannot work out. A typical result:
 
 ```yaml
 harness:
@@ -135,115 +59,21 @@ harness:
     # Files Erpyd never edits: this configuration itself.
     harness_paths: [harness.yaml, .harness/]
     # The check a pull request must be green on.
-    # Found in your branch's required checks, else the job that runs your tests.
     required_check: Addons tests
-    # The Odoo version your add-ons are written for. Found in your module manifests.
+    # The Odoo version your add-ons are written for.
     odoo_version: "19.0"
-    # The image Erpyd runs your code and tests on. Use the one your CI uses.
-    # It must be public, or in your own Amazon ECR (then set odoo_aws_role).
-    # Found in your workflows, Docker Compose file or Dockerfile.
+    # The image Erpyd runs your code and tests on.
     odoo_image: "odoo:19.0"
-    # Whether you run Odoo Enterprise (true) or Community (false). Community by default.
-    # Found in your Docker files, addons path and manifests.
-    # odoo_enterprise: false
-    # Where your Enterprise source comes from, when you run Enterprise: a path inside the image,
-    # or a GitHub repository. A private repository needs Erpyd installed on it.
-    # odoo_enterprise_source: image:/mnt/enterprise
-    # odoo_enterprise_source: github:<owner>/<name>@19.0
-    # Where the Odoo source comes from: the image (the default), or a GitHub repository.
-    # A private repository needs Erpyd installed on it.
-    # Found in your workflows, Docker files or .gitmodules.
-    # odoo_source: github:odoo/odoo@19.0
-    # Your development stack: a Docker Compose file, and which of its services run Odoo and Postgres.
-    # Name a service only when it is built from a Dockerfile.
-    # Found in your repository. Without one, Erpyd uses its own standard stack.
-    # odoo_compose_file: docker-compose.yml
-    # odoo_compose_services: [odoo=web, postgres=db]
-    # The Odoo configuration file, when you have your own.
-    # odoo_conf: config/odoo.conf
-    # The folders that hold your add-ons, when they are not at the top of the repository.
-    # odoo_addons_paths: [addons, custom]
-    # The development database. Erpyd uses odoo_dev when you name none.
-    # odoo_dev_db: odoo_dev
-    # Where your database dump is stored. Without one, tests start from a fresh database.
-    # odoo_seed: s3://<bucket>/<prefix>
-    # The read-only role in your AWS account that Erpyd uses to read your ECR image or your dump.
-    # odoo_aws_role: arn:aws:iam::<account>:role/<name>
-    # Whether to load demo data when starting from a fresh database.
-    # odoo_with_demo: false
-    # The image for UI demos and recordings. It is the Odoo image by default.
-    # odoo_base_image: "odoo:19.0"
-    # The Docker Hub images your Docker Compose file uses besides Odoo.
-    # Found in your Docker Compose file.
-    # odoo_hub_images: ["postgres:16", "nginx:alpine"]
     # The languages a new translatable term needs, besides English.
-    # Found in your translation lint settings, else in your .po files. Without them, you answer.
     odoo_locales: [fr_BE, nl_NL]
     resolve_ci:
-      # Branches besides the default that pull requests target and CI runs on.
-      # Found in your recent pull requests and workflow branch filters.
-      extra_base_branches: ["19.0"]
       # Workflows Erpyd does not try to repair when they fail.
-      # Erpyd proposes Repair or Leave alone for each workflow in the plan, and you decide.
       ignore_workflows: ["Deploy to staging"]
-    # Set to false to stop Erpyd resolving merge conflicts on its own. It does by default.
-    # resolve_conflicts:
-    #   automatic: false
-    # chat:
-    #   # Review bots whose comments Erpyd reads as feedback.
-    #   # Found in the authors of your recent reviews. You answer if you use one.
-    #   bots: ["coderabbitai[bot]"]
-# The branch new work starts from, when it is not your default branch.
-# worktree:
-#   base: "19.0"
 ```
 
-The commented-out settings are the ones Erpyd found no evidence for, or that you turn on yourself. Erpyd asks you about them in the plan. You can change any setting later with a pull request.
+You can change any setting later with a pull request. [Advanced settings](../03-advanced-settings/) explains every setting and the values it accepts.
 
 A workflow that Erpyd leaves alone still runs and still blocks a merge. Erpyd only does not try to repair it. Workflows that deploy, run scheduled work against outside systems, or need secrets or an environment Erpyd does not have are proposed as Leave alone.
-
-## Read access in your AWS account
-
-Erpyd reads a private Odoo image from your Amazon ECR, or a database dump from your Amazon S3 bucket, through one read-only IAM role that you create in your AWS account. Put its ARN in `odoo_aws_role`.
-
-When the plan asks about this role, it shows the trust policy with your installation id filled in, and the permissions the role needs.
-
-Give the role this trust policy. `<your installation id>` is the number at the end of the address of your installation's page. Open it from **Settings**, **GitHub Apps**, **Erpyd**, **Configure**:
-
-- for an organization: `https://github.com/organizations/<your-organization>/settings/installations/<id>`
-- for a personal account: `https://github.com/settings/installations/<id>`
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {"AWS": "arn:aws:iam::564589597920:role/harness-boundary-credentials"},
-      "Action": "sts:AssumeRole",
-      "Condition": {"StringEquals": {"sts:ExternalId": "<your installation id>"}}
-    }
-  ]
-}
-```
-
-Then give it only the read access it needs:
-
-- For an image in ECR: `ecr:GetAuthorizationToken`, `ecr:BatchCheckLayerAvailability`, `ecr:GetDownloadUrlForLayer` and `ecr:BatchGetImage`.
-- For a dump in S3: `s3:GetObject` on `arn:aws:s3:::<bucket>/<prefix>/*`. The bucket must be in the same AWS account as the role. If it is encrypted with your own KMS key, the role also needs `kms:Decrypt` on that key, in the role's policy and in the key's policy.
-- Keep the role's maximum session at one hour or more, which is the AWS default.
-
-Store the dump in `s3://<bucket>/<prefix>/` like this:
-
-- the dump itself, made with `pg_dump -Fc`. It holds the database only. Erpyd does not restore a filestore.
-- `latest.txt`: one line with the dump's key in the bucket, for example `seed/odoo_2026-10-01.dump`.
-- `latest.meta.json`: write it last. It must say which Odoo image the dump was built on:
-
-  ```json
-  {"base_image_digest": "sha256:<digest of the image the dump was built on>"}
-  ```
-
-Erpyd compares that digest with the `odoo_image` it starts. If Erpyd cannot read the dump, or the dump was built on a different image, it stops before any work and says on the issue what to fix. Fix it and ask again.
 
 ## Check
 
