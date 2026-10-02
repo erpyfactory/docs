@@ -16,6 +16,7 @@ Each step ends with a **Check**: something you can look at to know it worked.
 2. [Configure your repository](quickstart/02-configure-your-repository/): ask Erpyd to plan it, approve the plan, merge the pull request.
 3. [Advanced settings](quickstart/03-advanced-settings/): every setting in `harness.yaml`, for Enterprise, your own Docker Compose setup, or your own AWS account.
 4. [Use Erpy Factory](quickstart/04-use-erpy-factory/): ask Erpyd for the requirements, approve them, have it build the change, review the pull request.
+5. [Automatic work](quickstart/05-automatic-work/): what Erpyd does on its own on your pull requests, and how long.
 
 ## What you need
 

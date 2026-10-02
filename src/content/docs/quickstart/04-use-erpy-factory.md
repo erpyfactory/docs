@@ -59,12 +59,28 @@ Erpyd turns an issue into a pull request in two stages: it writes the requiremen
 
 - Erpyd starts the pull request as a draft, and writes its description when the change is ready for review. The description starts with `Closes #N`, and has a summary, the acceptance criteria and an overview of the changes.
 - Erpyd does not build before you approve the requirements. If you ask for it anyway, Erpyd comments "I can't build this yet because the requirements are not approved. When they are right, ask `@erpyd` in a comment here to approve them, then to build the change." and adds the label `erpy-needs-info`. Approve the requirements, then ask again.
+- If the change touches code that is broken, Erpyd fixes it in the same pull request. It opens no second pull request and no follow-up issue for it.
 - Erpyd works on one issue or pull request at a time. When many requests are waiting, Erpyd's check says it starts when capacity is free.
 - Erpyd never merges, never pushes to your default branch, and never changes your workflows, `harness.yaml` or `.harness` folder. You do.
-- A pull request that Erpyd opens carries the `erpy-factory` label. On it, Erpyd repairs a failing check for up to three attempts, resolves merge conflicts, and follows up when someone with write access requests changes. To ask for something yourself, comment on the pull request, for example:
-
-  ```text
-  @erpyd please fix the failing checks
-  ```
-
+- A pull request that Erpyd opens carries the `erpy-factory` label, and Erpyd keeps it in order on its own, see [Automatic work](../05-automatic-work/).
 - If a run stops, the status comment and the check on the pull request say why. When it is something you can fix, such as "This repository's configuration has no `<setting>` setting, and this work needs it. Add `<setting>` to harness.yaml with a pull request.", fix it and ask again in a new comment that mentions Erpyd. Other stops say that Erpyd reported the fault to its team and will continue once it is fixed.
+
+## Ask Erpyd for more work
+
+When the pull request is open, you can ask Erpyd for more in a comment on it that mentions Erpyd, in your own words:
+
+```text
+@erpyd show the delivery note on the delivery order too
+```
+
+```text
+@erpyd please fix the failing checks
+```
+
+```text
+@erpyd resolve the merge conflicts
+```
+
+Erpyd replies that it is working on it, for example "I'm fixing the failing checks on this pull request now." or "I'm merging the base branch into this pull request and resolving the conflicts now."
+
+These requests work whether or not the pull request carries the `erpy-factory` label, and they have no limit on attempts.
