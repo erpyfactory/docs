@@ -15,6 +15,7 @@ Each step ends with a **Check**: something you can look at to know it worked.
 1. [Install the Erpyd GitHub App](quickstart/01-install-the-app/) on your repositories.
 2. [Configure your repository](quickstart/02-configure-your-repository/): ask Erpyd to plan it, approve the plan, merge the pull request.
 3. [Advanced settings](quickstart/03-advanced-settings/): every setting in `harness.yaml`, for Enterprise, your own Docker Compose setup, or your own AWS account.
+4. [Use Erpy Factory](quickstart/04-use-erpy-factory/): ask Erpyd for the requirements, approve them, have it build the change, review the pull request.
 
 ## What you need
 
