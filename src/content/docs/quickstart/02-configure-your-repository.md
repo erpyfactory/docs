@@ -26,7 +26,7 @@ Erpyd configures your repository from a plan that you review first. It looks at 
 
 ## What Erpyd may ask you
 
-Erpyd tries to answer most of these from your repository itself. It asks you in the plan only about what it could not find, and it helps to know the answers beforehand.
+Erpyd tries to answer these questions from your repository itself. Where it cannot, it needs your help: it lists the question in the plan, and you answer in a comment. It helps to know the answers beforehand.
 
 1. Which check must be green before a pull request can merge? If you have no CI, which check should it be?
 2. Which Odoo version are your add-ons written for?
