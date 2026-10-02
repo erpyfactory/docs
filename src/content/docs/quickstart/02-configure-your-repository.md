@@ -45,7 +45,6 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 15. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
 16. Should Erpyd resolve merge conflicts on its own?
 17. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
-18. Do you already have a `harness.yaml`, a `.harness` folder, a `.claude` folder, an `AGENTS.md` or a `CLAUDE.md`? What should happen to each?
 
 ## What Erpyd configures
 
@@ -138,7 +137,7 @@ A workflow that Erpyd leaves alone still runs and still blocks a merge. Erpyd on
 - Erpyd never pushes to your default branch. It only opens the pull request.
 - Erpyd does not change your workflows. It reviews them and proposes what to do with each.
 - Your own `.claude` folder, `AGENTS.md` and `CLAUDE.md` are left as they are.
-- If your repository already has a `harness.yaml` or a `.harness` folder, the plan asks you what to do with them. Nothing in them changes until you approve.
+- Erpyd sets up `harness.yaml` and a `.harness` folder. If your repository already has them, Erpyd sees that, suggests how to proceed, and works to resolve the conflict. Nothing in them changes until you approve.
 - If you ask to configure before there is a plan, Erpyd asks you to plan first.
 - Merging the pull request starts no work by itself. After it, Erpyd works on its own only on pull requests that carry the `erpy-factory` label, which you add, or which a pull request gets from the issue it closes. On those pull requests Erpyd:
   - repairs a failing check, for up to a few attempts, except in workflows you told it to leave alone;
