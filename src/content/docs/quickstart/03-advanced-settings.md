@@ -220,7 +220,7 @@ Erpyd finds them in your translation lint settings, else in your `.po` files. Wi
 required_check: Addons tests
 ```
 
-The name of the job, as the pull request shows it, not the name of the workflow. For several, separate the names with commas: `Tests, Lint`. Erpyd finds it in your branch's required checks, else in the job that runs your tests. Name it: Erpyd's default matches no check in your repository.
+The name of the job, as the pull request shows it, not the name of the workflow. For several, separate the names with commas: `Tests, Lint`. Erpyd finds it in your branch's required checks, else in the job that runs your tests, and always writes it in the file, never as a comment. Without it, Erpyd cannot judge a pull request's checks, so it does not report them as passed.
 
 ### `resolve_ci`
 
@@ -257,6 +257,16 @@ chat:
 ```
 
 Their logins, as GitHub shows them. Erpyd finds them in the authors of your recent reviews. Erpyd reads their comments, and acts on them, on open pull requests that carry the `erpy-factory` label or where the bot mentions `@erpyd`.
+
+### `carry_days`
+
+**For how long should Erpyd take care of a pull request?**
+
+```yaml
+carry_days: 7
+```
+
+The number of days the `erpy-factory` label stays on a pull request after it was added, or after Erpyd last did work on the change. The default is 7, and Erpyd writes it as a comment. A whole number from 1 to 3650. See [Automatic work](../05-automatic-work/).
 
 ### `worktree`
 
@@ -362,6 +372,8 @@ harness:
     odoo_locales: [fr_BE, nl_NL]
     # The check a pull request must be green on.
     required_check: Addons tests
+    # The days the erpy-factory label stays on a pull request nobody works on. 7 by default.
+    carry_days: 7
     resolve_ci:
       # Branches besides the default that pull requests target.
       extra_base_branches: ["19.0"]
