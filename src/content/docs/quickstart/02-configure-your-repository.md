@@ -33,53 +33,80 @@ Erpyd configures your repository from a plan that you review first. It looks at 
 
 ## What Erpyd configures
 
-Everything Erpyd configures is a setting in `harness.yaml`. Erpyd fills in what it can from your repository, and asks you about the rest. This is the shape of the file, with where each value comes from:
+Everything Erpyd configures is a setting in `harness.yaml`. Every setting is in the file, with a comment above it that says what it is for. Erpyd fills in a setting from your repository when it finds evidence there, and writes it as a comment with an example value when it does not. You answer those in the plan.
+
+This is an example for a repository with a Docker setup and CI. The comments here also say where Erpyd looks:
 
 ```yaml
 harness:
+  # The Erpy Factory configuration this repository builds on. Leave these three as they are.
+  extends: {git: git@github.com:erpyfactory/harness, ref: main, stack: odoo}
+  target: {runtime: claude, model: opus}
+  modules:
+    - name: honeydukes
+      source: {path: .harness}
   extensions:
-    # The check a pull request must pass before it can merge.
-    # Erpyd reads it from your repository rules and workflows.
-    required_check: <name of your check>
-
-    # The Odoo version. Erpyd reads it from your module manifests.
-    odoo_version: <version>
-
-    # Community or Enterprise, and where the Enterprise code lives.
-    # Erpyd reads it from your Docker setup. Without one, you answer.
-    odoo_enterprise: <true or false>
-    odoo_enterprise_repo: <repository>
-
-    # The Odoo images your tests and demos run on.
-    # Erpyd reads them from your Docker Compose file, Dockerfile or CI.
-    odoo_test_image: <image>
-    odoo_base_image: <image>
-
-    # The databases your tests use, and where the seed they start from is stored.
-    # Erpyd reads them from your Docker setup. If it finds none, you answer.
-    odoo_dev_db: <name>
-    odoo_test_db: <name>
-    odoo_seed_bucket: <bucket>
-
-    # The languages your repository keeps translated, besides English.
-    # Erpyd reads them from your translation files and lint settings.
-    # With no translation files, you answer.
-    odoo_locales: [<language>]
-
+    # Files Erpyd never edits: this configuration itself.
+    harness_paths: [harness.yaml, .harness/]
+    # The check a pull request must be green on.
+    # Found in your branch's required checks, else the job that runs your tests.
+    required_check: Addons tests
+    # The Odoo version your add-ons are written for. Found in your module manifests.
+    odoo_version: "19.0"
+    # Whether you run Odoo Enterprise (true) or Community (false).
+    # Found in your Docker files, addons path and manifests. Without them, you answer.
+    odoo_enterprise: false
+    # Where the Odoo source comes from, and the branch it is taken at.
+    # Found in your workflows, Docker files or .gitmodules.
+    # odoo_core_repo: odoo/odoo
+    # odoo_enterprise_repo: odoo/enterprise
+    # odoo_source_ref: "19.0"
+    # The containers and the network of your development setup.
+    # Found in your Docker Compose file.
+    odoo_dev_container: odoo-dev
+    odoo_postgres_container: postgres-dev
+    odoo_nginx_container: nginx-dev
+    odoo_docker_network: odoo-dev-network
+    # The image the Odoo service runs, and the Docker Hub images beside it.
+    # Found in your Docker Compose file or Dockerfile.
+    odoo_base_image: "odoo:19.0"
+    odoo_hub_images: ["postgres:16", "nginx:alpine"]
+    # The databases for development and for tests, and the address of the development server.
+    # Found in your Docker Compose file and test scripts.
+    odoo_dev_db: odoo_dev
+    odoo_test_db: odoo_test
+    odoo_dev_url: "http://localhost:8069"
+    # The languages a new translatable term needs, besides English.
+    # Found in your translation lint settings, else in your .po files. Without them, you answer.
+    odoo_locales: [fr_BE, nl_NL]
+    # The image your CI runs the tests in.
+    # Found in your workflows.
+    odoo_test_image: "odoo:19.0"
+    # The bucket that holds your development database dump.
+    # Found in your workflows. If you have none, you answer.
+    # odoo_seed_bucket: my-odoo-db-dumps
     resolve_ci:
-      # Branches that pull requests land on besides the default branch.
-      # Erpyd reads them from your pull requests.
-      extra_base_branches: [<branch>]
+      # Branches besides the default that pull requests target and CI runs on.
+      # Found in your recent pull requests and workflow branch filters.
+      extra_base_branches: ["19.0"]
       # Workflows Erpyd does not try to repair when they fail.
-      # Erpyd proposes Repair or Leave alone for each workflow, and you decide.
-      ignore_workflows: [<workflow name>]
-
-    chat:
-      # Review bots that may trigger Erpyd by commenting on a pull request.
-      bots: [<bot>]
+      # Erpyd proposes Repair or Leave alone for each workflow in the plan, and you decide.
+      ignore_workflows: ["Deploy to staging"]
+    # Set to false to stop Erpyd resolving merge conflicts on its own. It does by default.
+    # resolve_conflicts:
+    #   automatic: false
+    # chat:
+    #   # Review bots whose comments Erpyd reads as feedback.
+    #   # Found in the authors of your recent reviews. You answer if you use one.
+    #   bots: ["coderabbitai[bot]"]
+    # Branch pairs a fix is carried to: a fix merged on the first is opened again on the second.
+    # forward_port: ["18.0:19.0"]
+# The branch new work starts from, when it is not your default branch.
+# worktree:
+#   base: "19.0"
 ```
 
-A setting Erpyd finds no evidence for is written as a comment with an example value, and Erpyd asks you about it in the plan. You can change any setting later with a pull request.
+The commented-out settings are the ones Erpyd found no evidence for, or that you turn on yourself. Erpyd asks you about them in the plan. You can change any setting later with a pull request.
 
 A workflow that Erpyd leaves alone still runs and still blocks a merge. Erpyd only does not try to repair it. Workflows that deploy, run scheduled work against outside systems, or need secrets or an environment Erpyd does not have are proposed as Leave alone.
 
