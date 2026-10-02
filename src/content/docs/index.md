@@ -13,6 +13,7 @@ Erpy Factory is in early access.
 Each step ends with a **Check**: something you can look at to know it worked.
 
 1. [Install the Erpyd GitHub App](quickstart/01-install-the-app/) on your repositories.
+2. [Configure your repository](quickstart/02-configure-your-repository/): ask Erpyd to plan it, approve the plan, merge the pull request.
 
 ## What you need
 
