@@ -124,6 +124,10 @@ harness:
     # Whether you run Odoo Enterprise (true) or Community (false). Community by default.
     # Found in your Docker files, addons path and manifests.
     # odoo_enterprise: false
+    # Where your Enterprise source comes from, when you run Enterprise: a path inside the image,
+    # or a public GitHub repository.
+    # odoo_enterprise_source: image:/mnt/enterprise
+    # odoo_enterprise_source: github:<owner>/<name>@19.0
     # Where the Odoo source comes from: the image (the default), or a public GitHub repository.
     # Found in your workflows, Docker files or .gitmodules.
     # odoo_source: github:odoo/odoo@19.0
