@@ -24,9 +24,9 @@ Erpyd configures your repository from a plan that you review first. It looks at 
 7. Wait for "Pull request #N with the configuration is open for review."
 8. Review the pull request, and merge it when it looks right.
 
-## What Erpyd may ask you
+## What Erpyd works out from your repository
 
-Erpyd tries to answer these questions from your repository itself. Where it cannot, it needs your help: it lists the question in the plan, and you answer in a comment. It helps to know the answers beforehand.
+Erpyd takes this on itself. It reads your repository and tries to answer each of these questions, so you do not have to. Only what it cannot work out from the repository does it ask you, in the plan, and you answer in a comment.
 
 1. Which check must be green before a pull request can merge? If you have no CI, which check should it be?
 2. Which Odoo version are your add-ons written for?
