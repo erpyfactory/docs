@@ -24,6 +24,29 @@ Erpyd configures your repository from a plan that you review first. It looks at 
 7. Wait for "Pull request #N with the configuration is open for review."
 8. Review the pull request, and merge it when it looks right.
 
+## What Erpyd may ask you
+
+Erpyd tries to answer most of these from your repository itself. It asks you in the plan only about what it could not find, and it helps to know the answers beforehand.
+
+1. Which check must be green before a pull request can merge? If you have no CI, which check should it be?
+2. Which Odoo version are your add-ons written for?
+3. Do you run Odoo Community or Enterprise?
+4. If Enterprise: which repository holds the code, and may Erpyd read it?
+5. Where does the Odoo source come from (the official repository, a fork, or your own), and at which branch?
+6. How do you run Odoo for development? What are the Odoo, Postgres and nginx containers called, and what is the network they share called?
+7. Which image does Odoo run on, the official one or one you build? Which images run beside it, for example Postgres and nginx? Are any of them private?
+8. What are your development and test databases called, and at which address does the development server answer?
+9. Do your tests start from a database dump? Where is it stored?
+10. Which image does your CI run the tests in?
+11. Which languages besides English must a new translatable term be translated into?
+12. Which branches do pull requests target besides the default branch?
+13. Does new work start from a branch other than the default branch?
+14. Should a fix be carried over to other versions? Between which branches, for example from `18.0` to `19.0`?
+15. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
+16. Should Erpyd resolve merge conflicts on its own?
+17. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
+18. Do you already have a `harness.yaml`, a `.harness` folder, a `.claude` folder, an `AGENTS.md` or a `CLAUDE.md`? What should happen to each?
+
 ## Check
 
 - The issue has a plan, and after you approved it, a pull request titled "Configure this repository for Erpy Factory", opened from a branch named `erpy/configure-` followed by the issue number.
