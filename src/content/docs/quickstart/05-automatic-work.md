@@ -1,6 +1,6 @@
 ---
 title: 5. Automatic work
-description: What Erpyd does on its own on your pull requests: repairing failing checks and resolving merge conflicts, for how long, and how to give a pull request back.
+description: What Erpyd does on its own on your pull requests, repairing failing checks and resolving merge conflicts, for how long, and how to give a pull request back.
 ---
 
 On a pull request that carries the `erpy-factory` label, Erpyd works on its own, without a comment from you. Every pull request that Erpyd opens carries the label.
