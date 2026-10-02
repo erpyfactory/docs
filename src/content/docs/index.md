@@ -8,6 +8,10 @@ requests.
 
 Erpy Factory is in early access.
 
+## Before you start
+
+The [onboarding checklist](onboarding-checklist/) lists the questions about your Odoo project that decide how much setup it takes.
+
 ## Quick start
 
 Each step ends with a **Check**: something you can look at to know it worked.
