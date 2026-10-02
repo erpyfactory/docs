@@ -16,11 +16,28 @@ Erpyd configures your repository from a plan that you review first. It looks at 
 ## Steps
 
 1. Open a new issue in your repository, for example titled "Configure Erpy Factory".
-2. Add a comment: `@erpyd plan the configuration`
+2. Add this comment:
+
+   ```text
+   @erpyd plan the configuration
+   ```
+
 3. Erpyd replies that it is planning and keeps one status comment up to date: in progress, then done. Wait for "The configuration plan is ready for review."
 4. Read the plan. Erpyd wrote it into the issue, below your text. It says what it found in your repository, which labels and configuration file it will add and what each setting in that file is for, what it proposes for each of your workflows, and what you need to decide.
-5. Erpyd tries to answer most questions from your repository itself. If it could not, it lists its open questions in the issue. Answer them in a comment that mentions Erpyd, and say there anything else you want changed, for example `@erpyd the staging deploy should be left alone`. Erpyd adjusts the plan. Repeat until the plan is right.
-6. When the plan is right, add a comment: `@erpyd approve, configure`
+5. Erpyd tries to answer most questions from your repository itself. If it could not, it lists its open questions in the issue. Answer them in a comment that mentions Erpyd, and say there anything else you want changed, for example:
+
+   ```text
+   @erpyd the staging deploy should be left alone
+   ```
+
+   Erpyd adjusts the plan. Repeat until the plan is right.
+
+6. When the plan is right, add this comment:
+
+   ```text
+   @erpyd approve, configure
+   ```
+
 7. Wait for "Pull request #N with the configuration is open for review."
 8. Review the pull request, and merge it when it looks right.
 
