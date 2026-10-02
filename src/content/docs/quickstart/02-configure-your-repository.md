@@ -17,7 +17,7 @@ Erpyd configures your repository from a plan that you review first. It looks at 
 
 1. Open a new issue in your repository, for example titled "Configure Erpy Factory".
 2. Add a comment: `@erpyd plan the configuration`
-3. Erpyd replies that it is planning and keeps one status comment up to date: queued, in progress, done. Wait for "The configuration plan is ready for review."
+3. Erpyd replies that it is planning and keeps one status comment up to date: in progress, then done. Wait for "The configuration plan is ready for review."
 4. Read the plan. Erpyd wrote it into the issue, below your text. It says what it found in your repository, which labels and configuration file it will add and what each setting in that file is for, what it proposes for each of your workflows, and what you need to decide.
 5. Erpyd tries to answer most questions from your repository itself. If it could not, it lists its open questions in the issue. Answer them in a comment that mentions Erpyd, and say there anything else you want changed, for example `@erpyd the staging deploy should be left alone`. Erpyd adjusts the plan. Repeat until the plan is right.
 6. When the plan is right, add a comment: `@erpyd approve, configure`
@@ -90,4 +90,8 @@ A workflow that Erpyd leaves alone still runs and still blocks a merge. Erpyd on
 - Your own `.claude` folder, `AGENTS.md` and `CLAUDE.md` are left as they are.
 - If your repository already has a `harness.yaml` or a `.harness` folder, the plan asks you what to do with them. Nothing in them changes until you approve.
 - If you ask to configure before there is a plan, Erpyd asks you to plan first.
-- Once the pull request is merged, Erpyd is configured on your repository and can start work on its own, for example repairing a failing check or resolving a merge conflict.
+- Merging the pull request starts no work by itself. After it, Erpyd works on its own only on pull requests that carry the `erpy-factory` label, which you add, or which a pull request gets from the issue it closes. On those pull requests Erpyd:
+  - repairs a failing check, for up to a few attempts, except in workflows you told it to leave alone;
+  - resolves merge conflicts;
+  - follows up when someone with write access requests changes.
+- The label comes off a pull request after seven days without a hand-over. Remove it yourself to take a pull request back.
