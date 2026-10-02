@@ -38,11 +38,11 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
 3. If Enterprise: which repository holds the code, and may Erpyd read it?
 
-   Erpyd clones your Enterprise code next to your repository and runs your add-ons with it. Erpyd must be installed on that repository.
+   Erpyd clones your Enterprise code next to your repository and runs your add-ons with it. If the repository is private, Erpyd must be installed on it, in the same account or organization as your repository.
 
 4. Where does your Odoo source come from: the Odoo image you use, or a separate repository (the official one, a fork or your own)?
 
-   With an official Odoo image, Erpyd takes the Odoo source from the image. With a public source repository, Erpyd clones it at the branch you use and keeps a copy to read while it works.
+   With an official Odoo image, Erpyd takes the Odoo source from the image. With a source repository, Erpyd clones it at the branch you use and keeps a copy to read while it works. If the repository is private, Erpyd must be installed on it, in the same account or organization as your repository.
 
 5. Does your development setup run more than Odoo and Postgres, for example Redis? Do you have a Docker Compose file for it?
 
@@ -60,39 +60,43 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
    Erpyd then starts from the same data as you, and needs to be able to read the dump. Without a dump, it starts from a fresh database.
 
-9. Which image does your CI run the tests in? Is it a public image?
+9. Do your tests run with Odoo's demo data?
+
+   Erpyd starts its tests from the same data as yours.
+
+10. Which image does your CI run the tests in? Is it a public image?
 
    This is the Odoo image Erpyd runs your code and tests on, so use the one your CI uses. It must be public.
 
-10. Which languages besides English must a new translatable term be translated into?
+11. Which languages besides English must a new translatable term be translated into?
 
    Erpyd will not finish a change that adds text without translating it into these languages.
 
-11. Which branches do pull requests target besides the default branch?
+12. Which branches do pull requests target besides the default branch?
 
    Erpyd repairs failing checks and resolves conflicts on pull requests to these branches that carry the `erpy-factory` label. When one of these branches itself goes red, Erpyd opens a fix for it.
 
-12. Does new work start from a branch other than the default branch?
+13. Does new work start from a branch other than the default branch?
 
    Erpyd starts its work from that branch and opens its pull requests against it.
 
-13. Which check must be green before a pull request can merge?
+14. Which check must be green before a pull request can merge?
 
    Erpyd watches this check on the pull requests it opens, and works until it passes.
 
-14. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
+15. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
 
    On pull requests that carry the `erpy-factory` label, Erpyd repairs a failing workflow by changing your code, for a few attempts. Some failures cannot be fixed that way, for example a deploy that fails for a missing secret, so you tell it which workflows to leave alone.
 
-15. Should Erpyd resolve merge conflicts on its own?
+16. Should Erpyd resolve merge conflicts on its own?
 
    Erpyd resolves conflicts itself on pull requests that carry the `erpy-factory` label, and you may prefer to do it yourself.
 
-16. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
+17. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
 
    Erpyd reads these bots' comments as review feedback and acts on it, on pull requests that carry the `erpy-factory` label or where the bot mentions `@erpyd`.
 
-17. Erpyd configures its settings in `harness.yaml` and lets you keep your own instructions for Erpyd in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
+18. Erpyd configures its settings in `harness.yaml` and lets you keep your own instructions for Erpyd in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
 
    Erpyd needs to know, so that it builds on what you have and does not overwrite it unasked.
 
@@ -125,13 +129,15 @@ harness:
     # Found in your Docker files, addons path and manifests.
     # odoo_enterprise: false
     # Where your Enterprise source comes from, when you run Enterprise: a path inside the image,
-    # or a public GitHub repository.
+    # or a GitHub repository. A private repository needs Erpyd installed on it.
     # odoo_enterprise_source: image:/mnt/enterprise
     # odoo_enterprise_source: github:<owner>/<name>@19.0
-    # Where the Odoo source comes from: the image (the default), or a public GitHub repository.
+    # Where the Odoo source comes from: the image (the default), or a GitHub repository.
+    # A private repository needs Erpyd installed on it.
     # Found in your workflows, Docker files or .gitmodules.
     # odoo_source: github:odoo/odoo@19.0
     # Your development stack: a Docker Compose file, and which of its services run Odoo and Postgres.
+    # Name a service only when it is built from a Dockerfile.
     # Found in your repository. Without one, Erpyd uses its own standard stack.
     # odoo_compose_file: docker-compose.yml
     # odoo_compose_services: [odoo=web, postgres=db]
