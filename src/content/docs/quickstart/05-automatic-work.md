@@ -21,11 +21,9 @@ Less often, a test fails on the branch your pull requests target. Erpyd fixes it
 
 ## How long it lasts
 
-Pull requests are meant to be merged. Erpyd takes care of a pull request for seven days after the last time it did work on the change itself: building it, following up on a review that asks for changes, filming its screen recordings or revising its design. Repairing checks and resolving conflicts do not start the seven days again, and neither does a push or a comment from you, unless it leads Erpyd to one of those. A pull request that is still going through review rounds stays in care.
+Pull requests are meant to be merged. Erpyd takes care of a pull request for seven days, or the number of days you set with `carry_days` in [Advanced settings](../03-advanced-settings/), after the last time it did work on the change itself: building it, following up on a review that asks for changes, filming its screen recordings or revising its design. Repairing checks and resolving conflicts do not start the seven days again, and neither does a push or a comment from you, unless it leads Erpyd to one of those. A pull request that is still going through review rounds stays in care.
 
 A pull request that is not merged in that time is treated as no longer important. The `erpy-factory` label comes off it, within about an hour, and Erpyd stops its automatic work on it. The pull request stays open, and you can bring it back to Erpyd.
-
-To stop the automatic work yourself before that, remove the label.
 
 ## Bring a pull request back to Erpyd
 
@@ -41,3 +39,7 @@ To stop the automatic work yourself before that, remove the label.
   ```
 
 - A request to fix the failing checks or to resolve the conflicts works at any time too, see [Use Erpy Factory](../04-use-erpy-factory/). It does not put the label back, and it does not start the seven days again.
+
+## Take a pull request back from Erpyd
+
+Sometimes you ask Erpyd to work on a pull request, and then decide to continue on your own. Remove the `erpy-factory` label from the pull request. Erpyd stops the automatic work it had waiting for it, and starts none. Work that is already running is not stopped, and anything you asked for in a comment still runs. You can bring the pull request back to Erpyd at any time, as above.
