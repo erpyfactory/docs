@@ -30,7 +30,7 @@ Erpyd configures your repository from a plan that you review first. It looks at 
    @erpyd the staging deploy should be left alone
    ```
 
-   Erpyd adjusts the plan. Repeat until the plan is right.
+   Erpyd updates the plan, lists what it changed and what is still open, and asks you to approve again. An approval you gave before an update no longer counts. Repeat until the plan is right.
 
 6. When the plan is right, add this comment:
 
@@ -40,6 +40,8 @@ Erpyd configures your repository from a plan that you review first. It looks at 
 
 7. Wait for "Pull request #N with the configuration is open for review."
 8. Review the pull request, and merge it when it looks right.
+
+If someone with write access edits the plan directly, that edit wins over the comments posted before it.
 
 ## What Erpyd works out from your repository
 
