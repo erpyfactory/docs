@@ -46,7 +46,7 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
 5. How do you run Odoo for development? What are the Odoo, Postgres and nginx containers called, and what is the network they share called?
 
-   Erpyd starts your development stack from your Docker Compose file, and needs these names to reach its containers.
+   Erpyd starts your development stack and needs these names to reach its containers.
 
 6. Which image do you use for UI demos and recordings of your Odoo? Which Docker Hub images does your Docker Compose file use besides Odoo, for example Postgres and nginx?
 
@@ -58,7 +58,7 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
 8. Do your tests start from a database dump? Where is it stored?
 
-   Erpyd's test stack boots from a database dump in an S3 bucket that it can read.
+   Erpyd's test stack boots from a database dump that it can read.
 
 9. Which image does your CI run the tests in? Is it a public image?
 
@@ -70,7 +70,7 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
 11. Which branches do pull requests target besides the default branch?
 
-   Erpyd repairs failing checks and resolves conflicts on pull requests to these branches. When one of these branches itself goes red, Erpyd opens a fix for it.
+   Erpyd repairs failing checks and resolves conflicts on pull requests to these branches that carry the `erpy-factory` label. When one of these branches itself goes red, Erpyd opens a fix for it.
 
 12. Does new work start from a branch other than the default branch?
 
@@ -80,7 +80,7 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
    A script that your team runs uses these branch pairs to open a fix again on the other branch.
 
-14. Which check must be green before a pull request can merge? If you have no CI, which check should it be?
+14. Which check must be green before a pull request can merge?
 
    Erpyd watches this check on the pull requests it opens, and works until it passes.
 
@@ -96,7 +96,7 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
    Erpyd reads these bots' comments as review feedback and acts on it, on pull requests that carry the `erpy-factory` label or where the bot mentions `@erpyd`.
 
-18. Erpyd configures its settings in `harness.yaml` and lets you keep customized harnesses in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
+18. Erpyd configures its settings in `harness.yaml` and lets you keep your own instructions for Erpyd in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
 
    Erpyd needs to know, so that it builds on what you have and does not overwrite it unasked.
 
@@ -127,8 +127,8 @@ harness:
     odoo_enterprise: false
     # Where the Odoo source comes from, and the branch it is taken at.
     # Found in your workflows, Docker files or .gitmodules.
-    # odoo_core_repo: odoo/odoo
-    # odoo_enterprise_repo: odoo/enterprise
+    # odoo_core_repo: <your-organization>/odoo
+    # odoo_enterprise_repo: <your-organization>/enterprise
     # odoo_source_ref: "19.0"
     # The containers and the network of your development setup.
     # Found in your Docker Compose file.
@@ -140,11 +140,9 @@ harness:
     # Found in your Docker Compose file or Dockerfile.
     odoo_base_image: "odoo:19.0"
     odoo_hub_images: ["postgres:16", "nginx:alpine"]
-    # The databases for development and for tests, and the address of the development server.
-    # Found in your Docker Compose file and test scripts.
+    # The development database that Erpyd restores its starting data into.
+    # Found in your Docker Compose file and scripts.
     odoo_dev_db: odoo_dev
-    odoo_test_db: odoo_test
-    odoo_dev_url: "http://localhost:8069"
     # The languages a new translatable term needs, besides English.
     # Found in your translation lint settings, else in your .po files. Without them, you answer.
     odoo_locales: [fr_BE, nl_NL]
@@ -189,7 +187,7 @@ A workflow that Erpyd leaves alone still runs and still blocks a merge. Erpyd on
 ## What to expect
 
 - Erpyd never pushes to your default branch. It only opens the pull request.
-- Erpyd does not change your workflows. It reviews them and proposes what to do with each.
+- The configuration pull request does not change your workflows. Erpyd reviews them and proposes what to do with each.
 - Your own `.claude` folder, `AGENTS.md` and `CLAUDE.md` are left as they are. Erpyd's runs do not use your `.claude` folder or `CLAUDE.md`. Put instructions for Erpyd in `.harness/AGENTS.md`.
 - Erpyd sets up `harness.yaml` and a `.harness` folder. If your repository already has them, Erpyd sees that, suggests how to proceed, and works to resolve the conflict. Nothing in them changes until you approve.
 - If you ask to configure before there is a plan, Erpyd asks you to plan first.
@@ -197,4 +195,4 @@ A workflow that Erpyd leaves alone still runs and still blocks a merge. Erpyd on
   - repairs a failing check, for up to a few attempts, except in workflows you told it to leave alone;
   - resolves merge conflicts;
   - follows up when someone with write access requests changes.
-- The label comes off a pull request after seven days without a hand-over. Remove it yourself to take a pull request back.
+- The label comes off a pull request after seven days of inactivity. Remove it yourself to take a pull request back.
