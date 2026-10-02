@@ -13,7 +13,7 @@ This step covers the simple case: a repository of Odoo add-ons with CI that runs
   - for an organization: `https://github.com/organizations/<your-organization>/settings/installations`
   - for a personal account: [github.com/settings/installations](https://github.com/settings/installations)
 - Issues are enabled on the repository.
-- You have write access to the repository. Erpyd acts only on requests from people with write access, and it tells anyone else that they do not have enough access to make the request.
+- You have write access to the repository. Erpyd acts only on requests from people with write access.
 
 ## Steps
 
