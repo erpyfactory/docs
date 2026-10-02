@@ -40,25 +40,25 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
    Erpyd clones your Enterprise code next to your repository and runs your add-ons with it. Erpyd must be installed on that repository.
 
-4. Where does the Odoo source come from (the official repository, a fork, or your own), and at which branch?
+4. Where does your Odoo source come from: the Odoo image you use, or a separate repository (the official one, a fork or your own)?
 
-   Erpyd keeps a copy of the Odoo source to read while it works. It must be a repository Erpyd is installed on, at the branch you use.
+   With an official Odoo image, Erpyd takes the Odoo source from the image. With a separate source repository, Erpyd keeps a copy of it to read while it works, and must be installed on that repository, at the branch you use.
 
-5. How do you run Odoo for development? What are the Odoo, Postgres and nginx containers called, and what is the network they share called?
+5. Does your development setup run more than Odoo and Postgres, for example Redis? Do you have a Docker Compose file for it?
 
-   Erpyd starts your development stack and needs these names to reach its containers.
+   Erpyd runs the same services, so its tests see what yours see. Without a Docker Compose file, Erpyd uses its own standard development stack.
 
-6. Which image do you use for UI demos and recordings of your Odoo? Which Docker Hub images does your Docker Compose file use besides Odoo, for example Postgres and nginx?
+6. Which images does your development setup use besides Odoo, for example Postgres and nginx? Is any of them private?
 
-   One image runs Erpyd's UI demos and recordings. The others are public Docker Hub images that Erpyd loads in advance.
+   Erpyd loads these images in advance, so it must be able to pull them.
 
-7. What is your development database called?
+7. Do you have a development database? What is it called?
 
-   Erpyd restores its starting database under your development database name.
+   Erpyd restores its starting data under that name. Without one, it starts from a fresh database.
 
 8. Do your tests start from a database dump? Where is it stored?
 
-   Erpyd's test stack boots from a database dump that it can read.
+   Erpyd then starts from the same data as you, and needs to be able to read the dump. Without a dump, it starts from a fresh database.
 
 9. Which image does your CI run the tests in? Is it a public image?
 
@@ -76,27 +76,23 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
    Erpyd starts its work from that branch and opens its pull requests against it.
 
-13. Should a fix be carried over to other versions? Between which branches, for example from `18.0` to `19.0`?
-
-   A script that your team runs uses these branch pairs to open a fix again on the other branch.
-
-14. Which check must be green before a pull request can merge?
+13. Which check must be green before a pull request can merge?
 
    Erpyd watches this check on the pull requests it opens, and works until it passes.
 
-15. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
+14. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
 
    On pull requests that carry the `erpy-factory` label, Erpyd repairs a failing workflow by changing your code, for a few attempts. Some failures cannot be fixed that way, for example a deploy that fails for a missing secret, so you tell it which workflows to leave alone.
 
-16. Should Erpyd resolve merge conflicts on its own?
+15. Should Erpyd resolve merge conflicts on its own?
 
    Erpyd resolves conflicts itself on pull requests that carry the `erpy-factory` label, and you may prefer to do it yourself.
 
-17. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
+16. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
 
    Erpyd reads these bots' comments as review feedback and acts on it, on pull requests that carry the `erpy-factory` label or where the bot mentions `@erpyd`.
 
-18. Erpyd configures its settings in `harness.yaml` and lets you keep your own instructions for Erpyd in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
+17. Erpyd configures its settings in `harness.yaml` and lets you keep your own instructions for Erpyd in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
 
    Erpyd needs to know, so that it builds on what you have and does not overwrite it unasked.
 
@@ -166,8 +162,6 @@ harness:
     #   # Review bots whose comments Erpyd reads as feedback.
     #   # Found in the authors of your recent reviews. You answer if you use one.
     #   bots: ["coderabbitai[bot]"]
-    # Branch pairs a fix is carried to: a fix merged on the first is opened again on the second.
-    # forward_port: ["18.0:19.0"]
 # The branch new work starts from, when it is not your default branch.
 # worktree:
 #   base: "19.0"
