@@ -25,8 +25,6 @@ Pull requests are meant to be merged. Erpyd takes care of a pull request for sev
 
 A pull request that is not merged in that time is treated as no longer important. The `erpy-factory` label comes off it, within about an hour, and Erpyd stops its automatic work on it. The pull request stays open, and you can bring it back to Erpyd.
 
-To stop the automatic work yourself before that, remove the label.
-
 ## Bring a pull request back to Erpyd
 
 - Add the `erpy-factory` label again. The seven days start again. Erpyd then repairs on the next run of your checks, and resolves conflicts on its next check for them.
@@ -41,3 +39,7 @@ To stop the automatic work yourself before that, remove the label.
   ```
 
 - A request to fix the failing checks or to resolve the conflicts works at any time too, see [Use Erpy Factory](../04-use-erpy-factory/). It does not put the label back, and it does not start the seven days again.
+
+## Take a pull request back from Erpyd
+
+Sometimes you ask Erpyd to work on a pull request, and then decide to continue on your own. Remove the `erpy-factory` label from the pull request. Erpyd stops the automatic work it had waiting for it, and starts none. Work that is already running is not stopped, and anything you asked for in a comment still runs. You can bring the pull request back to Erpyd at any time, as above.
