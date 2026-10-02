@@ -30,7 +30,7 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
 1. Which Odoo version are your add-ons written for?
 
-   Erpyd runs your add-ons on that version and writes code in its style. View syntax and other details differ between versions.
+   Erpyd checks that its test setup runs the Odoo version your add-ons are written for.
 
 2. Do you run Odoo Community or Enterprise?
 
@@ -38,39 +38,39 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
 3. If Enterprise: which repository holds the code, and may Erpyd read it?
 
-   Erpyd needs that code to run your add-ons, and it can only read repositories it has been given access to.
+   Erpyd clones your Enterprise code next to your repository and runs your add-ons with it. Erpyd must be installed on that repository.
 
 4. Where does the Odoo source come from (the official repository, a fork, or your own), and at which branch?
 
-   Erpyd runs your add-ons against that source, so it must know which one and which branch.
+   Erpyd keeps a copy of the Odoo source to read while it works. It must be a repository Erpyd is installed on, at the branch you use.
 
 5. How do you run Odoo for development? What are the Odoo, Postgres and nginx containers called, and what is the network they share called?
 
-   Erpyd starts the same development setup you use, so it needs the names of its parts.
+   Erpyd starts your development stack from your Docker Compose file, and needs these names to reach its containers.
 
-6. Which image does Odoo run on, the official one or one you build? Which images run beside it, for example Postgres and nginx? Are any of them private?
+6. Which image do you use for UI demos and recordings of your Odoo? Which Docker Hub images does your Docker Compose file use besides Odoo, for example Postgres and nginx?
 
-   The images decide which Odoo your code runs on, and where Erpyd has to pull them from. A private image needs access that Erpyd must be given.
+   One image runs Erpyd's UI demos and recordings. The others are public Docker Hub images that Erpyd loads in advance.
 
-7. What are your development and test databases called, and at which address does the development server answer?
+7. What is your development database called?
 
-   Erpyd creates and uses these databases when it runs and tests your code, and opens the development server to check its work.
+   Erpyd restores its starting database under your development database name.
 
 8. Do your tests start from a database dump? Where is it stored?
 
-   Starting from a dump is faster and closer to your data, so Erpyd needs to know where to get it.
+   Erpyd's test stack boots from a database dump in an S3 bucket that it can read.
 
-9. Which image does your CI run the tests in?
+9. Which image does your CI run the tests in? Is it a public image?
 
-   Erpyd runs your tests the way your CI does, so that a result means the same thing in both.
+   This is the Odoo image Erpyd runs your code and tests on, so use the one your CI uses. It must be public.
 
 10. Which languages besides English must a new translatable term be translated into?
 
-   Erpyd adds the translations your repository keeps, so that a new term does not ship untranslated.
+   Erpyd will not finish a change that adds text without translating it into these languages.
 
 11. Which branches do pull requests target besides the default branch?
 
-   Erpyd repairs failing checks and resolves conflicts on pull requests to these branches, so it needs to know which branches count.
+   Erpyd repairs failing checks and resolves conflicts on pull requests to these branches. When one of these branches itself goes red, Erpyd opens a fix for it.
 
 12. Does new work start from a branch other than the default branch?
 
@@ -78,11 +78,11 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
 13. Should a fix be carried over to other versions? Between which branches, for example from `18.0` to `19.0`?
 
-   Erpyd can open a fix again on another branch, so that your versions stay in step.
+   A script that your team runs uses these branch pairs to open a fix again on the other branch.
 
 14. Which check must be green before a pull request can merge? If you have no CI, which check should it be?
 
-   Erpyd treats a pull request as ready for you when this check is green, so it needs to know which one is yours.
+   Erpyd watches this check on the pull requests it opens, and works until it passes.
 
 15. For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?
 
@@ -90,11 +90,11 @@ Erpyd takes this on itself. It reads your repository and tries to answer each of
 
 16. Should Erpyd resolve merge conflicts on its own?
 
-   Erpyd can resolve conflicts on its pull requests itself, and you may prefer to do it yourself.
+   Erpyd resolves conflicts itself on pull requests that carry the `erpy-factory` label, and you may prefer to do it yourself.
 
 17. Do you use review bots whose comments Erpyd should read as feedback? Which ones?
 
-   Erpyd reads their comments on its pull requests and acts on them.
+   Erpyd reads these bots' comments on its pull requests as review feedback and acts on it.
 
 18. Erpyd configures its settings in `harness.yaml` and lets you keep customized harnesses in a `.harness` folder. Do you already have a `harness.yaml` or a `.harness` folder?
 
