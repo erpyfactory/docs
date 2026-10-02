@@ -15,6 +15,7 @@ export default defineConfig({
 			editLink: { baseUrl: 'https://github.com/erpyfactory/docs/edit/main/' },
 			sidebar: [
 				{ label: 'What is Erpy Factory', slug: 'index' },
+				{ label: 'Onboarding checklist', slug: 'onboarding-checklist' },
 				{ label: 'Quick start', items: [{ autogenerate: { directory: 'quickstart' } }] },
 			],
 		}),
