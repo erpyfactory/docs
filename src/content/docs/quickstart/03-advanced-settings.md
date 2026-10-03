@@ -1,9 +1,9 @@
 ---
 title: 3. Advanced settings
-description: Every setting in harness.yaml, in file order, with the values it accepts, for a repository that is more than a simple Odoo add-ons repository.
+description: The settings in harness.yaml, in file order, with the values they accept, for a repository that is more than a simple Odoo add-ons repository.
 ---
 
-Step 2 sets up the simple case. This page explains every setting in `harness.yaml`, in file order, for when your repository is different: Odoo Enterprise, your own Docker Compose setup, a database dump, an image in your own AWS account.
+Step 2 sets up the simple case. This page explains the settings in `harness.yaml`, in file order, for when your repository is different: Odoo Enterprise, your own Docker Compose setup, a database dump, an image in your own AWS account.
 
 Erpyd proposes a value for each setting in the plan, from what it finds in your repository, and asks you only what it cannot find. You answer in a comment, as in step 2, and you can change any setting later with a pull request. Under each setting below is the question Erpyd asks.
 
@@ -159,7 +159,7 @@ odoo_base_image: "odoo:19.0"
 odoo_hub_images: ["postgres:16", "nginx:alpine"]
 ```
 
-`odoo_base_image` is the image for demos and recordings. It is the Odoo image by default. `odoo_hub_images` are the other images your Docker Compose file uses. Erpyd loads them in advance, so each one must be readable without signing in, for example a public Docker Hub image. Erpyd finds them in your Docker Compose file.
+`odoo_base_image` is the image for demos and recordings. It is the Odoo image by default. `odoo_hub_images` are the other images your Docker Compose file uses. Erpyd loads them in advance. A service built from a Dockerfile needs its private base image listed here too. An image on a private registry works once the Erpy Factory team has set up the login for that registry. Erpyd finds them in your Docker Compose file.
 
 ## Your data
 
@@ -258,16 +258,6 @@ chat:
 
 Their logins, as GitHub shows them. Erpyd finds them in the authors of your recent reviews. Erpyd reads their comments, and acts on them, on open pull requests that carry the `erpy-factory` label or where the bot mentions `@erpyd`.
 
-### `carry_days`
-
-**For how long should Erpyd take care of a pull request?**
-
-```yaml
-carry_days: 7
-```
-
-The number of days the `erpy-factory` label stays on a pull request after it was added, or after Erpyd last did work on the change. The default is 7, and Erpyd writes it as a comment. A whole number from 1 to 3650. See [Automatic work](../05-automatic-work/).
-
 ### `worktree`
 
 **Does new work start from a branch other than the default branch?**
@@ -326,7 +316,7 @@ Erpyd compares that digest with the `odoo_image` it starts. If Erpyd cannot read
 
 ## The whole file
 
-Here is a `harness.yaml` that uses every setting. Your file has only the ones that apply to you.
+Here is a `harness.yaml` that uses the settings above. Your file has only the ones that apply to you.
 
 ```yaml
 harness:
@@ -372,8 +362,6 @@ harness:
     odoo_locales: [fr_BE, nl_NL]
     # The check a pull request must be green on.
     required_check: Addons tests
-    # The days the erpy-factory label stays on a pull request nobody works on. 7 by default.
-    carry_days: 7
     resolve_ci:
       # Branches besides the default that pull requests target.
       extra_base_branches: ["19.0"]
