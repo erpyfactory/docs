@@ -5,7 +5,7 @@ description: The settings in harness.yaml, in file order, with the values they a
 
 Step 2 sets up the simple case. This page explains the settings in `harness.yaml`, in file order, for when your repository is different: Odoo Enterprise, your own Docker Compose setup, a database dump, an image in your own AWS account.
 
-Erpy proposes a value for each setting in the plan, from what it finds in your repository, and asks you only what it cannot find. You answer in a comment, as in step 2, and you can change any setting later with a pull request. Under each setting below is the question Erpy asks.
+Erpyd proposes a value for each setting in the plan, from what it finds in your repository, and asks you only what it cannot find. You answer in a comment, as in step 2, and you can change any setting later with a pull request. Under each setting below is the question Erpyd asks.
 
 Every setting goes under `harness:`, `extensions:`, except `worktree`. The examples show the key only.
 
@@ -25,26 +25,26 @@ harness:
 
 Leave both as they are. `extends` names the Erpy Factory configuration your repository builds on, and `target` the agent that works on it.
 
-### `modules`: your own instructions for Erpy
+### `modules`: your own instructions for Erpyd
 
-The `modules` entry connects your repository's `.harness` folder to every run. Erpy writes it for you, named after your repository. The name must be the one in `.harness/qory-module.yaml`.
+The `modules` entry connects your repository's `.harness` folder to every run. Erpyd writes it for you, named after your repository. The name must be the one in `.harness/qory-module.yaml`.
 
-Put what Erpy should know about your repository in the `.harness` folder:
+Put what Erpyd should know about your repository in the `.harness` folder:
 
-- `AGENTS.md`: instructions that Erpy reads on every run. Erpy starts it with your branch model and your environment.
+- `AGENTS.md`: instructions that Erpyd reads on every run. Erpyd starts it with your branch model and your environment.
 - `skills/<name>/SKILL.md`, `agents/<name>.md` and `commands/<name>.md`: your own skills, agents and commands. A name that Erpy Factory already uses is refused: pick another.
 
-Your own `.claude` folder and `CLAUDE.md` are not used by Erpy's runs.
+Your own `.claude` folder and `CLAUDE.md` are not used by Erpyd's runs.
 
 ### `harness_paths`
 
-**Which files must Erpy never edit?**
+**Which files must Erpyd never edit?**
 
 ```yaml
 harness_paths: [harness.yaml, .harness/]
 ```
 
-The configuration itself. A folder ends with `/`. Without this setting, Erpy cannot write anything in your repository, so leave it in.
+The configuration itself. A folder ends with `/`. Without this setting, Erpyd cannot write anything in your repository, so leave it in.
 
 ## Your Odoo version and image
 
@@ -56,13 +56,13 @@ The configuration itself. A folder ends with `/`. Without this setting, Erpy can
 odoo_version: "19.0"
 ```
 
-Erpy finds it in your module manifests. Write it as a quoted `"major.minor"`. Required.
+Erpyd finds it in your module manifests. Write it as a quoted `"major.minor"`. Required.
 
 ### `odoo_image`
 
 **Which image does your CI run the tests in?**
 
-This is the Odoo image Erpy runs your code and tests on, so use the one your CI uses. Erpy finds it in your workflows, Docker Compose file or Dockerfile. Required, and the reference needs a tag or a digest: a bare `odoo` is refused.
+This is the Odoo image Erpyd runs your code and tests on, so use the one your CI uses. Erpyd finds it in your workflows, Docker Compose file or Dockerfile. Required, and the reference needs a tag or a digest: a bare `odoo` is refused.
 
 ```yaml
 # From Docker Hub
@@ -76,13 +76,13 @@ odoo_image: "123456789012.dkr.ecr.eu-west-3.amazonaws.com/acme/odoo:19.0"
 odoo_aws_role: "arn:aws:iam::123456789012:role/erpy-odoo-read"
 ```
 
-An image in your own ECR is read through a role that you create, see [Read access in your AWS account](#read-access-in-your-aws-account). Erpy pulls such an image on every run, so setup takes longer than with a public image.
+An image in your own ECR is read through a role that you create, see [Read access in your AWS account](#read-access-in-your-aws-account). Erpyd pulls such an image on every run, so setup takes longer than with a public image.
 
 If your Docker Compose file builds the Odoo service from a Dockerfile, `odoo_image` is the image that Dockerfile starts from. If the file runs the Odoo service from an image, `odoo_image` must be that image.
 
 ### `odoo_enterprise` and `odoo_enterprise_source`
 
-**Do you run Odoo Community or Enterprise? If Enterprise: which repository holds the code, and may Erpy read it?**
+**Do you run Odoo Community or Enterprise? If Enterprise: which repository holds the code, and may Erpyd read it?**
 
 ```yaml
 odoo_enterprise: true
@@ -94,9 +94,9 @@ odoo_enterprise_source: "image:/opt/odoo/enterprise"
 odoo_enterprise_source: "github:acme/enterprise@19.0"
 ```
 
-`odoo_enterprise` is `false` by default. Erpy finds it in your Docker files, add-ons path and manifests. When it is `true`, `odoo_enterprise_source` is required. Without `@<ref>`, a GitHub source is read at your `odoo_version`.
+`odoo_enterprise` is `false` by default. Erpyd finds it in your Docker files, add-ons path and manifests. When it is `true`, `odoo_enterprise_source` is required. Without `@<ref>`, a GitHub source is read at your `odoo_version`.
 
-A private repository must be in the same account or organization as your repository, with Erpy AI installed on it.
+A private repository must be in the same account or organization as your repository, with Erpyd installed on it.
 
 ### `odoo_source`
 
@@ -113,7 +113,7 @@ odoo_source: "image:/usr/lib/python3/dist-packages"
 odoo_source: "github:odoo/odoo@19.0"
 ```
 
-Erpy finds it in your workflows, Docker files or `.gitmodules`. With a repository, it clones it at the branch you name, or at your `odoo_version` without one, and keeps a copy to read while it works. A private repository must be in the same account or organization as yours, with Erpy AI installed on it.
+Erpyd finds it in your workflows, Docker files or `.gitmodules`. With a repository, it clones it at the branch you name, or at your `odoo_version` without one, and keeps a copy to read while it works. A private repository must be in the same account or organization as yours, with Erpyd installed on it.
 
 ## Your development stack
 
@@ -126,9 +126,9 @@ odoo_compose_file: docker-compose.yml
 odoo_compose_services: [odoo=web, postgres=db]
 ```
 
-Erpy runs the same services as you, so its tests see what yours see. Without a Docker Compose file, it uses its own standard stack: Odoo and Postgres 16. The path is relative to your repository's root.
+Erpyd runs the same services as you, so its tests see what yours see. Without a Docker Compose file, it uses its own standard stack: Odoo and Postgres 16. The path is relative to your repository's root.
 
-Erpy works out which of your services is Odoo, Postgres and nginx from their images. Name them in `odoo_compose_services`, as `<role>=<service>`, only when it cannot tell: a service built from a Dockerfile, or several that fit.
+Erpyd works out which of your services is Odoo, Postgres and nginx from their images. Name them in `odoo_compose_services`, as `<role>=<service>`, only when it cannot tell: a service built from a Dockerfile, or several that fit.
 
 ### `odoo_conf`
 
@@ -138,7 +138,7 @@ Erpy works out which of your services is Odoo, Postgres and nginx from their ima
 odoo_conf: config/odoo.conf
 ```
 
-A path relative to your repository's root. Without one, Erpy uses the image's own configuration.
+A path relative to your repository's root. Without one, Erpyd uses the image's own configuration.
 
 ### `odoo_addons_paths`
 
@@ -159,7 +159,7 @@ odoo_base_image: "odoo:19.0"
 odoo_hub_images: ["postgres:16", "nginx:alpine"]
 ```
 
-`odoo_base_image` is the image for demos and recordings. It is the Odoo image by default. `odoo_hub_images` are the other images your Docker Compose file uses. Erpy loads them in advance. A service built from a Dockerfile needs its private base image listed here too. An image on a private registry works once the Erpy Factory team has set up the login for that registry. Erpy finds them in your Docker Compose file.
+`odoo_base_image` is the image for demos and recordings. It is the Odoo image by default. `odoo_hub_images` are the other images your Docker Compose file uses. Erpyd loads them in advance. A service built from a Dockerfile needs its private base image listed here too. An image on a private registry works once the Erpy Factory team has set up the login for that registry. Erpyd finds them in your Docker Compose file.
 
 ## Your data
 
@@ -171,7 +171,7 @@ odoo_hub_images: ["postgres:16", "nginx:alpine"]
 odoo_dev_db: odoo_dev
 ```
 
-Erpy restores or creates its starting data under that name: a lowercase name. The default is `odoo_dev`.
+Erpyd restores or creates its starting data under that name: a lowercase name. The default is `odoo_dev`.
 
 ### `odoo_seed` and `odoo_aws_role`
 
@@ -186,7 +186,7 @@ odoo_seed: "s3://acme-erpy-dumps/odoo"
 odoo_aws_role: "arn:aws:iam::123456789012:role/erpy-odoo-read"
 ```
 
-Erpy then starts from the same data as you. With no dump, it installs every installable module in your add-ons folders into a fresh database. A fresh database fails to install if a module does not install, and the run stops before any work starts. See [Read access in your AWS account](#read-access-in-your-aws-account) for the role and the dump.
+Erpyd then starts from the same data as you. With no dump, it installs every installable module in your add-ons folders into a fresh database. A fresh database fails to install if a module does not install, and the run stops before any work starts. See [Read access in your AWS account](#read-access-in-your-aws-account) for the role and the dump.
 
 ### `odoo_with_demo`
 
@@ -208,7 +208,7 @@ odoo_with_demo: false
 odoo_locales: [fr_BE, nl_NL]
 ```
 
-Erpy finds them in your translation lint settings, else in your `.po` files. Without them, the plan asks you.
+Erpyd finds them in your translation lint settings, else in your `.po` files. Without them, the plan asks you.
 
 ## Continuous integration and pull requests
 
@@ -220,11 +220,11 @@ Erpy finds them in your translation lint settings, else in your `.po` files. Wit
 required_check: Addons tests
 ```
 
-The name of the job, as the pull request shows it, not the name of the workflow. For several, separate the names with commas: `Tests, Lint`. Erpy finds it in your branch's required checks, else in the job that runs your tests, and always writes it in the file, never as a comment. Without it, Erpy cannot judge a pull request's checks, so it does not report them as passed.
+The name of the job, as the pull request shows it, not the name of the workflow. For several, separate the names with commas: `Tests, Lint`. Erpyd finds it in your branch's required checks, else in the job that runs your tests, and always writes it in the file, never as a comment. Without it, Erpyd cannot judge a pull request's checks, so it does not report them as passed.
 
 ### `resolve_ci`
 
-**Which branches do pull requests target besides the default branch? For each of your workflows: should Erpy try to repair it when it fails, or leave it alone?**
+**Which branches do pull requests target besides the default branch? For each of your workflows: should Erpyd try to repair it when it fails, or leave it alone?**
 
 ```yaml
 resolve_ci:
@@ -232,13 +232,13 @@ resolve_ci:
   ignore_workflows: ["Deploy to staging"]
 ```
 
-`extra_base_branches` are branches besides the default one that Erpy watches. Erpy finds them in your recent pull requests and your workflows' branch filters.
+`extra_base_branches` are branches besides the default one that Erpyd watches. Erpyd finds them in your recent pull requests and your workflows' branch filters.
 
-`ignore_workflows` are the workflows Erpy does not try to repair when they fail. A name can be a pattern, for example `Deploy*`. To match a `*` itself, write `[*]`. A workflow Erpy leaves alone still runs and still blocks a merge.
+`ignore_workflows` are the workflows Erpyd does not try to repair when they fail. A name can be a pattern, for example `Deploy*`. To match a `*` itself, write `[*]`. A workflow Erpyd leaves alone still runs and still blocks a merge.
 
 ### `resolve_conflicts`
 
-**Should Erpy resolve merge conflicts on its own?**
+**Should Erpyd resolve merge conflicts on its own?**
 
 ```yaml
 resolve_conflicts:
@@ -249,14 +249,14 @@ On by default. Set `automatic` to `false` to turn it off. It must be `true` or `
 
 ### `chat`
 
-**Do you use review bots whose comments Erpy should read as feedback? Which ones?**
+**Do you use review bots whose comments Erpyd should read as feedback? Which ones?**
 
 ```yaml
 chat:
   bots: ["coderabbitai[bot]"]
 ```
 
-Their logins, as GitHub shows them. Erpy finds them in the authors of your recent reviews. Erpy reads their comments, and acts on them, on open pull requests that carry the `erpy-factory` label or where the bot mentions `@erpyai`.
+Their logins, as GitHub shows them. Erpyd finds them in the authors of your recent reviews. Erpyd reads their comments, and acts on them, on open pull requests that carry the `erpy-factory` label or where the bot mentions `@erpyd`.
 
 ### `worktree`
 
@@ -267,15 +267,15 @@ worktree:
   base: "19.0"
 ```
 
-This one is not under `extensions`: it sits at the top of the file, beside `harness`. Quote a branch name that looks like a number. The file must be on your default branch for Erpy to read it.
+This one is not under `extensions`: it sits at the top of the file, beside `harness`. Quote a branch name that looks like a number. The file must be on your default branch for Erpyd to read it.
 
 ## Read access in your AWS account
 
-Erpy reads a private Odoo image from your Amazon ECR, or a database dump from your Amazon S3 bucket, through one read-only IAM role that you create in your AWS account. Put its ARN in `odoo_aws_role`.
+Erpyd reads a private Odoo image from your Amazon ECR, or a database dump from your Amazon S3 bucket, through one read-only IAM role that you create in your AWS account. Put its ARN in `odoo_aws_role`.
 
 When the plan asks about this role, it shows the trust policy with your installation id filled in, and the permissions the role needs.
 
-Give the role this trust policy. `<your installation id>` is the number at the end of the address of your installation's page. Open it from **Settings**, **GitHub Apps**, **Erpy AI**, **Configure**:
+Give the role this trust policy. `<your installation id>` is the number at the end of the address of your installation's page. Open it from **Settings**, **GitHub Apps**, **Erpyd**, **Configure**:
 
 - for an organization: `https://github.com/organizations/<your-organization>/settings/installations/<id>`
 - for a personal account: `https://github.com/settings/installations/<id>`
@@ -304,7 +304,7 @@ The role must be in your own AWS account.
 
 Store the dump in `s3://<bucket>/<prefix>/` like this:
 
-- the dump itself, made with `pg_dump -Fc`. It holds the database only. Erpy does not restore a filestore.
+- the dump itself, made with `pg_dump -Fc`. It holds the database only. Erpyd does not restore a filestore.
 - `latest.txt`: one line with the dump's key in the bucket, for example `seed/odoo_2026-10-01.dump`.
 - `latest.meta.json`: write it last. It must say which Odoo image the dump was built on:
 
@@ -312,7 +312,7 @@ Store the dump in `s3://<bucket>/<prefix>/` like this:
   {"base_image_digest": "sha256:<digest of the image the dump was built on>"}
   ```
 
-Erpy compares that digest with the `odoo_image` it starts. If Erpy cannot read the dump, or the dump was built on a different image, it stops before any work and says on the issue what to fix. Fix it and ask again.
+Erpyd compares that digest with the `odoo_image` it starts. If Erpyd cannot read the dump, or the dump was built on a different image, it stops before any work and says on the issue what to fix. Fix it and ask again.
 
 ## The whole file
 
@@ -327,11 +327,11 @@ harness:
     - name: honeydukes
       source: {path: .harness}
   extensions:
-    # Files Erpy never edits: this configuration itself.
+    # Files Erpyd never edits: this configuration itself.
     harness_paths: [harness.yaml, .harness/]
     # The Odoo version your add-ons are written for.
     odoo_version: "19.0"
-    # The image Erpy runs your code and tests on. Use the one your CI uses.
+    # The image Erpyd runs your code and tests on. Use the one your CI uses.
     odoo_image: "123456789012.dkr.ecr.eu-west-3.amazonaws.com/acme/odoo:19.0"
     # Whether you run Odoo Enterprise (true) or Community (false). Community by default.
     odoo_enterprise: true
@@ -354,7 +354,7 @@ harness:
     odoo_dev_db: odoo_dev
     # Where your database dump is stored. Without one, tests start from a fresh database.
     odoo_seed: "s3://acme-erpy-dumps/odoo"
-    # The read-only role in your AWS account that Erpy uses to read your ECR image and your dump.
+    # The read-only role in your AWS account that Erpyd uses to read your ECR image and your dump.
     odoo_aws_role: "arn:aws:iam::123456789012:role/erpy-odoo-read"
     # Whether to load demo data when starting from a fresh database.
     odoo_with_demo: false
@@ -365,13 +365,13 @@ harness:
     resolve_ci:
       # Branches besides the default that pull requests target.
       extra_base_branches: ["19.0"]
-      # Workflows Erpy does not try to repair when they fail.
+      # Workflows Erpyd does not try to repair when they fail.
       ignore_workflows: ["Deploy to staging"]
-    # Set to false to stop Erpy resolving merge conflicts on its own. It does by default.
+    # Set to false to stop Erpyd resolving merge conflicts on its own. It does by default.
     resolve_conflicts:
       automatic: false
     chat:
-      # Review bots whose comments Erpy reads as feedback.
+      # Review bots whose comments Erpyd reads as feedback.
       bots: ["coderabbitai[bot]"]
 # The branch new work starts from, when it is not your default branch.
 worktree:
@@ -381,4 +381,4 @@ worktree:
 ## Check
 
 - `harness.yaml` on your default branch has the settings you chose, written without a leading `#`.
-- If a run needs a setting that is missing, Erpy says which one on the issue and asks you to add it to `harness.yaml` with a pull request. Add it, then ask again.
+- If a run needs a setting that is missing, Erpyd says which one on the issue and asks you to add it to `harness.yaml` with a pull request. Add it, then ask again.

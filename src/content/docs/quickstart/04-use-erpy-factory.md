@@ -1,13 +1,13 @@
 ---
 title: 4. Use Erpy Factory
-description: Turn an issue into a pull request. Ask Erpy to write the requirements, approve them, ask it to build the change, and review the pull request.
+description: Turn an issue into a pull request. Ask Erpyd to write the requirements, approve them, ask it to build the change, and review the pull request.
 ---
 
-Erpy turns an issue into a pull request in two stages: it writes the requirements, you approve them, and then it builds the change. You talk to Erpy in comments that mention `@erpyai`, in your own words. Erpy acts only on requests from people with write access.
+Erpyd turns an issue into a pull request in two stages: it writes the requirements, you approve them, and then it builds the change. You talk to Erpyd in comments that mention `@erpyd`, in your own words. Erpyd acts only on requests from people with write access.
 
 ## Before you start
 
-- Your repository is set up: Erpy AI is installed and active on it, and you merged the configuration pull request, with the advanced settings if your repository needs them.
+- Your repository is set up: Erpyd is installed and active on it, and you merged the configuration pull request, with the advanced settings if your repository needs them.
 - You have an issue that describes one small change. Write it as you would tell a colleague, for example "Add a delivery note field to sale orders".
 
 ## Typical workflow
@@ -16,34 +16,34 @@ Erpy turns an issue into a pull request in two stages: it writes the requirement
 2. Add this comment:
 
    ```text
-   @erpyai write the requirements
+   @erpyd write the requirements
    ```
 
-3. Erpy replies that it is writing them and keeps one status comment up to date: in progress, then done. Wait for "The requirements are ready for review."
-4. Read the requirements. Erpy replaced the description of the issue with them, and kept your own text at the bottom, under "Original request". Erpy adds the label `erpy-prd-review`.
-5. If Erpy has a question, it asks it in a comment. Answer in a comment that mentions Erpy. To change something, say what in a comment that mentions Erpy, for example:
+3. Erpyd replies that it is writing them and keeps one status comment up to date: in progress, then done. Wait for "The requirements are ready for review."
+4. Read the requirements. Erpyd replaced the description of the issue with them, and kept your own text at the bottom, under "Original request". Erpyd adds the label `erpy-prd-review`.
+5. If Erpyd has a question, it asks it in a comment. Answer in a comment that mentions Erpyd. To change something, say what in a comment that mentions Erpyd, for example:
 
    ```text
-   @erpyai the delivery note should be optional
+   @erpyd the delivery note should be optional
    ```
 
-   Erpy revises the requirements and asks you to approve them again. Repeat until the requirements are right.
+   Erpyd revises the requirements and asks you to approve them again. Repeat until the requirements are right.
 
 6. When the requirements are right, add this comment:
 
    ```text
-   @erpyai I approve this issue
+   @erpyd I approve this issue
    ```
 
-   Erpy replies that it added `erpy-prd-ready` and removed `erpy-prd-review`. Nothing is built yet.
+   Erpyd replies that it added `erpy-prd-ready` and removed `erpy-prd-review`. Nothing is built yet.
 
 7. Add this comment:
 
    ```text
-   @erpyai build this change
+   @erpyd build this change
    ```
 
-   Erpy replies "I'm starting on this issue now. I'll open a pull request with the change."
+   Erpyd replies "I'm starting on this issue now. I'll open a pull request with the change."
 
 8. Wait for "Pull request #N is open for review." in the status comment.
 9. Review the pull request, and merge it when it looks right.
@@ -57,30 +57,30 @@ Erpy turns an issue into a pull request in two stages: it writes the requirement
 
 ## What to expect
 
-- Erpy starts the pull request as a draft, and writes its description when the change is ready for review. The description starts with `Closes #N`, and has a summary, the acceptance criteria and an overview of the changes.
-- Erpy does not build before you approve the requirements. If you ask for it anyway, Erpy comments "I can't build this yet because the requirements are not approved. When they are right, ask `@erpyai` in a comment here to approve them, then to build the change." and adds the label `erpy-needs-info`. Approve the requirements, then ask again.
-- If the change touches code that is broken, Erpy fixes it in the same pull request. It opens no second pull request and no follow-up issue for it.
-- Erpy works on one issue or pull request at a time. When many requests are waiting, Erpy's check says it starts when capacity is free.
-- Erpy never merges, never pushes to your default branch, and never changes your workflows, `harness.yaml` or `.harness` folder. You do.
-- A pull request that Erpy opens carries the `erpy-factory` label, and Erpy keeps it in order on its own, see [Automatic work](../05-automatic-work/).
-- If a run stops and there is something you can fix, such as a missing setting in `harness.yaml`, Erpy says so in a comment on the request. Fix it and ask again in a new comment that mentions Erpy.
+- Erpyd starts the pull request as a draft, and writes its description when the change is ready for review. The description starts with `Closes #N`, and has a summary, the acceptance criteria and an overview of the changes.
+- Erpyd does not build before you approve the requirements. If you ask for it anyway, Erpyd comments "I can't build this yet because the requirements are not approved. When they are right, ask `@erpyd` in a comment here to approve them, then to build the change." and adds the label `erpy-needs-info`. Approve the requirements, then ask again.
+- If the change touches code that is broken, Erpyd fixes it in the same pull request. It opens no second pull request and no follow-up issue for it.
+- Erpyd works on one issue or pull request at a time. When many requests are waiting, Erpyd's check says it starts when capacity is free.
+- Erpyd never merges, never pushes to your default branch, and never changes your workflows, `harness.yaml` or `.harness` folder. You do.
+- A pull request that Erpyd opens carries the `erpy-factory` label, and Erpyd keeps it in order on its own, see [Automatic work](../05-automatic-work/).
+- If a run stops and there is something you can fix, such as a missing setting in `harness.yaml`, Erpyd says so in a comment on the request. Fix it and ask again in a new comment that mentions Erpyd.
 
-## Ask Erpy for more work
+## Ask Erpyd for more work
 
-When the pull request is open, you can ask Erpy for more in a comment on it that mentions Erpy, in your own words:
+When the pull request is open, you can ask Erpyd for more in a comment on it that mentions Erpyd, in your own words:
 
 ```text
-@erpyai show the delivery note on the delivery order too
+@erpyd show the delivery note on the delivery order too
 ```
 
 ```text
-@erpyai please fix the failing checks
+@erpyd please fix the failing checks
 ```
 
 ```text
-@erpyai resolve the merge conflicts
+@erpyd resolve the merge conflicts
 ```
 
-Erpy replies that it is working on it, for example "I'm fixing the failing checks on this pull request now." or "I'm merging the base branch into this pull request and resolving the conflicts now."
+Erpyd replies that it is working on it, for example "I'm fixing the failing checks on this pull request now." or "I'm merging the base branch into this pull request and resolving the conflicts now."
 
 These requests work whether or not the pull request carries the `erpy-factory` label, and they have no limit on attempts.
