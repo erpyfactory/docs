@@ -63,7 +63,7 @@ Erpyd turns an issue into a pull request in two stages: it writes the requiremen
 - Erpyd works on one issue or pull request at a time. When many requests are waiting, Erpyd's check says it starts when capacity is free.
 - Erpyd never merges, never pushes to your default branch, and never changes your workflows, `harness.yaml` or `.harness` folder. You do.
 - A pull request that Erpyd opens carries the `erpy-factory` label, and Erpyd keeps it in order on its own, see [Automatic work](../05-automatic-work/).
-- If a run stops, the status comment and the check on the pull request say why. When it is something you can fix, such as "This repository's configuration has no `<setting>` setting, and this work needs it. Add `<setting>` to harness.yaml with a pull request.", fix it and ask again in a new comment that mentions Erpyd. Other stops say that Erpyd reported the fault to its team and will continue once it is fixed.
+- If a run stops on a problem with the setup, Erpyd says so once, in a comment on the request. When it is something you can fix, such as "This repository's configuration has no `<setting>` setting, and this work needs it. Add `<setting>` to harness.yaml with a pull request.", fix it and ask again in a new comment that mentions Erpyd. Other stops say that Erpyd reported the fault to its team and will continue once it is fixed.
 
 ## Ask Erpyd for more work
 
