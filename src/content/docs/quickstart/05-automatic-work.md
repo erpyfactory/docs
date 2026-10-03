@@ -17,7 +17,7 @@ In both cases Erpyd changes only what the pull request needs. It leaves alone an
 
 ## A broken base branch
 
-Less often, a test fails on the branch your pull requests target. Erpyd fixes it once, in a separate pull request onto that branch, and not inside yours. It starts on its own when your checks are red after a push to a branch listed in `extra_base_branches`, see [Advanced settings](../03-advanced-settings/), or when it finds a failing test that your pull request does not touch, or a security defect on the base branch. You review and merge that pull request: Erpyd never merges it into your base branch. Meanwhile Erpyd pushes nothing to your pull request and comments on it with a link. After the merge it brings the fix into your pull request, and your checks run again.
+Less often, a test fails on the branch your pull requests target. Erpyd fixes it once, in a separate pull request onto that branch, and not inside yours. That pull request carries the `erpy-fix` label, because Erpyd opened it itself, and the `erpy-blocking` label while your pull request waits on it. Erpyd adds and removes `erpy-blocking` itself. It starts on its own when your checks are red after a push to a branch listed in `extra_base_branches`, see [Advanced settings](../03-advanced-settings/), or when it finds a failing test that your pull request does not touch, or a security defect on the base branch. You review and merge that pull request: Erpyd never merges it into your base branch. Meanwhile Erpyd pushes nothing to your pull request and comments on it with a link. After the merge it brings the fix into your pull request, and your checks run again.
 
 ## How long it lasts
 

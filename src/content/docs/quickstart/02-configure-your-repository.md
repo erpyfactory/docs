@@ -71,7 +71,7 @@ harness:
       ignore_workflows: ["Deploy to staging"]
 ```
 
-You can change any setting later with a pull request. [Advanced settings](../03-advanced-settings/) explains every setting and the values it accepts.
+You can change any setting later with a pull request. [Advanced settings](../03-advanced-settings/) explains the settings and the values they accept.
 
 A workflow that Erpyd leaves alone still runs and still blocks a merge. Erpyd only does not try to repair it. Workflows that deploy, run scheduled work against outside systems, or need secrets or an environment Erpyd does not have are proposed as Leave alone.
 
