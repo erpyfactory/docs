@@ -11,7 +11,7 @@ Most projects can give the simple answer to every row, and then need only the fi
 
 | Question | Simple | More setup |
 | --- | --- | --- |
-| Which account owns your repositories? | One organization or personal account | Odoo or Enterprise code in a repository of another account: Erpyd must be installed there too |
+| Which account owns your repositories? | One organization or personal account | Odoo or Enterprise code in a repository of another account: Erpy AI must be installed there too |
 | How many Odoo versions do you run? | One, in one repository | Several, one repository each, configured one by one |
 
 ## Your Odoo project
@@ -27,7 +27,7 @@ Most projects can give the simple answer to every row, and then need only the fi
 
 | Question | Simple | More setup |
 | --- | --- | --- |
-| Which image does your CI run your tests in? | A public image, for example `odoo:19.0` on Docker Hub | An image in your own Amazon ECR: you create a read-only AWS role for Erpyd |
+| Which image does your CI run your tests in? | A public image, for example `odoo:19.0` on Docker Hub | An image in your own Amazon ECR: you create a read-only AWS role for Erpy |
 | Is your image in another private registry? | No | Yes: for now, the Erpy Factory team sets up the login to that registry |
 | Does your development setup use Docker Compose? | No: Odoo and Postgres only | Yes: your own Compose file, extra services such as Redis or nginx, an Odoo service built from a Dockerfile |
 | Which images do those services use? | Public ones | Private ones: the same registry question as above |
@@ -36,7 +36,7 @@ Most projects can give the simple answer to every row, and then need only the fi
 
 | Question | Simple | More setup |
 | --- | --- | --- |
-| Do your tests start from a database dump? | No: Erpyd installs your modules into a fresh database | Yes: a `pg_dump -Fc` dump in your own Amazon S3 bucket, built on the same Odoo image as your tests, read through an AWS role |
+| Do your tests start from a database dump? | No: Erpy installs your modules into a fresh database | Yes: a `pg_dump -Fc` dump in your own Amazon S3 bucket, built on the same Odoo image as your tests, read through an AWS role |
 | Do your tests need demo data? | No | Yes |
 | Is that bucket encrypted with your own KMS key? | Not applicable | Yes: the role also needs access to that key |
 
