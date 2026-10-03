@@ -258,16 +258,6 @@ chat:
 
 Their logins, as GitHub shows them. Erpyd finds them in the authors of your recent reviews. Erpyd reads their comments, and acts on them, on open pull requests that carry the `erpy-factory` label or where the bot mentions `@erpyd`.
 
-### `carry_days`
-
-**For how long should Erpyd take care of a pull request?**
-
-```yaml
-carry_days: 7
-```
-
-The number of days the `erpy-factory` label stays on a pull request after it was added, or after Erpyd last did work on the change. The default is 7, and Erpyd writes it as a comment. A whole number from 1 to 3650. See [Automatic work](../05-automatic-work/).
-
 ### `worktree`
 
 **Does new work start from a branch other than the default branch?**
@@ -372,8 +362,6 @@ harness:
     odoo_locales: [fr_BE, nl_NL]
     # The check a pull request must be green on.
     required_check: Addons tests
-    # The days the erpy-factory label stays on a pull request nobody works on. 7 by default.
-    carry_days: 7
     resolve_ci:
       # Branches besides the default that pull requests target.
       extra_base_branches: ["19.0"]
