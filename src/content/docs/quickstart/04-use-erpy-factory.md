@@ -83,4 +83,4 @@ When the pull request is open, you can ask Erpyd for more in a comment on it tha
 
 Erpyd replies that it is working on it, for example "I'm fixing the failing checks on this pull request now." or "I'm merging the base branch into this pull request and resolving the conflicts now."
 
-These requests work whether or not the pull request carries the `erpy-factory` label, and they have no limit on attempts.
+These requests work whether or not the pull request carries the `erpy-factory` label, and they have no limit on attempts. On a closed or merged pull request Erpyd starts no work, and still answers questions about it.
