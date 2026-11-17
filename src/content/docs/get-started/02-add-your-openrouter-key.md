@@ -1,6 +1,6 @@
 ---
 title: 2. Add your OpenRouter key
-description: Save your organization's own OpenRouter API key, the first page of a new organization.
+description: Save your organization's own OpenRouter API key, the first step of a new organization's setup page.
 ---
 
 Your organization's own [OpenRouter](https://openrouter.ai) key pays for your DeepSeek tickets: see
@@ -32,7 +32,8 @@ the setup page, **OpenRouter key**: the next steps open once the key is saved.
 5. Select **Save**. The button reads "Checking…" while Factory checks the key with OpenRouter. Factory
    saves the key only once OpenRouter accepts it.
 6. The page opens the **Link code host** step and says "This key pays for Acme's DeepSeek tickets.
-   Next, link your code host."
+   Next, link your code host." If your code host is already linked, it opens **Add repository**
+   instead, without that line.
 
 ## Check
 
@@ -50,8 +51,10 @@ the setup page, **OpenRouter key**: the next steps open once the key is saved.
 
 ### What the key pays for
 
-Settings → Model key says what the key is for: "This organization's DeepSeek tickets are paid by this
-key, and wait while it fails."
+Before you save the key, the setup page's **OpenRouter key** step says "Erpy works on Acme's DeepSeek
+tickets with models it reaches through OpenRouter, and your organization's own OpenRouter key pays for
+them." Once setup is over, Settings → Model key says: "This organization's DeepSeek tickets are paid
+by this key, and wait while it fails."
 
 - **A DeepSeek ticket** is a ticket Erpy has set to run on a DeepSeek model, which Erpy reaches through
   OpenRouter. Every other ticket runs on Claude. Erpy decides this for each ticket. You don't choose the
@@ -78,7 +81,7 @@ The key stays unsaved, and the page shows one of these messages beside **Save**.
 | --- | --- |
 | "This is not an OpenRouter API key. A key starts with sk-or-v1- followed by 64 characters 0-9 and a-f." | Copy the whole key again from OpenRouter, with nothing before or after it, and paste it. |
 | "OpenRouter did not accept this key. Check that it is an API key, not a provisioning key, and that it is not deleted or disabled." | Create a new API key at openrouter.ai/settings/keys, not a provisioning key, and save it. |
-| "This key has no credit limit. Set one on OpenRouter's API Keys page, then save it again." | Set a **Credit limit** on the key at OpenRouter, then select **Save** again. "OpenRouter's API Keys page" links to openrouter.ai/settings/keys. |
+| "This key has no credit limit. Set one on OpenRouter's API Keys page, then save it again." | Set a **Credit limit** on the key at OpenRouter, then select **Save** again. The ↗ icon after "OpenRouter's API Keys page" opens openrouter.ai/settings/keys. |
 | "This key has used up its credit limit. Raise it on OpenRouter's API Keys page, then save it again." | Raise the key's credit limit at OpenRouter, then save it again. |
 | "The OpenRouter account of this key has less than 1 USD of credit. Add credit at openrouter.ai/settings/credits, then save it again." | Add credit at OpenRouter, then save it again. |
 | "This organization has no OpenRouter key. Reload the page." | Reload the page. |
@@ -91,7 +94,7 @@ The key stays unsaved, and the page shows one of these messages beside **Save**.
 Only an Admin can add, replace or remove the key.
 
 - On a new organization's setup page, the **OpenRouter key** step says "An Admin of Acme sets its
-  OpenRouter key." and names your Admins after "Admins:". Ask one of them, then reload the page once
+  OpenRouter key." It also names your Admins after "Admins:" when Erpy Factory can list them. Ask one of them, then reload the page once
   they have saved it.
 - Once setup is over, on Settings → Model key, you read the key's facts and "Only an Admin of this organization can change
   this." When no key is set, the page says "No key is set. DeepSeek tickets wait until an Admin sets
@@ -99,7 +102,7 @@ Only an Admin can add, replace or remove the key.
 
 ## The key's status
 
-Factory checks the key with OpenRouter. **Status** on Settings → Model key shows one word.
+Factory checks the key with OpenRouter. **Status** shows one of these, on Settings → Model key once setup is over, and during setup on the **OpenRouter key** step when you open it again from the sidebar.
 
 | What you see | What to do |
 | --- | --- |
@@ -128,7 +131,7 @@ the key is **Active**.
 
 ## Check again, replace or remove the key
 
-On Settings → Model key, an Admin has three buttons:
+Once setup is over, an Admin has three buttons on Settings → Model key. During setup, Settings → Model key opens the setup page instead: select **OpenRouter key** in the sidebar for the same three buttons.
 
 - **Check again**: Factory asks OpenRouter about the key now, and the page updates its facts. Use it
   after you add credit or raise the limit.

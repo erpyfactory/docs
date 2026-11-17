@@ -51,7 +51,7 @@ The form shows three numbered cards and a token field numbered 4. Steps 1 to 4 b
 5. **Read the preview.** The page shows "Token accepted" and what the token reaches (see [The preview](#the-preview)).
 6. **Link.** Select **Link acme**, where `acme` is your group (or the user's name, when it is in no project yet). The button reads "Linking…", then the page says "acme is linked. Erpy lists its projects within a few minutes." Erpy lists them with its hourly check, so the projects can take up to an hour to show on [4. Add a repository](../../04-add-a-repository/).
 
-   On the setup page, the **Link code host** step then shows the link's card, marked "Active", with its **Webhooks** section: see [Add the webhooks](#add-the-webhooks). The step offers **Skip for now** while no webhook is saved, and **Continue** once one is. Both open **Add repository**.
+   On the setup page, the **Link code host** step then shows the link's card, marked "Active", with its **Webhooks** section: see [Add the webhooks](#add-the-webhooks). For an Admin, the step offers **Skip for now** while no webhook is saved, and **Continue** once one is. A Builder sees **Continue**. Both open **Add repository**.
 
    Link within 10 minutes of the check. After that, check the token again.
 
@@ -113,7 +113,7 @@ Webhooks are optional. Without them, Erpy checks GitLab every 5 minutes for the 
 - You are an Admin of your organization in Erpy Factory.
 - On GitLab, you are Owner of the group (for a group webhook) or Maintainer of each project (for project webhooks), or someone who is helps you.
 
-On the link's card, open the **Webhooks** section. It is open by itself while no webhook is saved, and it walks through the same three parts as the steps below.
+On the link's card, open the **Webhooks** section. It is open by itself while no webhook is saved, and it walks through the same work as steps 1 to 5 below.
 
 ### Webhook steps
 
@@ -204,6 +204,7 @@ A refused check clears the token field. Fix the cause on GitLab, then paste the 
 | "The token's user is Reporter or Guest of its projects. Make it Developer of the projects Erpy should work on, then check again." | Raise the user to Developer on the projects Erpy should work on. |
 | "The token's user is in projects of more than one top-level group (acme, acme-labs). A link covers one group: keep the user in one." | Remove the user from the projects of every top-level group but one. |
 | "acme/team is not a top-level group." | Erpy links a top-level group. Check which groups the user is a member of. |
+| "The token's user reaches more than 100 projects. A link covers at most 100." | Make the user Developer of fewer projects on GitLab, 100 at most, then check the token again. |
 | "This group is linked to another organization. It must be removed there first." | An Admin of that organization removes the link first. |
 | "This group is already linked to this organization, through another user. Replace that link's token instead." | Use **Replace token** on the existing link, with a token of that link's user. |
 | "This group is already linked through GitLab's approval screen. Remove that link first." | Remove the existing link of this group, then link it with the token. |
@@ -233,7 +234,7 @@ Once you have fixed the cause, [replace the token](#replace-the-token): the mark
 Replace the token when the card asks for it, or when you want a fresh one.
 
 1. On GitLab, sign in as Erpy's user and create a new personal access token, as in step 3.
-2. On the link's card in Settings → Links, select **Replace token**. The form says "A new token of the same user, or of another user made for Erpy, for acme. The webhooks you added stay."
+2. On the link's card, select **Replace token**: on the setup page's **Link code host** step during setup, or on Settings → Links after. The form says "A new token of the same user, or of another user made for Erpy, for acme. The webhooks you added stay."
 3. Paste the new token, select **Check token**, read the preview, and confirm.
 
 Use a token of this link's user. Although the form mentions another user, Erpy accepts only this link's user, and refuses other tokens:
@@ -268,9 +269,9 @@ Don't revoke the token on GitLab while the link is in use. If you do, the card a
 
 Only an Admin can link GitLab, replace the token, add webhooks or remove a link. A Builder or a Viewer sees:
 
-- on the setup page, before a link exists: "An Admin of Acme links its code host: GitLab or GitHub." and the names of your Admins, after "Admins:";
+- on the setup page, before a link exists: "An Admin of Acme links its code host: GitLab or GitHub." It also names your Admins after "Admins:" when Erpy Factory can list them;
 - on Settings → Links, before a link exists: "Acme has no link yet. An Admin of Acme links its GitHub account or GitLab group here."
-- after: the link's card, with its status, its projects and any "Needs attention" line. On a linked group's card, the menu has **Open in GitLab** and **See projects**.
+- after: the link's card, with its status, its projects and any "Needs attention" line. On Settings → Links, a linked group's card has a menu with **Open in GitLab** and **See projects**.
 
 ## Next step
 

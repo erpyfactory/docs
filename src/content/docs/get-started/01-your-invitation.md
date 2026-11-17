@@ -27,8 +27,8 @@ host** (GitLab or GitHub) and **Add repository**. The page shows one step at a t
 **OpenRouter key**:
 
 - as an Admin, you see the key form;
-- with any other role, you see "An Admin of Acme sets its OpenRouter key." and the names of your
-  Admins, after "Admins:".
+- with any other role, you see "An Admin of Acme sets its OpenRouter key." It also names your
+  Admins after "Admins:" when Erpy Factory can list them.
 
 Every other page of the organization, Settings included, opens the setup page until the first
 repository is added.

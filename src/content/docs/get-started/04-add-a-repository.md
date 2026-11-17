@@ -12,16 +12,15 @@ You choose which repositories Erpy works on, and Erpy sets each one up. The setu
 
 ## Open Add repository
 
-On a new organization, the setup page opens the **Add repository** step once the code host is linked. It shows the list below in place. A Viewer sees "An Admin or Builder of Acme adds its first repository." and the names of your Admins instead.
+On a new organization, right after the link, the setup page stays on **Link code host** and offers **Continue**, or **Skip for now** while no GitLab webhook is saved. Either opens the **Add repository** step, which shows the list below in place. A Viewer sees "An Admin or Builder of Acme adds its first repository." instead. It also names your Admins after "Admins:" when Erpy Factory can list them.
 
 - On GitLab, once you add projects and nothing went wrong, your organization's board opens. Setup is over, and the organization's pages, Settings included, open as usual. If setup did not start, or GitLab refused Erpy's labels, the step stays open with the reason: see [What happens after Add](#what-happens-after-add).
-- On GitHub, the repositories come from the Erpy app's access. The step reads again by itself, and once the first repository shows, the board opens.
+- On GitHub, the repositories come from the Erpy app's access. If you chose repositories when you installed the app, GitHub sends you straight to the board. Otherwise the step reads again by itself, and once the first repository shows, the board opens.
 
-Later, select **Add repository** on the home page's Repositories card or at the foot of the repository switcher.
+Later, select **Add repository** on the home page's Repositories card or at the foot of the repository switcher. An organization that removes every repository goes back to the setup page, at its first step not done.
 
 - With a link to both GitLab and GitHub, the page asks "Where is the repository?". Choose **GitHub** or **GitLab**.
 - With more than one GitLab group, it asks "Which GitLab group?". Choose the group.
-- With no link yet, an Admin sees **Link GitHub** and **Link GitLab**. After the link you come back to this page.
 
 ## On GitLab
 
