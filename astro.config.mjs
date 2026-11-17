@@ -15,6 +15,7 @@ export default defineConfig({
 			editLink: { baseUrl: 'https://github.com/erpyfactory/docs/edit/main/' },
 			sidebar: [
 				{ label: 'What is Erpy Factory', slug: 'index' },
+				{ label: 'Before you start', slug: 'reference/onboarding-checklist' },
 				{ label: 'Get started', items: [{ autogenerate: { directory: 'get-started' } }] },
 				{
 					label: 'Work with Erpy',
@@ -25,7 +26,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Reference',
-					items: [{ slug: 'reference/onboarding-checklist' }, { slug: 'reference/harness-yaml' }],
+					items: [{ slug: 'reference/harness-yaml' }],
 				},
 			],
 		}),

@@ -1,6 +1,6 @@
 ---
 title: Ask Erpy from GitLab or GitHub
-description: Mention Erpy in comments on GitLab or GitHub to ask for requirements, for more work on a merge request or pull request, or to ask a question.
+description: Mention Erpy in comments on GitLab or GitHub to ask a question, to ask for more work on a merge request or pull request, or, on GitHub, to turn an issue into a pull request.
 ---
 
 Besides the board, you can talk to Erpy in comments on GitLab or GitHub. Mention `@erpyai` and say what you want, in your own words.
@@ -36,6 +36,8 @@ Mention Erpy in a comment on an issue, or on a merge request (GitLab) or pull re
 - **On GitLab**, write `@erpyai`, or the username of your organization's own Erpy user, the GitLab user you created for Erpy. Write it exactly: on GitLab, Erpy does not answer a misspelled name.
 - **On GitHub**, write `@erpyai`.
 
+On GitLab, `@erpyai` needs no GitLab user: it is not the Erpy user you created, and you add no user for it. Erpy reads the text of each comment, through your webhooks as soon as you post it, or within 5 minutes in a project that has no webhook yet. GitLab may not show `@erpyai` as a link; Erpy reads the comment all the same.
+
 Erpy replies in the same thread.
 
 ### If Erpy can't act on your request
@@ -49,7 +51,7 @@ Erpy posts each of these once per person on a thread.
 
 ## On GitHub: from an issue to a pull request
 
-On GitHub, Erpy turns an issue into a pull request in two stages: it writes the requirements, you approve them, and then it builds the change.
+On GitHub, Erpy turns an issue into a pull request in two stages: it writes the requirements, you approve them, and your approval starts the build.
 
 1. Open the issue. Write it as you would tell a colleague, for example "Add a delivery note field to sale orders".
 2. Add this comment:
@@ -66,7 +68,7 @@ On GitHub, Erpy turns an issue into a pull request in two stages: it writes the 
    @erpyai the delivery note should be optional
    ```
 
-   Erpy replies "I'm revising this issue's requirements now.", revises the requirements and asks you to approve them again. Repeat until the requirements are right.
+   Erpy replies "I'm revising this issue's requirements now." and revises the requirements. The status comment then reads "The requirements are updated." If you had already approved them, it reads "The requirements are updated and ready for review again.", and you approve them again. Repeat until the requirements are right.
 
 6. When the requirements are right, add this comment:
 
@@ -74,53 +76,36 @@ On GitHub, Erpy turns an issue into a pull request in two stages: it writes the 
    @erpyai I approve this issue
    ```
 
-   Erpy replies that it added `erpy-prd-ready` and removed `erpy-prd-review`. Nothing is built yet.
+   Your approval starts the build. Erpy replies "I marked the requirements approved. I'm starting on this issue now. I'll open a pull request with the change."
 
-7. Add this comment:
-
-   ```text
-   @erpyai build this change
-   ```
-
-   Erpy replies "I'm starting on this issue now. I'll open a pull request with the change."
-
-8. Wait for "Pull request #N is open for review." in the status comment.
-9. Review the pull request, and merge it when it looks right.
+7. Wait for "Pull request #N is open for review." in the status comment. For a change that gets screen recordings, the status first reads "Pull request #N is open; a screen recording of the change comes next."
+8. Review the pull request, and merge it when it looks right.
 
 ### Check
 
-- After you approve the requirements, the issue has the label `erpy-prd-ready`.
-- After the pull request is open, the issue has the label `erpy-in-review`. The pull request is titled with the issue number, comes from a branch whose name starts with `issue-` and the issue number, and closes the issue.
+- After you approve the requirements, the issue has the label `erpy-prd-ready`, until the build moves the issue on.
+- When the pull request is ready for review, the issue has the label `erpy-ready-for-review`. The pull request is titled with the issue number, comes from a branch whose name starts with `issue-` and the issue number, and closes the issue.
 - The pull request has a check named "Implementation".
 - After you merge the pull request, the issue closes by itself.
 
 ### What to expect
 
 - Erpy starts the pull request as a draft, and writes its description when the change is ready for review. The description starts with `Closes #N`, and has a summary, the acceptance criteria and an overview of the changes.
-- Erpy does not build before you approve the requirements. If you ask for it anyway, Erpy says in a comment that it can't build yet because the requirements are not approved, and adds the label `erpy-needs-info`. Approve the requirements in a comment that mentions `@erpyai`, then ask again.
+- If you ask Erpy to build an issue whose requirements wait for review, or an issue with no requirements yet, your request counts as the approval: Erpy adds `erpy-prd-ready` and builds.
 - If your organization uses Factory tickets, the same flow runs on the board with buttons, see [Write your first ticket](../../get-started/08-write-your-first-ticket/).
 
-## On GitLab: requirements, questions and merge requests
+## On GitLab: tickets in Erpy Factory, comments on merge requests
 
-On GitLab, you can ask Erpy to write requirements on an issue, ask it questions, and ask for more work on a merge request.
+On GitLab, write your tickets in Erpy Factory, see [Write your first ticket](../../get-started/08-write-your-first-ticket/). Requirements written on a GitLab issue cannot be approved, so Erpy builds nothing from them. Keep **Factory tickets** under Settings → Tickets.
 
-### Ask for requirements on an issue
+On GitLab, use comments to:
 
-Add this comment on the issue:
+- ask Erpy a question, on an issue or a merge request, see [Ask questions](#ask-questions);
+- ask for more work on a merge request: a change, fixing the failing checks or resolving the merge conflicts, see [Ask for more work on a merge request or pull request](#ask-for-more-work-on-a-merge-request-or-pull-request).
 
-```text
-@erpyai write the requirements
-```
-
-Erpy replies "I'm writing the requirements for this issue now." To change them, say what in a comment that mentions `@erpyai`. Erpy replies "I'm revising this issue's requirements now."
-
-### Approving on a GitLab issue is not available yet
-
-If you ask Erpy to approve the requirements on a GitLab issue, or to build the change from it, Erpy replies:
+If you ask on GitLab for something Erpy does not take there, such as approving requirements or building from a GitLab issue, Erpy replies:
 
 > This isn't available on GitLab yet.
-
-The requirements on a GitLab issue can't be approved in Erpy Factory either. So on GitLab, keep **Factory tickets** under Settings → Tickets, and write your tickets on the board: there you approve the PRD with **Approve PRD**. See [Write your first ticket](../../get-started/08-write-your-first-ticket/).
 
 ### The merge request
 
@@ -178,8 +163,9 @@ On GitLab, for a change you need after a merge, write a new ticket on the board 
 
 ## What to expect
 
-- If the change touches code that is broken, Erpy fixes it in the same merge request or pull request. It opens no second one and no follow-up issue for it.
-- Erpy works on one issue, merge request or pull request at a time. When many requests are waiting, they start when there is capacity.
+- If the change touches code that is broken, Erpy fixes it in the same merge request or pull request, and opens no follow-up issue for it. A test that already fails on the base branch is the exception: Erpy fixes it in a separate merge request or pull request onto the base branch, see [Automatic work](../automatic-work/).
+- Erpy runs one piece of work at a time on each ticket, issue, merge request or pull request. If you ask for more on one while Erpy is still working on it, your request waits and starts when that work ends. Work on different ones can run at the same time. When many requests are waiting, they start when there is capacity.
 - Erpy never merges: you do. While it builds a change, it does not change your workflows, `harness.yaml` or `.harness` folder.
+- Erpy does not deploy. After you merge, install or upgrade the module in your Odoo as you do today.
 - A merge request or pull request that Erpy opens carries the `erpy-factory` label, and Erpy keeps it in order on its own, see [Automatic work](../automatic-work/).
 - If a run stops and there is something you can fix, such as a missing setting in `harness.yaml`, Erpy says so in a comment. Fix it and ask again in a new comment that mentions `@erpyai`. Work can also pause on Erpy's side and continue on its own, with nothing for you to do.

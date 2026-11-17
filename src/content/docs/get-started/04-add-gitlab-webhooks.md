@@ -1,4 +1,7 @@
 ---
+next:
+  link: ../06-add-a-repository/
+  label: 6. Add a repository
 title: 4. Add GitLab webhooks
 description: Add a group webhook or one webhook per project on GitLab, so Erpy hears about your changes at once.
 ---
@@ -7,7 +10,7 @@ A webhook tells Erpy at once when something happens in your projects: a push, a 
 
 ## Before you start
 
-- Step 3 is done: your GitLab group is linked and its card in **Settings → Links** is "Active". See [3. Link GitLab](../03-link-gitlab/).
+- Step 3 is done: your GitLab group is linked and its card in **Settings → Links** is "Active". The **Webhooks** section shows only on an "Active" card. If the card says "Waiting for access", go back to [If your group has no project yet](../03-link-gitlab/#if-your-group-has-no-project-yet) or [Waiting for access](../03-link-gitlab/#waiting-for-access).
 - You are an Admin of your organization in Erpy Factory.
 - On GitLab, you are Owner of the group (for a group webhook) or Maintainer of each project (for project webhooks), or someone who is helps you.
 
@@ -23,8 +26,8 @@ On the link's card in Settings → Links, open the **Webhooks** section. It is o
 2. **Copy the URL the page shows.** The group webhook's URL is under "One group webhook". Each project has its own URL, listed under its name below "Or one webhook per project". The project list appears once Erpy's user has projects.
 3. **Fill in GitLab's form.** On GitLab's **Webhooks** page, add a new webhook:
    - **URL**: paste the URL you copied.
-   - **Secret token**: leave it empty.
-   - **Signing token**: generate one and copy it. GitLab shows it only once.
+   - **Secret token**: leave it empty. Erpy doesn't use it: it checks GitLab's signing token instead, which proves each delivery came from your webhook.
+   - **Signing token**: select **Generate signing token** and copy it. GitLab shows it only once. gitlab.com's form has this field on every plan. Erpy accepts only deliveries signed with it, so a webhook without a signing token doesn't work.
    - **Trigger**: tick these events:
      - Push events
      - Comments
@@ -44,14 +47,16 @@ On the link's card in Settings → Links, open the **Webhooks** section. It is o
    - Paste the token into **Signing token** and select **Save**.
 
    The page says "Saved. Erpy accepts deliveries from the group webhook now. Use GitLab's Test button to send one." (or "from the project webhook").
-5. **Send a test.** On GitLab, use the webhook's **Test** button to send an event.
+5. **Send a test.** On GitLab, open the webhook's **Test** list and choose **Push events**. GitLab can send it only once the project has at least one commit. For a project that is still empty, send the test after its first commit, for example after you add it in [6. Add a repository](../06-add-a-repository/) and Erpy commits the starter.
+
+   GitLab shows the result at once: edit the webhook and look under **Recent events**. A `200` status means Erpy accepted the delivery. A `401` means the signature didn't match: check that you saved this webhook's signing token in step 4.
 
 For webhooks per project, repeat steps 2 to 5 for each project Erpy works on.
 
 ## Check
 
 - The **Webhooks** line on the card says "A group webhook is saved." or "Project webhooks are saved. Add one for each project Erpy works on." Before you save one it says "No webhook yet. Until you add one, Erpy checks GitLab every 5 minutes."
-- Each project in the list shows "Waiting for first event. Erpy checks GitLab every 5 minutes meanwhile." until a webhook has delivered an event for that project, then "Receiving events". The list is refreshed every hour, so "Receiving events" can take up to an hour to show.
+- Each project in the list shows "Waiting for first event. Erpy checks GitLab every 5 minutes meanwhile." until a webhook has delivered an event for that project, then "Receiving events". Only events of projects you have added in [6. Add a repository](../06-add-a-repository/) count, so a test sent before you add the project gets a `200` on GitLab but doesn't change this line. The list is refreshed every hour, so "Receiving events" can take up to an hour to show.
 - A test sends one event, so it turns one project at most. With a group webhook, each other project turns to "Receiving events" after something happens in it, such as a push or a comment.
 
 ## What to expect

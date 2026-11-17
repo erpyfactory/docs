@@ -7,8 +7,8 @@ You choose which repositories Erpy works on, and Erpy sets each one up. The setu
 
 ## Before you start
 
-- Your organization has a link: [Link GitLab](../03-link-gitlab/) or [Link GitHub](../05-link-github/).
-- You are a Builder or an Admin. A Viewer sees the list but cannot add: "A Viewer cannot add a repository. Ask a Builder or an Admin."
+- Your organization has a link: [Link GitLab](../03-link-gitlab/) or [Link GitHub](../05-link-github/). On GitLab, the link's card in **Settings → Links** must be "Active". A card marked "Waiting for access" doesn't count: until it is "Active", **Add repository** says your organization has no link yet. See [If your group has no project yet](../03-link-gitlab/#if-your-group-has-no-project-yet).
+- You are a Builder or an Admin. On GitLab, a Viewer sees the list but cannot add: "A Viewer cannot add a repository. Ask a Builder or an Admin."
 
 ## Open Add repository
 
@@ -34,7 +34,7 @@ The page lists the projects in your group that Erpy's user reaches as Developer 
    | **Python service** | "FastAPI, tested with pytest" |
    | **Something else** | "Say what in one line" |
 
-   The configuration covers Odoo projects today. For an Odoo project, choose **Odoo module**.
+   The configuration covers Odoo projects today. For an Odoo project, choose **Odoo module**. Erpy then lays out one Odoo module at the root of the project, in a folder named after the project (for example `coffee_rental` for `coffee-rental`), with its manifest and one test.
 3. Select **Add** (or **Add 3 repositories**, with the number you ticked).
 
 Next to the button, a line says what is missing:
@@ -47,9 +47,9 @@ Next to the button, a line says what is missing:
 
 ### Not in the list?
 
-The list shows only the projects Erpy's user is a member of. In GitLab, invite Erpy's user to the project as Developer, or to a group. Factory reads the list again within the hour. To read it now, select **Check again** under "Not in the list?".
+The list shows only the projects Erpy's user is a member of. In GitLab, invite Erpy's user to the project as Developer, or to a group. Erpy checks GitLab every hour, so a new project shows in the list within the hour: reload the page.
 
-The page then says "Erpy is listing acme now. New projects show in the list above within a minute: reload the page." Under **Not usable** it lists each project Erpy's user reaches but Erpy can't use, with the fix. Here `acme-erpy` stands for Erpy's user and `acme` for your group.
+To see why a project is missing, select **Check again** under "Not in the list?". The page then says "Erpy is listing acme now. New projects show in the list above within a minute: reload the page." New projects still show with Erpy's hourly check, within the hour. Under **Not usable** the page lists each project Erpy's user reaches but Erpy can't use, with the fix. Here `acme-erpy` stands for Erpy's user and `acme` for your group.
 
 | What you see | What to do |
 |---|---|
@@ -62,10 +62,12 @@ If nothing is wrong, the page says "acme-erpy reaches no project that Erpy canno
 
 ### Create a new project
 
-1. On the Add repository page, select **Create a new one on GitLab**. GitLab's new-project page opens in a new tab.
-2. Leave "Initialize repository with a README" off, and create the project.
-3. Invite Erpy's user to the project as Developer, unless it is already a member of the whole group.
-4. Back in Factory, reload the page, or select **Check again**. The project shows in the list as **Empty**. Add it as in the steps above.
+1. Before you create it, on GitLab Premium or Ultimate, check your group's **Settings → Repository → Default branch → Initial default branch protection**. **Fully protected after initial push**, **Partially protected** or **Not protected** lets Erpy's user, a Developer, make the first commit. **Fully protected** does not. If Erpy can't make the first commit, see [What happens after Add](#what-happens-after-add): you add a README instead.
+2. On the Add repository page, select **Create a new one on GitLab**. GitLab's new-project page opens in a new tab.
+3. Leave "Initialize repository with a README" off, and create the project.
+4. Invite Erpy's user to the project as Developer, unless it is already a member of the whole group.
+5. If you use one webhook per project (the only kind on GitLab Free), add one for the new project. See [4. Add GitLab webhooks](../04-add-gitlab-webhooks/). Without a webhook, Erpy still checks GitLab every 5 minutes for the projects you added.
+6. Back in Factory, reload the page within the hour. The project shows in the list as **Empty**. Add it as in the steps above.
 
 ## On GitHub
 
@@ -77,7 +79,7 @@ Factory lists every repository the Erpy app can reach on GitHub. There is no lis
 
 If the page says "Acme: an owner of the account changes the App's access on GitHub.", ask an owner of the GitHub account to give the app access.
 
-To create a new repository, select **Create a new one on GitHub**, create it, then give the Erpy app access to it under **Repository access**. On GitHub, Add repository does not ask what an empty repository will be: create the repository with a README, so it has a first commit.
+To create a new repository, select **Create a new one on GitHub**, create it, then give the Erpy app access to it under **Repository access**. On GitHub, Add repository does not ask what an empty repository will be: create the repository with a README, so it has a first commit. If the repository is empty, add a README before you select **Set up my repo**.
 
 ## What happens after Add
 
@@ -87,13 +89,15 @@ On GitLab, the page lists each project you added with what happens next:
 |---|---|
 | "Has harness.yaml: ready for tickets." | The project is set up. Write a ticket. |
 | "No harness.yaml yet: its board shows Set up my repo." | Open its board and select **Set up my repo**. See [An existing project](#an-existing-project). |
-| "Empty: Factory is setting it up as Odoo module: a first commit with a test and CI, then a setup pull request with harness.yaml." | Erpy is setting up the empty project. See [An empty project](#an-empty-project). |
+| "Empty: Factory is setting it up as Odoo module: a first commit with a test and CI, then a setup pull request with harness.yaml." (a merge request on GitLab) | Erpy is setting up the empty project. See [An empty project](#an-empty-project). |
 | "Empty: setup did not start." followed by the reason | Do what the reason says. |
 | "Its board says whether it needs setup." | Open its board. |
 
 If GitLab refused Erpy's labels, the page also says "GitLab refused Erpy’s labels on one repository: Erpy’s user needs the Developer role there. Erpy tries again every hour." Make Erpy's user Developer of that project.
 
 Select **Add more** to add other projects.
+
+Each project's name in the list opens its board. Later, choose the project in the repository switcher in the top bar, next to your organization's name, and open **Board**.
 
 If setup did not start, the reason says what to do. For example: "GitLab did not let Erpy make the first commit in gitlab.com/acme/shop. Add a README on GitLab (Add file → New file, README.md), then set it up again; the project is then set up without a starter." Your group's default branch protection can keep a Developer from pushing to an empty project. After you add the README, open the project's board and select **Set up my repo**.
 
@@ -102,6 +106,10 @@ If setup did not start, the reason says what to do. For example: "GitLab did not
 1. Erpy commits a starter straight to the default branch: a README, a starting layout, one test, and CI that runs the test. For **Something else**, the starter is the README alone.
 2. Erpy then plans the configuration and opens the setup merge request, titled "Configure this repository for Erpy Factory".
 3. You review the merge request and merge it.
+
+On GitLab, the starter's CI is a `.gitlab-ci.yml` whose job has no runner tags. gitlab.com runs untagged jobs on its hosted runners, unless your group has runners of its own that take them, and that time counts toward your group's compute minutes.
+
+Watch the progress on the project's board: once Erpy has opened the setup ticket, the board shows "Setup in progress — view ticket". Select it to follow the ticket.
 
 ### An existing project
 
@@ -117,23 +125,22 @@ While the setup ticket is open, the board shows "Setup in progress — view tick
 
 - `harness.yaml`, with a comment above each setting that says what it is for. Every setting is in the file. A setting Erpy found no evidence for stays commented out, with an example value. [harness.yaml settings](../../reference/harness-yaml/) explains each one.
 - A `.harness` folder, with `.harness/AGENTS.md`: what Erpy knows about your repository's environment and branch model. Put your own instructions for Erpy there.
-- Nothing under `.github/workflows`, and no change to your CI.
+- Nothing else: nothing under `.github/workflows`, and no change to your `.gitlab-ci.yml` or other CI.
 
 The description lists each setting with the evidence for its value. Where Erpy had to guess, it says "Check these before you merge:" and lists each guess. Change any value in the merge request before you merge it, or later with another merge request.
 
-Your own `.claude` folder, `AGENTS.md` and `CLAUDE.md` are left as they are. If your repository already has a `harness.yaml` or a `.harness` folder, the setup merge request replaces it.
+Your own `.claude` folder, `AGENTS.md` and `CLAUDE.md` are left as they are. If your repository already has a `.harness` folder, the setup merge request writes its files into it, over any file of the same name.
 
 ## Check
 
-- The setup merge request is titled "Configure this repository for Erpy Factory", from a branch named `erpy/configure-` followed by a number.
-- It adds `harness.yaml` and a `.harness` folder, and changes nothing under `.github/workflows`.
+- The setup merge request is titled "Configure this repository for Erpy Factory", from a branch whose name starts with `erpy/configure-`.
+- It adds `harness.yaml` and a `.harness` folder, and changes nothing under `.github/workflows` or in `.gitlab-ci.yml`.
 - After you merge it, `harness.yaml` is on the default branch, and the repository is set up. Its board no longer shows **Set up my repo**.
 
 ## What to expect
 
 - Erpy never merges. You merge the setup merge request.
 - For an empty project, the starter commits are the only ones Erpy makes straight to your default branch. Everything else comes as a merge request.
-- Merging the setup merge request starts no work by itself. Erpy starts on the tickets you write.
 
 ## Next step
 

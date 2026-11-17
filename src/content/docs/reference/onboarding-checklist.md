@@ -11,15 +11,15 @@ Most projects can give the simple answer to every row, and then need only the [G
 
 | Question | Simple | More setup |
 | --- | --- | --- |
-| Where are your repositories? | One GitLab group on gitlab.com, or one GitHub organization or personal account | Odoo or Enterprise code in a repository of another account or group: Erpy must be able to reach it there too |
+| Where are your repositories? | One GitLab group on gitlab.com, or one GitHub organization or personal account | Odoo or Enterprise code in a repository of another account or group: Erpy reads such code from a GitHub repository only. On GitLab, put it in your image |
 | How many Odoo versions do you run? | One, in one repository | Several, one repository each, configured one by one |
 
 ## Your Odoo project
 
 | Question | Simple | More setup |
 | --- | --- | --- |
-| Do you run Community or Enterprise? | Community | Enterprise: where does its code live, in your image or in a repository Erpy can reach? |
-| Where does your Odoo source come from? | The Odoo image you use | A repository: the official one, a fork or your own |
+| Do you run Community or Enterprise? | Community | Enterprise: where does its code live, in your image or in a GitHub repository Erpy can reach? On GitLab, it must be in your image |
+| Where does your Odoo source come from? | The Odoo image you use | A GitHub repository: the official one, a fork or your own. On GitLab, use the source in your image |
 | Where are your add-ons? | At the top of the repository | In other folders, or with your own `odoo.conf` |
 | Which languages besides English do new terms need? | None, or a short list | A long list: translation work grows with it |
 
@@ -28,7 +28,7 @@ Most projects can give the simple answer to every row, and then need only the [G
 | Question | Simple | More setup |
 | --- | --- | --- |
 | Which image does your CI run your tests in? | A public image, for example `odoo:19.0` on Docker Hub | An image in your own Amazon ECR: you create a read-only AWS role for Erpy. Today this role can be set up on GitHub only; on GitLab it cannot be set up yet |
-| Is your image in another private registry? | No | Yes: for now, the Erpy Factory team sets up the login to that registry |
+| Is your image in another private registry? | No | Yes: you set `odoo_image_access: registry` in `harness.yaml`, and for now the Erpy Factory team sets up the login to that registry |
 | Does your development setup use Docker Compose? | No: Odoo and Postgres only | Yes: your own Compose file, extra services such as Redis or nginx, an Odoo service built from a Dockerfile |
 | Which images do those services use? | Public ones | Private ones: the same registry question as above |
 

@@ -1,4 +1,7 @@
 ---
+prev:
+  link: ../02-add-your-openrouter-key/
+  label: 2. Add your OpenRouter key
 title: 5. Link GitHub
 description: Link your GitHub account or organization to Erpy Factory by installing the Erpy app from Settings → Links.
 ---
@@ -9,7 +12,7 @@ You install the Erpy app on your GitHub account or organization, from Factory, a
 
 ## Before you start
 
-- You are an Admin of your organization in Erpy Factory. Only an Admin can link GitHub. Anyone else sees "Acme has no link yet. An Admin of Acme links its GitHub account or GitLab group here."
+- You are an Admin of your organization in Erpy Factory. Only an Admin can link GitHub. While nothing is linked, anyone else sees "Acme has no link yet. An Admin of Acme links its GitHub account or GitLab group here." Once something is linked, they see the link cards and no **Link GitHub** button.
 - You can sign in to GitHub as an owner of the GitHub account or organization that holds the repositories.
 - Start from Settings → Links in Factory, not from GitHub. An install you start on GitHub is not linked to your organization.
 
@@ -30,9 +33,8 @@ On Settings → Links, your GitHub account is a card with the line "GitHub accou
 
 | Status | What it means |
 |---|---|
-| "Waiting for approval" | The app is installed. Erpy activates the installation on its side. You don't need to do anything. |
+| "Waiting for approval" | The app is installed. Erpy activates the installation on its side. If it stays like this, tell Erpy. |
 | "Active" | Erpy can work on the repositories you chose. |
-| "Suspended" | Erpy does not work on these repositories until the link is active again. |
 
 If the message said "The account appears on this page within a minute", refresh the page after a minute to see the card.
 
@@ -58,8 +60,7 @@ After GitHub sends you back, one of these messages shows at the top of Settings 
 | "GitHub asked an owner of the GitHub organization to approve the Erpy app. An install that an owner approves later is not linked here: the owner can press Link GitHub here as an Admin instead." | You are not an owner of that GitHub organization, and an install an owner approves later is not linked. Either an owner on GitHub makes you an owner there and you select **Link GitHub** again, or that owner selects **Link GitHub** as an Admin of your organization in Erpy Factory. |
 | "The link could not be checked: it was started in another session or too long ago. Press Link GitHub again." | You signed in again, or more than thirty minutes passed. Select **Link GitHub** again. |
 | "GitHub sent no installation back. Press Link GitHub again." | Select **Link GitHub** again. |
-| "Only an Admin of Acme can link a GitHub account." | Your role changed while you were on GitHub. Ask an Admin to link GitHub. |
-| "Link GitHub is not set up on this dashboard." | This is on Erpy's side. Tell Erpy. |
+| "Link GitHub is not set up on this dashboard. Report this to an operator." | This is on Erpy's side. Tell Erpy. |
 | "The request could not be sent. Try again in a moment." | Wait a moment, then select **Link GitHub** again. |
 
 ## Unlink GitHub

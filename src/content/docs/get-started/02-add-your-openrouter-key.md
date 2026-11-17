@@ -3,9 +3,9 @@ title: 2. Add your OpenRouter key
 description: Save your organization's own OpenRouter API key, the first page of a new organization.
 ---
 
-Erpy works on your organization's DeepSeek tickets with models it reaches through
-[OpenRouter](https://openrouter.ai), and your organization's own OpenRouter key pays for them. On a new
-organization, the key page is the first page: nothing else opens until the key is saved.
+Your organization's own [OpenRouter](https://openrouter.ai) key pays for your DeepSeek tickets: see
+[What the key pays for](#what-the-key-pays-for). On a new organization, the key page is the first page:
+nothing else opens until the key is saved.
 
 ## Before you start
 
@@ -34,16 +34,28 @@ organization, the key page is the first page: nothing else opens until the key i
 
 ## What to expect
 
+**Next step.** On a new organization, the key page names "Link GitLab" as the next step. On GitLab, go on to
+[3. Link GitLab](../03-link-gitlab/). On GitHub, go on to [5. Link GitHub](../05-link-github/)
+instead.
+
+### What the key pays for
+
 Settings → Model key says what the key is for: "This organization's DeepSeek tickets are paid by this
-key, and wait while it fails." You do not choose a model. When a ticket runs on DeepSeek, it uses your
-key.
+key, and wait while it fails."
+
+- **A DeepSeek ticket** is a ticket Erpy has set to run on a DeepSeek model, which Erpy reaches through
+  OpenRouter. Every other ticket runs on Claude. Erpy decides this for each ticket. You don't choose the
+  model.
+- **On a DeepSeek ticket, the key pays for all of Erpy's work**: PRD writing, Implementation, and the CI
+  fix, Conflict fix and Review follow-up on its merge request or pull request. That includes the
+  [automatic work](../../work-with-erpy/automatic-work/) Erpy does on its own there.
+- **Other tickets don't use your key.** Erpy's replies when you ask `@erpyai` a question never use it
+  either.
+
+### The key's facts
 
 The page also shows the key's **Label**, its **Limit** and what is left of it, the **Credit left** on
 the OpenRouter account, the **Last check**, and who set the key and when (**Set by**).
-
-**Next step.** The page names "Link GitLab" as the next step. On GitLab, go on to
-[3. Link GitLab](../03-link-gitlab/). On GitHub, go on to [5. Link GitHub](../05-link-github/)
-instead.
 
 ## If it is refused
 

@@ -9,15 +9,27 @@ pull request on GitHub. You review it and you merge it. Erpy never merges.
 
 Erpy Factory is in early access.
 
+## What you need
+
+- An invitation to Erpy Factory, sent to your email address.
+- A Google account with that email address. You sign in with Google.
+- An [OpenRouter](https://openrouter.ai) account with credit on it: at least 1 USD.
+- Your code in one of these places:
+  - a GitLab group on gitlab.com;
+  - a GitHub account: an organization or a personal account.
+
 ## Before you start
 
-The [onboarding checklist](reference/onboarding-checklist/) lists the questions about your Odoo project
-that decide how much setup it takes.
+Go through the [Before you start](reference/onboarding-checklist/) checklist first. It lists the
+questions about your Odoo project that decide how much setup it takes.
 
 ## Get started
 
 Erpy sets up your organization and emails you an invitation. From there, follow the steps in order. Each
 step ends with a **Check**: something you can look at to know it worked.
+
+The dashboard is at [erpy.dev](https://erpy.dev). If the invitation email is gone, sign in there with
+Google.
 
 1. [Your invitation and Google sign-in](get-started/01-your-invitation/): sign in with Google, using the
    address the invitation was sent to.
@@ -47,15 +59,5 @@ On GitLab, you walk steps 1, 2, 3, 4, 6, 7 and 8. On GitHub, you walk steps 1, 2
 
 ## Reference
 
-- [Onboarding checklist](reference/onboarding-checklist/): the questions about your Odoo project.
 - [`harness.yaml` settings](reference/harness-yaml/): every setting in `harness.yaml`, for Enterprise,
   your own Docker Compose setup, or your own AWS account.
-
-## What you need
-
-- An invitation to Erpy Factory, sent to your email address.
-- A Google account with that email address. You sign in with Google.
-- An [OpenRouter](https://openrouter.ai) account with credit on it: at least 1 USD.
-- Your code in one of these places:
-  - a GitLab group on gitlab.com;
-  - a GitHub account: an organization or a personal account.

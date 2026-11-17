@@ -13,9 +13,9 @@ description: Every setting in harness.yaml, in file order, with what it does, it
 - **Three settings are always commented out:** `odoo_datasets_dir`, `odoo_dataset_loader` and `odoo_image_access`. You turn one on by writing it live.
 - A block whose settings are all commented out is commented out too.
 
-Erpy fills in what it finds in your repository. Where it had to guess, the setup merge request says "Check these before you merge:" and lists each guess. To change a setting, edit `harness.yaml` in the setup merge request before you merge it, or later with another merge request. To turn a setting on, remove its leading `#`.
+Erpy fills in what it finds in your repository. Where it had to guess, the setup merge request says "Check these before you merge:" and lists each guess. To change a setting, edit `harness.yaml` in the setup merge request before you merge it, or later with another merge request. To turn a setting on, remove its leading `#`. For a setting inside a block, such as `resolve_conflicts:`, `chat:` or `worktree:`, also remove the `#` before the block's own line.
 
-Every setting goes under `harness:`, `extensions:`, except `worktree`. The examples below show the key only. Under each setting is the question it answers.
+Every setting from `harness_paths` on goes under `extensions:`, which sits inside `harness:`, except `worktree`. The examples below show the key only. Under each setting is the question it answers.
 
 ## The top of the file
 
@@ -30,7 +30,7 @@ harness:
 
 ### `extends` and `target`
 
-Leave both as they are. `extends` names the Erpy Factory configuration your repository builds on, and `target` the agent that works on it.
+Leave both as they are. `extends` names the Erpy Factory configuration your repository builds on. Erpy reads it from there on every run: you need no GitHub access and no SSH key for it, also on GitLab. `target` is fixed configuration too. It does not decide which model a ticket runs on: Erpy decides that per ticket, see [Add your OpenRouter key](../../get-started/02-add-your-openrouter-key/).
 
 ### `modules`: your own instructions for Erpy
 
@@ -78,7 +78,7 @@ Erpy finds it in your module manifests. Write it as a quoted `"major.minor"`. Re
 
 **Which image does your CI run the tests in? Is it a public image?**
 
-The image Erpy runs your code and tests on, so use the one your CI uses. It must be public, or in your own Amazon ECR and read through `odoo_aws_role`. Erpy finds it in your CI, else in your Docker Compose file. If your Docker Compose file builds the Odoo service from a Dockerfile, `odoo_image` is the image that Dockerfile starts from. Required.
+The image Erpy runs your code and tests on, so use the one your CI uses. It must be public, in your own Amazon ECR and read through `odoo_aws_role`, or in another private registry with `odoo_image_access: registry`, see [`odoo_image_access`](#odoo_image_access). Erpy finds it in your CI, else in your Docker Compose file. If your Docker Compose file runs the Odoo service from an image, `odoo_image` must be that same image. If it builds the Odoo service from a Dockerfile, `odoo_image` is the image that Dockerfile starts from. Write it with a tag or a digest: a bare `odoo` fails the run. Required.
 
 ```yaml
 # From Docker Hub
@@ -116,7 +116,7 @@ odoo_enterprise_source: "image:/opt/odoo/enterprise"
 odoo_enterprise_source: "github:acme/enterprise@19.0"
 ```
 
-Required when `odoo_enterprise` is `true`. Without `@<ref>`, a GitHub repository is read at your `odoo_version`. A repository source is read from GitHub only. A private one must be in the same GitHub account or organization as your repository, with the Erpy app installed on it.
+Required when `odoo_enterprise` is `true`. Without `@<ref>`, a GitHub repository is read at your `odoo_version`. A repository source is read from GitHub only. A private one must be in the same GitHub account or organization as your repository, with the Erpy app installed on it. On GitLab, there is no GitLab repository source: put Enterprise in your image and use `image:<path>`.
 
 ### `odoo_source`
 
@@ -133,7 +133,7 @@ odoo_source: "image:/usr/lib/python3/dist-packages"
 odoo_source: "github:odoo/odoo@19.0"
 ```
 
-Erpy finds it in your CI, Docker files or `.gitmodules`. With a repository, it reads it at the branch you name, or at your `odoo_version` without one. A repository source is read from GitHub only. A private one must be in the same GitHub account or organization as your repository, with the Erpy app installed on it.
+Erpy finds it in your CI, Docker files or `.gitmodules`. With a repository, it reads it at the branch you name, or at your `odoo_version` without one. A repository source is read from GitHub only. A private one must be in the same GitHub account or organization as your repository, with the Erpy app installed on it. On GitLab, there is no GitLab repository source: use the Odoo source in your image.
 
 ## Your development stack
 
@@ -145,7 +145,7 @@ Erpy finds it in your CI, Docker files or `.gitmodules`. With a repository, it r
 odoo_compose_file: docker-compose.yml
 ```
 
-Erpy runs the same services as you, so its tests see what yours see. The path is relative to your repository's root. Without a Docker Compose file, Erpy uses its own standard stack: Odoo and Postgres.
+Erpy runs the same services as you, so its tests see what yours see. The path is relative to your repository's root. Without a Docker Compose file, Erpy uses its own standard stack: Odoo and Postgres 16.
 
 ### `odoo_compose_services`
 
@@ -155,7 +155,7 @@ Erpy runs the same services as you, so its tests see what yours see. The path is
 odoo_compose_services: [odoo=web, postgres=db]
 ```
 
-Erpy works out which service is Odoo, Postgres and nginx from its image: a name ending in `odoo`, in `postgres` or `postgis`, or in `nginx`. Name them here, as `<role>=<service>`, only when it can't tell: a service built from a Dockerfile, an image named otherwise, or two services that fit one role.
+Erpy works out which service is Odoo, Postgres and nginx from its image: a name ending in `odoo`, in `postgres`, `postgresql` or `postgis`, or in `nginx`. Name them here, as `<role>=<service>`, only when it can't tell: a service built from a Dockerfile, an image named otherwise, or two services that fit one role.
 
 ### `odoo_conf`
 
@@ -187,7 +187,7 @@ Folders relative to your repository's root. The default is `["."]`, the root its
 odoo_dev_db: odoo_dev
 ```
 
-A lowercase name. The default is `odoo_dev`.
+A lowercase name. The default is `odoo_dev`. It names the database inside the Odoo stack Erpy starts for each run, the one it restores your dump into or installs your modules into. Use the name your development setup uses, so your scripts find it.
 
 ### `odoo_seed`
 
@@ -256,7 +256,7 @@ Your script that loads one dataset into a database, relative to your repository'
 odoo_image_access: public
 ```
 
-`public`, `ecr` or `registry`. Erpy works it out from the image's registry, so it is always commented out. Leave it so.
+`public`, `ecr` or `registry`. Erpy always writes it commented out. Without it, an image in Amazon ECR is read as `ecr`, and an image anywhere else, ghcr.io included, as `public`. Leave it commented out, unless your image is in a private registry other than ECR, for example a private package on ghcr.io or your own self-hosted registry: then write `odoo_image_access: registry` and ask Erpy to store a login for that registry, a username and a token that can pull the image. Erpy pulls the image with that login.
 
 ### `odoo_aws_role`
 
@@ -385,7 +385,7 @@ Keep the dump under the seed's prefix, or grant `s3:GetObject` on its key as wel
 
 ## The whole file
 
-Here is a `harness.yaml` for a simple repository: a public Odoo image, CI with one workflow left alone, and no review bot. Every setting is there; the ones without evidence are commented out.
+Here is a `harness.yaml` for a simple repository: a public Odoo image, CI with one workflow left alone, and no review bot. Every setting is there; the ones without evidence are commented out. The comments Erpy writes in your file may be worded differently from this example.
 
 ```yaml
 harness:

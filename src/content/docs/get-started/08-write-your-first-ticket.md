@@ -24,7 +24,7 @@ Factory tickets are the default. Until an Admin saves a choice, the page says "N
 
 Only an Admin can change the choice: choose one and select **Save**. The page says "Saved." Everyone else sees the choice, with "Only an Admin of this organization can change this."
 
-**On GitLab, keep Factory tickets.** Erpy can write requirements on a GitLab issue, but those requirements cannot be approved yet: not on GitLab, and not in Factory either. Without an approval, Erpy builds nothing. Requirements on a Factory ticket can be approved with **Approve PRD**, so a GitLab organization keeps Factory tickets.
+**On GitLab, keep Factory tickets.** Requirements written on a GitLab issue cannot be approved, not on GitLab and not in Erpy Factory, and without an approval Erpy builds nothing. Requirements on a Factory ticket are approved with **Approve PRD**. So on GitLab, write your tickets in Erpy Factory, and use GitLab comments for questions and for more work on a merge request, see [Ask Erpy from GitLab or GitHub](../../work-with-erpy/ask-erpy-from-gitlab-or-github/).
 
 **On GitHub**, both choices work. With GitHub issues, you approve the requirements in a comment on the issue, see [Ask Erpy from GitLab or GitHub](../../work-with-erpy/ask-erpy-from-gitlab-or-github/).
 
@@ -35,7 +35,7 @@ Whatever the choice, **New ticket** on the board always makes a Factory ticket (
 ### Write the ticket
 
 1. Open your repository's board.
-2. Select **New ticket**. A side panel opens, titled "New internal ticket", with "Saved as a draft. Nothing runs until you ask Factory to write a PRD." On your organization's board, first choose the repository the ticket is for.
+2. Select **New ticket**. A side panel opens, titled "New internal ticket", with "Saved as a draft. Nothing runs until you ask Factory to write a PRD." Internal means the ticket is kept in Erpy Factory, as T-1, T-2 and so on, not as a GitLab or GitHub issue. On your organization's board, first choose the repository the ticket is for.
 3. Fill in the title, and describe the request in the box under it. Write the change as you would tell a colleague, for example "Add a delivery note field to sale orders". Use **Preview** to read the description as it will show. You can attach files.
 4. Select **Create ticket**. The ticket opens. It is a draft, in the **Draft** column, and nothing runs yet.
 5. To change the draft, select **Edit**.
@@ -43,7 +43,7 @@ Whatever the choice, **New ticket** on the board always makes a Factory ticket (
 ### Ask Erpy to write the PRD
 
 6. On the draft ticket, select **Write PRD**. The page says "PRD queued. Erpy starts writing it shortly." The card moves to **PRD authoring**.
-7. Wait until the card reaches **PRD review**. The ticket page shows the PRD.
+7. Wait until the card reaches **PRD review**. The ticket page shows the PRD. Meanwhile, the card's column and the ticket's **Work history** tab show how far Erpy is.
 
 The PRD (product requirements document) is the requirements for your change: what it does, and how you will know it works.
 
@@ -62,8 +62,9 @@ The PRD (product requirements document) is the requirements for your change: wha
 
 ### Review and merge
 
-13. Erpy builds the change and opens a merge request on GitLab, or a pull request on GitHub. The card moves to **Building**, can pass through **Demo capture** and **Pre-merge**, and ends in **PR review**.
+13. Erpy builds the change and opens a merge request on GitLab, or a pull request on GitHub. The card moves to **Building**, can pass through **Demo capture** and **Pre-merge**, and ends in **PR review**. The **Work history** tab shows how far it is.
 14. Review the merge request or pull request on GitLab or GitHub, and merge it when it looks right. Erpy never merges.
+15. Erpy does not deploy. After the merge, install or upgrade the module in your Odoo as you do today.
 
 ## Check
 
@@ -85,7 +86,7 @@ The board has one column per stage, left to right:
 | **PRD authoring** | Erpy is writing or revising the PRD. |
 | **PRD review** | The PRD is ready. Read it, then approve it, change it or close the ticket. |
 | **Building** | Erpy is building the change, or working through a review that asks for changes. |
-| **Demo capture** | Erpy is filming screen recordings of the change. |
+| **Demo capture** | Erpy is filming screen recordings of the change. They show on the ticket's **Films** tab, and the merge request or pull request description links the recording under **Scenarios**. |
 | **Pre-merge** | Erpy is getting the merge request or pull request ready to merge, for example fixing failing checks or merge conflicts. |
 | **PR review** | The merge request or pull request is ready. Review it and merge it. |
 
@@ -102,8 +103,8 @@ Above the board, **All**, **Blocking**, **Needs you** and **Fixes** choose which
 | What you see | What it means | What to do |
 |---|---|---|
 | A task marked "paused", with "Resumes automatically" | The work is paused on Erpy's side. It continues on its own. | Nothing. |
-| "Paused until main's tests are fixed" on a card | The base branch already fails these tests. Erpy fixes the base branch in a separate merge request or pull request, and continues here on its own once that is merged. | Review and merge the fix. See [Automatic work](../../work-with-erpy/automatic-work/). |
-| "Stopped" and a date on a card, under the **Stopped** heading | The ticket's open merge requests or pull requests no longer carry the `erpy-factory` label, so Erpy does no automatic work on them. On GitHub, the label comes off by itself after seven days of care. | Add the `erpy-factory` label again. On GitHub, you can also ask for work in a comment that mentions `@erpyai`. See [Automatic work](../../work-with-erpy/automatic-work/). |
+| "Paused until {branch}'s tests are fixed" on a card, where `{branch}` is your base branch, for example "Paused until 19.0's tests are fixed" | The base branch already fails these tests. Erpy fixes the base branch in a separate merge request or pull request, and continues here on its own once that is merged. | Review and merge the fix. See [Automatic work](../../work-with-erpy/automatic-work/). |
+| "Stopped" and a date on a card, under the **Stopped** heading | GitHub only. Erpy had not worked on the change itself for seven days, so the `erpy-factory` label came off the ticket's open pull requests, and Erpy does no automatic work on them. On GitLab, a card shows no "Stopped", also after you remove the label. | Add the `erpy-factory` label again, or ask for work in a comment that mentions `@erpyai`. See [Automatic work](../../work-with-erpy/automatic-work/). |
 | "Snoozed until" and a date on a card | Someone snoozed the ticket off the board until that date. | Select **Unsnooze** to bring it back now. |
 
 Stopped cards show only while the **Stopped** chip above the board is on. Snoozed cards show only while the **Snoozed** chip is on.

@@ -3,7 +3,7 @@ title: Automatic work
 description: What Erpy does on its own on your merge requests and pull requests, repairing failing checks and resolving merge conflicts, and how to take the work back or hand it back.
 ---
 
-On a merge request (GitLab) or pull request (GitHub) that carries the `erpy-factory` label, Erpy takes care of what breaks them most often, without a comment from you. Every merge request or pull request that Erpy opens carries the label.
+On a merge request (GitLab) or pull request (GitHub) that carries the `erpy-factory` label, Erpy fixes what breaks them most often, without a comment from you. Every merge request or pull request that Erpy opens carries the label.
 
 ## Failing checks
 
@@ -11,7 +11,7 @@ When the checks on the latest commit have finished and one is red, Erpy repairs 
 
 ## Merge conflicts
 
-When the merge request or pull request conflicts with its base branch, Erpy merges the base branch into it and resolves the conflicts. You can turn this off with `resolve_conflicts.automatic`, see [`harness.yaml` settings](../../reference/harness-yaml/).
+When the merge request or pull request conflicts with its base branch, Erpy merges the base branch into it and resolves the conflicts. You can turn this off with `harness.extensions.resolve_conflicts.automatic`, see [`harness.yaml` settings](../../reference/harness-yaml/).
 
 In both cases Erpy changes only what the merge request or pull request needs. It leaves alone anything else that is broken, and if it has to touch a file outside the change, it says so in a comment on it.
 
@@ -29,9 +29,9 @@ To give it back to Erpy, add the `erpy-factory` label again. Erpy then repairs o
 
 ## How long it lasts
 
-**On GitLab**, the `erpy-factory` label stays on a merge request until you remove it, and Erpy keeps taking care of it while it carries the label.
+**On GitLab**, the `erpy-factory` label stays on a merge request until you remove it, and Erpy keeps working on it on its own while it carries the label.
 
-**On GitHub**, pull requests are meant to be merged. Erpy takes care of a pull request for seven days after the last time it did work on the change itself: building it, following up on a review that asks for changes, filming its screen recordings or revising its design. Repairing checks and resolving conflicts do not start the seven days again, and neither does a push or a comment from you, unless it leads Erpy to one of those. A pull request that is still going through review rounds stays in care.
+**On GitHub**, pull requests are meant to be merged. Erpy keeps working on a pull request on its own for seven days after the last time it worked on the change itself: building it, following up on a review that asks for changes, filming its screen recordings or revising its design. Repairing checks and resolving conflicts do not start the seven days again, and neither does a push or a comment from you, unless it leads Erpy to one of those. So a pull request that is still going through review rounds stays with Erpy.
 
 On GitHub, a pull request that is not merged in that time is treated as no longer important. The `erpy-factory` label comes off it, within about an hour, and Erpy stops its automatic work on it. The pull request stays open, and its ticket shows "Stopped" on the board. You can bring the pull request back to Erpy.
 

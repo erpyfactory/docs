@@ -14,8 +14,8 @@ the address the invitation was sent to.
 
 ## Steps
 
-1. In the invitation email, select **Sign in to Erpy Factory**. The page says "Sign in to your
-   organisation's dashboard."
+1. In the invitation email, select **Sign in to Erpy Factory**. If the email is gone, go to
+   [erpy.dev](https://erpy.dev) instead. The page says "Sign in to your organisation's dashboard."
 2. Select **Sign in with Google**. The page can show other sign-in buttons too; use the Google one.
 3. Choose the Google account whose address is the one under **Sign in as** in the email.
 
@@ -51,7 +51,8 @@ The email says which organization you were added to and with which role, for exa
 - **Sign in as**: the address to sign in with.
 
 It has a **Sign in to Erpy Factory** button. The button only opens the sign-in page. There is
-nothing to accept, and the invitation does not expire.
+nothing to accept, and the invitation does not expire. You can also sign in at
+[erpy.dev](https://erpy.dev) at any time, without the email.
 
 Its last line says why you got it:
 
