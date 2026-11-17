@@ -52,6 +52,9 @@ key, and wait while it fails."
 - **Other tickets don't use your key.** Erpy's replies when you ask `@erpyai` a question never use it
   either.
 
+What your organization pays Erpy for its plan is on the [pricing page](https://erpy.dev/pricing): one
+plan, priced by the number of PRDs a month, where one PRD is one ticket taken through the factory.
+
 ### The key's facts
 
 The page also shows the key's **Label**, its **Limit** and what is left of it, the **Credit left** on

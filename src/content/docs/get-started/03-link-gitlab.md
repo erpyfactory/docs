@@ -66,9 +66,10 @@ The form shows three numbered cards and a token field numbered 4. Steps 1 to 4 b
 When Erpy's user is Developer of a group that has no project yet, Erpy finds no project to work on. Link anyway, then create the project:
 
 1. **Link the token** as in the steps above. The preview's **Group** row says "None yet". After **Link**, the card is marked "Waiting for access".
-2. **Create the project in GitLab now**, in the group where Erpy's user is Developer. Leave "Initialize repository with a README" off, so Erpy can set the empty project up for you. Erpy's user is Developer of the group, so it reaches the new project: you don't need to invite it.
+2. **Create the project in GitLab now**, in the group where Erpy's user is Developer. Leave "Initialize repository with a README" off, so Erpy can set the empty project up for you. On GitLab Free, read the next paragraph first. Erpy's user is Developer of the group, so it reaches the new project: you don't need to invite it.
 
    Before you create it, on GitLab Premium or Ultimate, check the group's **Settings → Repository → Default branch → Initial default branch protection**. **Fully protected after initial push**, **Partially protected** or **Not protected** lets a Developer make the first push. **Fully protected** does not. If Erpy can't make the first commit, [6. Add a repository](../06-add-a-repository/#what-happens-after-add) says what to do.
+   On GitLab Free, a group Owner can't change this setting, and GitLab's default, **Fully protected**, doesn't let a Developer make the first push. On Free, tick "Initialize repository with a README" when you create the project instead: Erpy then sets it up with **Set up my repo**, without a starter.
 3. **Wait until the card is marked "Active".** Erpy checks every hour, so this takes up to about an hour after the project exists. Nothing in Erpy Factory makes it faster.
 4. **Go on with [4. Add GitLab webhooks](../04-add-gitlab-webhooks/)**, then [6. Add a repository](../06-add-a-repository/), where the project shows as **Empty**.
 

@@ -63,6 +63,7 @@ If nothing is wrong, the page says "acme-erpy reaches no project that Erpy canno
 ### Create a new project
 
 1. Before you create it, on GitLab Premium or Ultimate, check your group's **Settings → Repository → Default branch → Initial default branch protection**. **Fully protected after initial push**, **Partially protected** or **Not protected** lets Erpy's user, a Developer, make the first commit. **Fully protected** does not. If Erpy can't make the first commit, see [What happens after Add](#what-happens-after-add): you add a README instead.
+   On GitLab Free, a group Owner can't change this setting, and GitLab's default, **Fully protected**, doesn't let a Developer make the first push. On Free, tick "Initialize repository with a README" instead: the project then has a first commit, so it shows without the **Empty** badge, and you set it up with **Set up my repo**, without a starter.
 2. On the Add repository page, select **Create a new one on GitLab**. GitLab's new-project page opens in a new tab.
 3. Leave "Initialize repository with a README" off, and create the project.
 4. Invite Erpy's user to the project as Developer, unless it is already a member of the whole group.
