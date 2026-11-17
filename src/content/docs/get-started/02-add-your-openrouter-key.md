@@ -17,16 +17,17 @@ nothing else opens until the key is saved.
 
 1. Sign in at [openrouter.ai](https://openrouter.ai) and add credit at
    [openrouter.ai/settings/credits](https://openrouter.ai/settings/credits): at least 1 USD.
-2. At [openrouter.ai/settings/keys](https://openrouter.ai/settings/keys), create an API key and give it
-   a spend limit. Use an API key, not a provisioning key. A key without a spend limit is refused. You
-   choose the limit: any amount works, and you can raise it at OpenRouter later. When the key
+2. On OpenRouter's API Keys page ([openrouter.ai/settings/keys](https://openrouter.ai/settings/keys)),
+   create an API key and set its **Credit limit**, for example $10; OpenRouter counts in US dollars.
+   Use an API key, not a provisioning key. A key without a limit is refused. You can raise the limit at
+   OpenRouter later. When the key
    reaches its limit, its status reads **Limit reached**, and your DeepSeek tickets wait until the limit
    is raised.
 3. Copy the key. It starts with `sk-or-v1-`.
 4. In Erpy Factory, on the page "Add your OpenRouter key", paste the key in **OpenRouter API key**.
 5. Select **Save**. The button reads "Checking…" while Factory checks the key with OpenRouter. Factory
    saves the key only once OpenRouter accepts it.
-6. The page says "Key saved" and "This key pays for Acme's DeepSeek tickets. Next, link GitLab."
+6. The page says "Key saved" and "This key pays for Acme's DeepSeek tickets. Next, link GitLab or GitHub."
    Select **Continue**.
 
 ## Check
@@ -37,7 +38,7 @@ nothing else opens until the key is saved.
 
 ## What to expect
 
-**Next step.** On a new organization, the key page names "Link GitLab" as the next step. On GitLab, go on to
+**Next step.** On a new organization, the key page names "Link GitLab or GitHub" as the next step. On GitLab, go on to
 [3. Link GitLab](../03-link-gitlab/). On GitHub, go on to [5. Link GitHub](../05-link-github/)
 instead.
 
