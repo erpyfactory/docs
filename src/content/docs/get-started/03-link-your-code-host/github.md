@@ -67,7 +67,6 @@ After GitHub sends you back, one of these messages shows at the top of the page.
 | "The link could not be checked: it was started in another session or too long ago. Press Link GitHub again." | You signed in again, or more than thirty minutes passed. Select **Link GitHub** again. |
 | "GitHub sent no installation back. Press Link GitHub again." | Select **Link GitHub** again. |
 | "Link GitHub is not set up on this dashboard. Report this to an operator." | This is on Erpy's side. Write to support@erpy.dev. |
-| "Only an Admin of Acme can link a GitHub account." | Your role in Acme is not Admin. Ask an Admin of your organization to link it. |
 | "The request could not be sent. Try again in a moment." | Wait a moment, then select **Link GitHub** again. |
 
 ## Unlink GitHub
