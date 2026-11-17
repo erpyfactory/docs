@@ -28,7 +28,7 @@ Most projects can give the simple answer to every row, and then need only the [G
 | Question | Simple | More setup |
 | --- | --- | --- |
 | Which image does your CI run your tests in? | A public image, for example `odoo:19.0` on Docker Hub | An image in your own Amazon ECR: you create a read-only AWS role for Erpy. Today this role can be set up on GitHub only; on GitLab it cannot be set up yet |
-| Is your image in another private registry? | No | Yes: you set `odoo_image_access: registry` in `harness.yaml`, and you send the login for that registry to support@erpy.dev |
+| Is your image in another private registry? | No | Yes: such an image isn't supported. Use a public image, or on GitHub an image in your own Amazon ECR |
 | Does your development setup use Docker Compose? | No: Odoo and Postgres only | Yes: your own Compose file, extra services such as Redis or nginx, an Odoo service built from a Dockerfile |
 | Which images do those services use? | Public ones | Private ones: the same registry question as above |
 

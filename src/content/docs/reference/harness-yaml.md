@@ -78,7 +78,7 @@ Erpy finds it in your module manifests. Write it as a quoted `"major.minor"`. Re
 
 **Which image does your CI run the tests in? Is it a public image?**
 
-The image Erpy runs your code and tests on, so use the one your CI uses. It must be public, in your own Amazon ECR and read through `odoo_aws_role`, or in another private registry with `odoo_image_access: registry`, see [`odoo_image_access`](#odoo_image_access). Erpy finds it in your CI, else in your Docker Compose file. If your Docker Compose file runs the Odoo service from an image, `odoo_image` must be that same image. If it builds the Odoo service from a Dockerfile, `odoo_image` is the image that Dockerfile starts from. Write it with a tag or a digest: a bare `odoo` fails the run. Required.
+The image Erpy runs your code and tests on, so use the one your CI uses. It must be public, or in your own Amazon ECR and read through `odoo_aws_role`. Erpy finds it in your CI, else in your Docker Compose file. If your Docker Compose file runs the Odoo service from an image, `odoo_image` must be that same image. If it builds the Odoo service from a Dockerfile, `odoo_image` is the image that Dockerfile starts from. Write it with a tag or a digest: a bare `odoo` fails the run. Required.
 
 ```yaml
 # From Docker Hub
@@ -256,7 +256,7 @@ Your script that loads one dataset into a database, relative to your repository'
 odoo_image_access: public
 ```
 
-`public`, `ecr` or `registry`. Erpy always writes it commented out. Without it, an image in Amazon ECR is read as `ecr`, and an image anywhere else, ghcr.io included, as `public`. Leave it commented out, unless your image is in a private registry other than ECR, for example a private package on ghcr.io or your own self-hosted registry: then write `odoo_image_access: registry` and send a login for that registry to support@erpy.dev: a username and a token that can pull the image. Erpy stores it. Erpy pulls the image with that login.
+`public` or `ecr`. Erpy always writes it commented out. Without it, an image in Amazon ECR is read as `ecr`, and an image anywhere else, ghcr.io included, as `public`. Leave it commented out.
 
 ### `odoo_aws_role`
 
@@ -401,7 +401,7 @@ harness:
     required_check: Tests
     # The Odoo version your add-ons are written for.
     odoo_version: "19.0"
-    # The image Erpy runs your code and tests on. Use the one your CI uses. It must be public, or in your own Amazon ECR and read through odoo_aws_role, or in another private registry, with odoo_image_access: registry.
+    # The image Erpy runs your code and tests on. Use the one your CI uses. It must be public, or in your own Amazon ECR and read through odoo_aws_role.
     odoo_image: "odoo:19.0"
     # Whether you run Odoo Enterprise (true) or Community (false). Community by default.
     # odoo_enterprise: false
@@ -429,7 +429,7 @@ harness:
     # odoo_datasets_dir: demo/datasets
     # Your script that loads one dataset into a database, run as python3 <script> --dataset <file> --db <db> --port <port>.
     # odoo_dataset_loader: tools/load_dataset.py
-    # How Erpy pulls the Odoo image: public, ecr or registry. Without it, an ECR image is read as ecr and any other as public; a private registry other than ECR needs registry.
+    # How Erpy pulls the Odoo image: public or ecr. Without it, an ECR image is read as ecr and any other as public.
     # odoo_image_access: public
     # IAM role in your AWS account that Erpy assumes to read your private ECR image (and your S3 dump); its trust policy is in the plan.
     # odoo_aws_role: arn:aws:iam::123456789012:role/erpy-odoo-read
