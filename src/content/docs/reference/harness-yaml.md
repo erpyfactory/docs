@@ -401,7 +401,7 @@ harness:
     required_check: Tests
     # The Odoo version your add-ons are written for.
     odoo_version: "19.0"
-    # The image Erpy runs your code and tests on. Use the one your CI uses. It must be public, or in your own Amazon ECR and read through odoo_aws_role.
+    # The image Erpy runs your code and tests on. Use the one your CI uses. It must be public, or in your own Amazon ECR and read through odoo_aws_role, or in another private registry, with odoo_image_access: registry.
     odoo_image: "odoo:19.0"
     # Whether you run Odoo Enterprise (true) or Community (false). Community by default.
     # odoo_enterprise: false
@@ -429,7 +429,7 @@ harness:
     # odoo_datasets_dir: demo/datasets
     # Your script that loads one dataset into a database, run as python3 <script> --dataset <file> --db <db> --port <port>.
     # odoo_dataset_loader: tools/load_dataset.py
-    # How Erpy pulls the Odoo image: public, ecr or registry. Erpy works it out from the image's registry.
+    # How Erpy pulls the Odoo image: public, ecr or registry. Without it, an ECR image is read as ecr and any other as public; a private registry other than ECR needs registry.
     # odoo_image_access: public
     # IAM role in your AWS account that Erpy assumes to read your private ECR image (and your S3 dump); its trust policy is in the plan.
     # odoo_aws_role: arn:aws:iam::123456789012:role/erpy-odoo-read

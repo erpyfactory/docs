@@ -56,9 +56,9 @@ nothing to accept, and the invitation does not expire. You can also sign in at
 
 Its last line says why you got it:
 
-- If you are the first Admin of an organization Erpy set up: "You got this email because Erpy set up
+- If you are the first Admin of an organization Erpy set up, also when the invitation is sent again: "You got this email because Erpy set up
   Acme on Erpy Factory and invited you@example.com to it. If you did not expect it, you can ignore it."
-- If an Admin of your organization invited you, or sent your invitation again: "You got this email
+- If an Admin of your organization invited you: "You got this email
   because an admin of Acme invited you@example.com to Erpy Factory. If you did not expect it, you can
   ignore it."
 

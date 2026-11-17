@@ -70,7 +70,7 @@ When Erpy's user is Developer of a group that has no project yet, Erpy finds no 
 
    Before you create it, on GitLab Premium or Ultimate, check the group's **Settings → Repository → Default branch → Initial default branch protection**. **Fully protected after initial push**, **Partially protected** or **Not protected** lets a Developer make the first push. **Fully protected** does not. If Erpy can't make the first commit, [6. Add a repository](../06-add-a-repository/#what-happens-after-add) says what to do.
    On GitLab Free, a group Owner can't change this setting, and GitLab's default, **Fully protected**, doesn't let a Developer make the first push. On Free, tick "Initialize repository with a README" when you create the project instead: Erpy then sets it up with **Set up my repo**, without a starter.
-3. **Wait until the card is marked "Active".** Erpy checks every hour, so this takes up to about an hour after the project exists. Nothing in Erpy Factory makes it faster.
+3. **Wait until the card is marked "Active".** Erpy checks every hour, so this takes up to about an hour after the project exists. To skip the wait once the project exists, select **Link GitLab** on Settings → Links and paste the same token again: the preview now shows your group, and **Link** turns the card "Active" at once.
 4. **Go on with [4. Add GitLab webhooks](../04-add-gitlab-webhooks/)**, then [6. Add a repository](../06-add-a-repository/), where the project shows as **Empty**.
 
 ## Check

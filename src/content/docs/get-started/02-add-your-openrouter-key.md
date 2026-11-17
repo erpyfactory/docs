@@ -46,7 +46,7 @@ key, and wait while it fails."
 - **A DeepSeek ticket** is a ticket Erpy has set to run on a DeepSeek model, which Erpy reaches through
   OpenRouter. Every other ticket runs on Claude. Erpy decides this for each ticket. You don't choose the
   model.
-- **On a DeepSeek ticket, the key pays for all of Erpy's work**: PRD writing, Implementation, and the CI
+- **On a DeepSeek ticket, the key pays for all of Erpy's work**: for example PRD writing, Implementation, and the CI
   fix, Conflict fix and Review follow-up on its merge request or pull request. That includes the
   [automatic work](../../work-with-erpy/automatic-work/) Erpy does on its own there.
 - **Other tickets don't use your key.** Erpy's replies when you ask `@erpyai` a question never use it

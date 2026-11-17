@@ -68,7 +68,7 @@ On GitHub, Erpy turns an issue into a pull request in two stages: it writes the 
    @erpyai the delivery note should be optional
    ```
 
-   Erpy replies "I'm revising this issue's requirements now." and revises the requirements. The status comment then reads "The requirements are updated." If you had already approved them, it reads "The requirements are updated and ready for review again.", and you approve them again. Repeat until the requirements are right.
+   Erpy replies "I'm revising this issue's requirements now." and revises the requirements. The status comment then reads "The requirements are updated." If you ask for a change after approving and before Erpy starts building, it reads "The requirements are updated and ready for review again.", and you approve them again. Repeat until the requirements are right.
 
 6. When the requirements are right, add this comment:
 

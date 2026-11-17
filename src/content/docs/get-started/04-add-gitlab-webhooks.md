@@ -10,7 +10,7 @@ A webhook tells Erpy at once when something happens in your projects: a push, a 
 
 ## Before you start
 
-- Step 3 is done: your GitLab group is linked and its card in **Settings → Links** is "Active". The **Webhooks** section shows only on an "Active" card. If the card says "Waiting for access", go back to [If your group has no project yet](../03-link-gitlab/#if-your-group-has-no-project-yet) or [Waiting for access](../03-link-gitlab/#waiting-for-access).
+- Step 3 is done: your GitLab group is linked and its card in **Settings → Links** is "Active". The **Webhooks** section shows only once the link is active: on a card marked "Active" or "Needs attention". If the card says "Waiting for access", go back to [If your group has no project yet](../03-link-gitlab/#if-your-group-has-no-project-yet) or [Waiting for access](../03-link-gitlab/#waiting-for-access).
 - You are an Admin of your organization in Erpy Factory.
 - On GitLab, you are Owner of the group (for a group webhook) or Maintainer of each project (for project webhooks), or someone who is helps you.
 

@@ -13,11 +13,11 @@ Google, using the address you enter.
   [3. Link GitLab](../03-link-gitlab/) or [5. Link GitHub](../05-link-github/). Settings → Users opens
   only once a link is Active. A GitLab link that still says "Waiting for access", or a GitHub link that
   still says "Waiting for approval", does not count yet. With more than one link, the page goes by one
-  of them, GitHub first: a GitLab link that is Active and a GitHub link still waiting can still keep the
+  of them: the one named like your organization's address, else GitHub first: a GitLab link that is Active and a GitHub link still waiting can still keep the
   page closed.
 - On GitLab with a new group that has no project yet, the link turns Active only after the project
-  exists in GitLab and Erpy's hourly check has found it: up to about an hour. See
-  [3. Link GitLab](../03-link-gitlab/).
+  exists in GitLab and Erpy's hourly check has found it: up to about an hour. [3. Link GitLab](../03-link-gitlab/)
+  says how to skip the wait.
 
 Until the link is Active, Settings → Users shows this message to everyone, Admins included: "Only an
 admin of this organization can invite people or change their access. Ask your admin." Wait for the
