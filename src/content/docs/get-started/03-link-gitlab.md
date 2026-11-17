@@ -94,7 +94,7 @@ A card marked "Waiting for access" is not active yet. See [Waiting for access](#
 
 A user that is in no project yet, or whose projects can't be linked yet, shows as a card marked "Waiting for access", with what to change on GitLab. Erpy checks again every hour and links the group of its first projects by itself.
 
-While a waiting link is your organization's only link, nobody in your organization can open it in Erpy Factory, you included. Signing in shows "You need an invitation", with "Please ask your administrator to add you to their organisation." Do on GitLab what the card says. Within the hour, Erpy links the group, the card is marked "Active", and your organization opens again. If it doesn't, write to support@erpy.dev.
+While a waiting link is your organization's only link, nobody in your organization can open it in Erpy Factory, you included. Signing in shows "You need an invitation", with "Please ask your administrator to add you to their organisation." On GitLab, make Erpy's user Developer of a group, or of projects in one top-level group that no other organization has linked. Within the hour, Erpy links the group, the card is marked "Active", and your organization opens again. If it doesn't, write to support@erpy.dev.
 
 | What you see | What to do |
 |---|---|
