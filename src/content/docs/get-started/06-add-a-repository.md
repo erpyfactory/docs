@@ -29,7 +29,7 @@ The page lists the projects in your group that Erpy's user reaches as Developer 
 
    | Choice | What the screen says |
    |---|---|
-   | **Odoo module** | "Odoo 18, with tests in the module" |
+   | **Odoo module** | "Odoo 19, with tests in the module" |
    | **Next.js app** | "TypeScript, tested with Vitest" |
    | **Python service** | "FastAPI, tested with pytest" |
    | **Something else** | "Say what in one line" |
