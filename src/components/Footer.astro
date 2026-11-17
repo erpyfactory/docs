@@ -1,0 +1,14 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro';
+---
+
+<Default><slot /></Default>
+<p class="support">Stuck? Write to <a href="mailto:support@erpy.dev">support@erpy.dev</a>.</p>
+
+<style>
+	.support {
+		margin-top: 1.5rem;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+	}
+</style>
