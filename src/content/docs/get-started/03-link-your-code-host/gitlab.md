@@ -51,7 +51,7 @@ The form shows a numbered list of three steps, one per row, and a token field nu
 5. **Read the preview.** The page shows "Token accepted" and what the token reaches (see [The preview](#the-preview)).
 6. **Link.** Select **Link acme**, where `acme` is your group (or the user's name, when it is in no project yet). The button reads "Linking…", then the page says "acme is linked. Erpy lists its projects within a minute." The projects then show on the link's card, in its **Webhooks** section and on [4. Add a repository](../../04-add-a-repository/). If they haven't shown after a few minutes, Erpy's hourly check lists them, within the hour.
 
-   On the setup page, the **Link code host** step first says "Erpy is saving the GitLab link. This step shows it once it is saved." For up to two minutes it reads again by itself until the link shows, and doesn't offer GitLab or GitHub again. If the link hasn't shown by then, the step offers GitLab and GitHub again. Reload the page a little later. If the link still doesn't show, write to support@erpy.dev. Once the link shows, the step shows the link's card, marked "Active", with its **Webhooks** section: see [Add the webhooks](#add-the-webhooks). For a user in no project yet, it shows the waiting card instead: see [Waiting for access](#waiting-for-access). For an Admin, the step offers **Skip for now** while no webhook is saved, and **Continue** once one is. A Builder sees **Continue**. Both open **Add repository**. A Viewer sees no button, and reads "An Admin or Builder of Acme adds its first repository." instead.
+   On the setup page, the **Link code host** step first says "Erpy is saving the GitLab link. This step shows it once it is saved." For up to two minutes it reads again by itself until the link shows, and doesn't offer GitLab or GitHub again. If the link hasn't shown by then, the step offers GitLab and GitHub again. Reload the page a little later. If the link still doesn't show, write to support@erpy.dev. Once the link shows, the step shows the link's card, marked "Active", with its **Webhooks** section: see [Add the webhooks](#add-the-webhooks). For a user in no project yet, it shows the waiting card instead: see [Waiting for access](#waiting-for-access). For an Admin, the step offers **Skip for now** while no webhook is saved, and **Continue** as soon as one is. A Builder sees **Continue**. Both open **Add repository**. A Viewer sees no button, and reads "An Admin or Builder of Acme adds its first repository." instead.
 
    The sidebar ticks **Link code host** only once someone has selected **Continue** or **Skip for now**. Until then, the setup page opens on **Link code host**, also after a reload, and **Add repository** can't be opened. If the step can't be saved, it says "Erpy could not save this step. Try again." beside the button and stays on screen.
 
@@ -133,8 +133,8 @@ On the link's card, open the **Webhooks** section. It is open by itself while no
      - Push events
      - Comments
      - Confidential comments
-     - Issues events
-     - Confidential issues events
+     - Work item events
+     - Confidential work item events
      - Merge request events
      - Pipeline events
      - Emoji events
@@ -147,7 +147,7 @@ On the link's card, open the **Webhooks** section. It is open by itself while no
    - In **Webhook**, choose **Group webhook**, or the project the webhook belongs to. **Webhook** lists at most 50 projects. To choose any project, select **Paste its signing token** next to it in the list above.
    - Paste the token into **Signing token** and select **Save**.
 
-   The page says "Saved. Erpy accepts deliveries from the group webhook now. Use GitLab's Test button to send one." (or "from the project webhook").
+   The page says "Signing token saved for the group webhook. Erpy accepts its deliveries now. Use GitLab's Test button to send one." For a project webhook, it names the project as **Webhook** does, for example "Signing token saved for acme/shop. Erpy accepts its deliveries now. Use GitLab's Test button to send one." **Webhook** stays on the saved webhook, and the **Signing token** field then reads "Saved. Paste a new token only to replace it."
 5. **Send a test.** On GitLab, open the webhook's **Test** list and choose **Push events**. GitLab can send it only once the project has at least one commit. For a project that is still empty, send the test after its first commit, for example after you add it in [4. Add a repository](../../04-add-a-repository/) and Erpy commits the starter.
 
    GitLab shows the result at once: edit the webhook and look under **Recent events**. A `200` status means Erpy accepted the delivery. A `401` means the signature didn't match: check that you saved this webhook's signing token in step 4.
@@ -156,7 +156,7 @@ For webhooks per project, repeat steps 2 to 5 for each project Erpy works on.
 
 ### Check the webhooks
 
-- The **Webhooks** line on the card says "A group webhook is saved." or "Project webhooks are saved. Add one for each project Erpy works on." Before you save one it says "No webhook yet. Until you add one, Erpy checks GitLab every 5 minutes."
+- As soon as you save, the **Webhooks** line on the card says "A group webhook is saved." or "Project webhooks are saved. Add one for each project Erpy works on." Before you save one it says "No webhook yet. Until you add one, Erpy checks GitLab every 5 minutes."
 - Each project in the list shows "Waiting for first event. Erpy checks GitLab every 5 minutes meanwhile." until a webhook has delivered an event for that project, then "Receiving events". Only events of projects you have added in [4. Add a repository](../../04-add-a-repository/) count, so a test sent before you add the project gets a `200` on GitLab but doesn't change this line. The list is refreshed every hour, so "Receiving events" can take up to an hour to show.
 - A test sends one event, so it turns one project at most. With a group webhook, each other project turns to "Receiving events" after something happens in it, such as a push or a comment.
 
