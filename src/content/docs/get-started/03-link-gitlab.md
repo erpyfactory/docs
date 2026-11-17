@@ -26,7 +26,7 @@ The form shows three numbered cards and a token field numbered 4. Steps 1 to 4 b
    - Developer only, never Maintainer or Owner.
    - Projects of one top-level group only.
 
-   You can also do this step after you link. The link then waits for access (see [Waiting for access](#waiting-for-access)). If your group has no project yet, follow [If your group has no project yet](#if-your-group-has-no-project-yet).
+   Do this before you link: the user must be Developer of at least one project when you select **Link**. A link whose user is in no project is marked "Waiting for access", and while it is your organization's only link, nobody in your organization can open it in Erpy Factory, you included. Signing in shows "You need an invitation", with "Please ask your administrator to add you to their organisation." See [Waiting for access](#waiting-for-access). If your group has no project yet, follow [If your group has no project yet](#if-your-group-has-no-project-yet) first.
 3. **Create its token.** Sign in to GitLab as Erpy's user, for example in a private window. Create a personal access token with:
    - the scopes `api` and `self_rotate`;
    - an expiry date.
@@ -38,9 +38,9 @@ The form shows three numbered cards and a token field numbered 4. Steps 1 to 4 b
 
    Nothing is linked yet. The check only shows you what the token reaches.
 5. **Read the preview.** The page shows "Token accepted" and what the token reaches (see [The preview](#the-preview)).
-6. **Link.** Select **Link acme**, where `acme` is your group (or the user's name, when it is in no project yet). The button reads "Linking…", then the page says:
-   - "acme is linked. Erpy lists its projects within a few minutes.", or
-   - for a user in no project yet: "acme-erpy is linked. Erpy lists its projects within the hour after you add it as Developer to a group or to projects in GitLab."
+6. **Link.** Select **Link acme**, where `acme` is your group. The button reads "Linking…", then the page says "acme is linked. Erpy lists its projects within a few minutes." Erpy lists them with its hourly check, so the projects can take up to an hour to show on [6. Add a repository](../06-add-a-repository/).
+
+   If the button names the user instead of a group, for example **Link acme-erpy**, the user is in no project yet. Don't link: make it Developer of a project first, then check the token again.
 
    Link within 10 minutes of the check. After that, check the token again.
 
@@ -48,12 +48,12 @@ The form shows three numbered cards and a token field numbered 4. Steps 1 to 4 b
 
 | Row | What it means |
 |---|---|
-| **Group** | The top-level group the link covers, for example `gitlab.com/acme`. "None yet" when the user is in no project. |
+| **Group** | The top-level group the link covers, for example `gitlab.com/acme`. "None yet" when the user is in no project: don't link then. |
 | **Erpy acts as** | The GitLab user whose token you pasted, with its name. |
 | **Token expires** | The token's expiry date. |
 | "Erpy works on 12 projects, as Developer" | The projects Erpy can work on: the user is Developer there. |
 | "Not used: the user is Reporter or Guest of 2 projects, so Erpy cannot push there." | Projects the user can see but not push to. Erpy does not work on them. Make the user Developer there if Erpy should. |
-| "This user has no projects yet. Add it as Developer to a group or to projects in GitLab. You can link it now: its projects show here within the hour after that." | The user is in no project. You can link now and give access later. |
+| "This user has no projects yet. Add it as Developer to a group or to projects in GitLab. You can link it now: its projects show here within the hour after that." | The user is in no project. Don't link yet, although the page offers it: make the user Developer of a project, then check the token again. See [Waiting for access](#waiting-for-access) for why. |
 
 #### Personal projects
 
@@ -63,15 +63,14 @@ The form shows three numbered cards and a token field numbered 4. Steps 1 to 4 b
 
 ## If your group has no project yet
 
-When Erpy's user is Developer of a group that has no project yet, Erpy finds no project to work on. Link anyway, then create the project:
+Erpy's user needs a project before you link. Create the first project, then link:
 
-1. **Link the token** as in the steps above. The preview's **Group** row says "None yet". After **Link**, the card is marked "Waiting for access".
-2. **Create the project in GitLab now**, in the group where Erpy's user is Developer. Leave "Initialize repository with a README" off, so Erpy can set the empty project up for you. On GitLab Free, read the next paragraph first. Erpy's user is Developer of the group, so it reaches the new project: you don't need to invite it.
-
-   Before you create it, on GitLab Premium or Ultimate, check the group's **Settings → Repository → Default branch → Initial default branch protection**. **Fully protected after initial push**, **Partially protected** or **Not protected** lets a Developer make the first push. **Fully protected** does not. If Erpy can't make the first commit, [6. Add a repository](../06-add-a-repository/#what-happens-after-add) says what to do.
-   On GitLab Free, a group Owner can't change this setting, and GitLab's default, **Fully protected**, doesn't let a Developer make the first push. On Free, tick "Initialize repository with a README" when you create the project instead: Erpy then sets it up with **Set up my repo**, without a starter.
-3. **Wait until the card is marked "Active".** Erpy checks every hour, so this takes up to about an hour after the project exists. To skip the wait once the project exists, select **Link GitLab** on Settings → Links and paste the same token again: the preview now shows your group, and **Link** turns the card "Active" at once.
-4. **Go on with [4. Add GitLab webhooks](../04-add-gitlab-webhooks/)**, then [6. Add a repository](../06-add-a-repository/), where the project shows as **Empty**.
+1. **Create the project in GitLab**, in your group.
+   - On GitLab Free, tick "Initialize repository with a README". On Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project already has its first commit, and you set it up with **Set up my repo**, without a starter.
+   - On GitLab Premium or Ultimate, you can leave "Initialize repository with a README" off, so Erpy sets the empty project up with a starter. First check the group's **Settings → Repository → Default branch → Initial default branch protection**: **Fully protected after initial push**, **Partially protected** or **Not protected** lets a Developer make the first push. With **Fully protected**, tick the README box, as on Free.
+2. **Make Erpy's user Developer** of the group, or of the new project, as in step 2.
+3. **Link** as in steps 3 to 6. The preview's **Group** row now shows your group, and the card is marked "Active".
+4. **Go on with [4. Add GitLab webhooks](../04-add-gitlab-webhooks/)**, then [6. Add a repository](../06-add-a-repository/). The project shows there within the hour, marked **Empty** if you left the README off.
 
 ## Check
 
@@ -87,13 +86,15 @@ A card marked "Waiting for access" is not active yet. See [Waiting for access](#
 
 ## What to expect
 
-- Erpy lists the group's projects within a few minutes, and checks the user's access every hour after that. A project you add the user to later shows up on its own, within the hour.
+- Erpy lists the group's projects with its hourly check, so they show within the hour, and it checks the user's access every hour after that. A project you add the user to later shows up on its own, within the hour.
 - **Settings → Users** opens once the link is "Active", so you can [invite your team](../07-invite-your-team/).
 - Erpy cannot add webhooks: its user is a Developer. Someone with more rights on GitLab adds them in the next step.
 
 ## Waiting for access
 
 A user that is in no project yet, or whose projects can't be linked yet, shows as a card marked "Waiting for access", with what to change on GitLab. Erpy checks again every hour and links the group of its first projects by itself.
+
+While a waiting link is your organization's only link, nobody in your organization can open it in Erpy Factory, you included. Signing in shows "You need an invitation", with "Please ask your administrator to add you to their organisation." Do on GitLab what the card says. Within the hour, Erpy links the group, the card is marked "Active", and your organization opens again. If it doesn't, write to support@erpy.dev.
 
 | What you see | What to do |
 |---|---|
@@ -129,14 +130,16 @@ A refused check clears the token field. Fix the cause on GitLab, then paste the 
 
 ## Needs attention
 
-Erpy checks every link each hour. When something is wrong, the card is marked "Needs attention" and says what to do. Your organization's home page shows the same line.
+Erpy checks every link each hour. When something is wrong, the card is marked "Needs attention" and says what to do. Your organization's home page shows the same line; with more than one link, it shows only one link's line.
+
+Once you have fixed the cause, [replace the token](#replace-the-token): the mark stays until you do. The Maintainer or Owner warning is the exception: it clears by itself within the hour.
 
 | What you see | What to do |
 |---|---|
-| "Erpy's GitLab user is Maintainer or Owner somewhere. Lower it to Developer; Erpy checks again each hour and starts again by itself." | Change the user's role to Developer on GitLab. Erpy clears the warning within the hour. |
+| "Erpy's GitLab user is Maintainer or Owner somewhere. Lower it to Developer; Erpy checks again each hour and starts again by itself." | Change the user's role to Developer on GitLab. Erpy clears the warning within the hour, with no new token. |
 | "GitLab did not let Erpy renew the token, which expires within 60 days. Replace it before then." | [Replace the token](#replace-the-token) before it expires. |
-| "Erpy's GitLab user is no longer Developer of any project in the group. Add it back to the projects, or replace the token." | Add the user back as Developer, or replace the token. |
-| "GitLab has stopped sending webhooks. Check the webhooks below on GitLab." | Open the group's or projects' **Settings → Webhooks** on GitLab and check that the webhooks are still there and enabled. See [4. Add GitLab webhooks](../04-add-gitlab-webhooks/). |
+| "Erpy's GitLab user is no longer Developer of any project in the group. Add it back to the projects, or replace the token." | Add the user back as Developer on GitLab, then [replace the token](#replace-the-token). Adding the user back alone doesn't clear the mark. |
+| "GitLab has stopped sending webhooks. Check the webhooks below on GitLab." | Open the group's or projects' **Settings → Webhooks** on GitLab and check that the webhooks are still there and enabled. See [4. Add GitLab webhooks](../04-add-gitlab-webhooks/). Then [replace the token](#replace-the-token): fixing the webhooks alone doesn't clear the mark. |
 | "GitLab no longer accepts the token. Replace it." | [Replace the token](#replace-the-token). |
 
 ## Replace the token
@@ -144,10 +147,10 @@ Erpy checks every link each hour. When something is wrong, the card is marked "N
 Replace the token when the card asks for it, or when you want a fresh one.
 
 1. On GitLab, sign in as Erpy's user and create a new personal access token, as in step 3.
-2. On the link's card in Settings → Links, select **Replace token**. The form says "The webhooks you added stay."
+2. On the link's card in Settings → Links, select **Replace token**. The form says "A new token of the same user, or of another user made for Erpy, for acme. The webhooks you added stay."
 3. Paste the new token, select **Check token**, read the preview, and confirm.
 
-Use a token of the same user. Other tokens are refused:
+Use a token of this link's user. Although the form mentions another user, Erpy accepts only this link's user, and refuses other tokens:
 
 | What you see | What to do |
 |---|---|

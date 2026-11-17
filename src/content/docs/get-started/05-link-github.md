@@ -33,7 +33,7 @@ On Settings → Links, your GitHub account is a card with the line "GitHub accou
 
 | Status | What it means |
 |---|---|
-| "Waiting for approval" | The app is installed. Erpy activates the installation on its side. If it stays like this, write to support@erpy.dev. |
+| "Waiting for approval" | The app is installed. Erpy activates the installation on its side. While this is your organization's only link, nobody in your organization can open it in Erpy Factory, you included: signing in shows "You need an invitation". If it stays like this, write to support@erpy.dev. |
 | "Active" | Erpy can work on the repositories you chose. |
 
 If the message said "The account appears on this page within a minute", refresh the page after a minute to see the card.

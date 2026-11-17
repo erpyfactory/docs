@@ -60,7 +60,7 @@ The configuration itself. It always holds `harness.yaml` and `.harness/`. A fold
 required_check: Tests
 ```
 
-The name of the CI job that runs your tests, as the merge request or pull request shows it, not the name of a workflow or pipeline. A matrix job shows one check per combination: list each one. For several, separate the names with commas: `Tests, Lint`. Erpy finds it in your default branch's required checks, else in the job that runs your tests. If it finds neither, it writes its best guess and asks you to check it. Without this setting, Erpy can't judge a merge request's checks, so it never reports them as passed.
+The name of the CI job that runs your tests, as the merge request or pull request shows it, not the name of a workflow or pipeline. A matrix job shows one check per combination: list each one. For several, separate the names with commas: `Tests, Lint`. On GitHub, Erpy finds it in your default branch's required checks, else in the job that runs your tests. On GitLab, which names no required checks, it finds it in the job that runs your tests. If it finds neither, it writes its best guess and asks you to check it. Without this setting, Erpy can't judge a merge request's checks, so it never reports them as passed.
 
 ## Your Odoo version and image
 

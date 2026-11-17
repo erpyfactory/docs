@@ -23,7 +23,7 @@ It starts on its own when your checks are red after a push to a branch listed in
 
 ## Take a merge request or pull request back from Erpy
 
-Sometimes you ask Erpy to work on a merge request or pull request, and then decide to continue on your own. Remove the `erpy-factory` label from it. Erpy stops the automatic work it had waiting for it, and starts none. Work that is already running is not stopped, and anything you asked for in a comment still runs.
+Sometimes you ask Erpy to work on a merge request or pull request, and then decide to continue on your own. Remove the `erpy-factory` label from it. Erpy stops the automatic work it had waiting for it, and starts none. Work that is already running is not stopped, and anything you asked for in a comment still runs. On a GitLab project with no webhook yet, Erpy doesn't see the label removal: it starts no new automatic work, but work already waiting still runs.
 
 To give it back to Erpy, add the `erpy-factory` label again. Erpy then repairs on the next run of your checks, and resolves conflicts on its next check for them.
 

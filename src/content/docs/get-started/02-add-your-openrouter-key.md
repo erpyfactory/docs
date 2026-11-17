@@ -97,7 +97,7 @@ Factory checks the key with OpenRouter. **Status** on Settings → Model key sho
 | What you see | What to do |
 | --- | --- |
 | **Active** | Nothing. The key works. |
-| **Invalid** | OpenRouter refuses the key. Select **Replace** and save a new API key. |
+| **Invalid** | OpenRouter refuses the key, or the key no longer has a spend limit. If the limit was removed at OpenRouter, set one again at openrouter.ai/settings/keys, then select **Check again**. Otherwise select **Replace** and save a new API key. |
 | **No credit** | Add credit at openrouter.ai/settings/credits, then select **Check again**. |
 | **Limit reached** | Raise the key's limit at openrouter.ai/settings/keys, then select **Check again**. |
 

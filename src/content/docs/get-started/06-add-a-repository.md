@@ -49,7 +49,7 @@ Next to the button, a line says what is missing:
 
 The list shows only the projects Erpy's user is a member of. In GitLab, invite Erpy's user to the project as Developer, or to a group. Erpy checks GitLab every hour, so a new project shows in the list within the hour: reload the page.
 
-To see why a project is missing, select **Check again** under "Not in the list?". The page then says "Erpy is listing acme now. New projects show in the list above within a minute: reload the page." New projects still show with Erpy's hourly check, within the hour. Under **Not usable** the page lists each project Erpy's user reaches but Erpy can't use, with the fix. Here `acme-erpy` stands for Erpy's user and `acme` for your group.
+To see why a project is missing, select **Check again** under "Not in the list?". The page then says "Erpy is listing acme now. New projects show in the list above within a minute: reload the page." On a GitLab link, new projects still show only with Erpy's hourly check, within the hour. Under **Not usable** the page lists each project Erpy's user reaches but Erpy can't use, with the fix. Here `acme-erpy` stands for Erpy's user and `acme` for your group.
 
 | What you see | What to do |
 |---|---|
@@ -62,13 +62,14 @@ If nothing is wrong, the page says "acme-erpy reaches no project that Erpy canno
 
 ### Create a new project
 
-1. Before you create it, on GitLab Premium or Ultimate, check your group's **Settings → Repository → Default branch → Initial default branch protection**. **Fully protected after initial push**, **Partially protected** or **Not protected** lets Erpy's user, a Developer, make the first commit. **Fully protected** does not. If Erpy can't make the first commit, see [What happens after Add](#what-happens-after-add): you add a README instead.
-   On GitLab Free, a group Owner can't change this setting, and GitLab's default, **Fully protected**, doesn't let a Developer make the first push. On Free, tick "Initialize repository with a README" instead: the project then has a first commit, so it shows without the **Empty** badge, and you set it up with **Set up my repo**, without a starter.
-2. On the Add repository page, select **Create a new one on GitLab**. GitLab's new-project page opens in a new tab.
-3. Leave "Initialize repository with a README" off, and create the project.
+1. On the Add repository page, select **Create a new one on GitLab**. GitLab's new-project page opens in a new tab.
+2. Decide on the README box. The Add repository page says to leave "Initialize repository with a README" off; that works only where Erpy's user may make the first push.
+   - On GitLab Free, tick "Initialize repository with a README". On Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project has its first commit, so it shows without the **Empty** badge, and you set it up with **Set up my repo**, without a starter.
+   - On GitLab Premium or Ultimate, check your group's **Settings → Repository → Default branch → Initial default branch protection**. **Fully protected after initial push**, **Partially protected** or **Not protected** lets Erpy's user, a Developer, make the first commit: leave the README off, and Erpy sets the empty project up with a starter. With **Fully protected**, tick the README box, as on Free.
+3. Create the project.
 4. Invite Erpy's user to the project as Developer, unless it is already a member of the whole group.
-5. If you use one webhook per project (the only kind on GitLab Free), add one for the new project. See [4. Add GitLab webhooks](../04-add-gitlab-webhooks/). Without a webhook, Erpy still checks GitLab every 5 minutes for the projects you added.
-6. Back in Factory, reload the page within the hour. The project shows in the list as **Empty**. Add it as in the steps above.
+5. Back in Factory, reload the page within the hour. The project shows in the list, as **Empty** if you left the README off. Add it as in the steps above.
+6. If you use one webhook per project (the only kind on GitLab Free), add one for the new project now that it is listed: its URL shows under its name in the link's **Webhooks** section. See [4. Add GitLab webhooks](../04-add-gitlab-webhooks/). Without a webhook, Erpy still checks GitLab every 5 minutes for the projects you added.
 
 ## On GitHub
 
@@ -100,7 +101,10 @@ Select **Add more** to add other projects.
 
 Each project's name in the list opens its board. Later, choose the project in the repository switcher in the top bar, next to your organization's name, and open **Board**.
 
-If setup did not start, the reason says what to do. For example: "GitLab did not let Erpy make the first commit in gitlab.com/acme/shop. Add a README on GitLab (Add file → New file, README.md), then set it up again; the project is then set up without a starter." Your group's default branch protection can keep a Developer from pushing to an empty project. After you add the README, open the project's board and select **Set up my repo**.
+If setup of an empty GitLab project did not start, and the reason is "Something changed while the set-up ran. Try again.", the usual cause is your group's default branch protection: it keeps a Developer from making the first push to an empty project. Don't try again from the board while the project is still empty: there, **Set up my repo** sets up an empty project without the starter you chose. Instead:
+
+1. On GitLab, add a README to the project (**Add file → New file**, `README.md`), and commit it.
+2. Open the project's board and select **Set up my repo**. The project is set up without a starter.
 
 ### An empty project
 

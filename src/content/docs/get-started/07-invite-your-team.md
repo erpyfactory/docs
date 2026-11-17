@@ -15,11 +15,10 @@ Google, using the address you enter.
   still says "Waiting for approval", does not count yet. With more than one link, the page goes by one
   of them: the one named like your organization's address, else GitHub first: a GitLab link that is Active and a GitHub link still waiting can still keep the
   page closed.
-- On GitLab with a new group that has no project yet, the link turns Active only after the project
-  exists in GitLab and Erpy's hourly check has found it: up to about an hour. [3. Link GitLab](../03-link-gitlab/)
-  says how to skip the wait.
+- While your organization's only link is still waiting, nobody can open the organization, you
+  included. See [3. Link GitLab](../03-link-gitlab/#waiting-for-access).
 
-Until the link is Active, Settings → Users shows this message to everyone, Admins included: "Only an
+While the link the page goes by is not Active, Settings → Users shows this message to everyone, Admins included: "Only an
 admin of this organization can invite people or change their access. Ask your admin." Wait for the
 link to turn Active, then open the page again.
 
@@ -86,6 +85,6 @@ Your own row shows "(you)" and has no buttons: you cannot change your own access
 | What you see | What to do |
 | --- | --- |
 | "Enter a valid email address." | Check the address for typos, then select **Send invite** again. |
-| "This person is already on the list." | The address is already listed. Find its row, and use **Resend** if they did not get the email. |
+| "This person is already on the list." | The address is already listed. Find its row. If it reads **Invited**, use **Resend** if they did not get the email. If it reads **No access**, use **Grant Builder**. |
 | "The invitation was saved, but the email could not be queued. They can still sign in with Google; try Resend later." | The invitation stands. Tell the person to sign in with Google, or select **Resend** later. |
 | "Only an open invitation can be resent." | The person has already joined, or the invitation was cancelled. Reload the page. |

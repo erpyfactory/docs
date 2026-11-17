@@ -38,7 +38,9 @@ Go on to [2. Add your OpenRouter key](../02-add-your-openrouter-key/).
   colleague with an address on the same domain still needs their own invitation. An Admin invites them
   on [7. Invite your team](../07-invite-your-team/).
 - **Your Google account decides.** If your Google Workspace admin suspends or deletes your Google
-  account, you can no longer sign in with Google.
+  account, you can no longer sign in with Google. A sign-in that is already open lasts up to 8 hours
+  from when it started. To take someone's access away at once, an Admin selects **Revoke** on
+  [Settings → Users](../07-invite-your-team/#change-a-role-or-take-access-away).
 
 ## The invitation email
 
@@ -66,5 +68,5 @@ Its last line says why you got it:
 
 | What you see | What to do |
 | --- | --- |
-| "You need an invitation", with "Please ask your administrator to add you to their organisation." | You signed in with a Google account that has no invitation. Select **Sign out**, then sign in again with the Google account whose address got the invitation. If you have no invitation, ask an Admin of your organization to invite you. If you are your organization's first Admin, write to support@erpy.dev. |
-| The same card, with the right Google account | The invitation may have been sent to another address, or cancelled. Ask whoever invited you to check the address they used; if Erpy invited you as the first Admin, write to support@erpy.dev. Once you've been added, sign in again. |
+| "You need an invitation", with "Please ask your administrator to add you to their organisation." | If you selected **Sign in with GitHub**, select **Sign out**, then **Sign in with Google**: your invitation is for Google sign-in. Otherwise you signed in with a Google account that has no invitation. Select **Sign out**, then sign in again with the Google account whose address got the invitation. If you have no invitation, ask an Admin of your organization to invite you. If you are your organization's first Admin, write to support@erpy.dev. |
+| The same card, with the right Google account | Your organization's only link may still be waiting: a GitLab link marked "Waiting for access" or a GitHub link marked "Waiting for approval". Until it is active, nobody in the organization can open it, the Admin included. See [3. Link GitLab](../03-link-gitlab/#waiting-for-access) or [5. Link GitHub](../05-link-github/). Otherwise, the invitation may have been sent to another address, or cancelled. Ask whoever invited you to check the address they used; if Erpy invited you as the first Admin, write to support@erpy.dev. Once you've been added, sign in again. |
