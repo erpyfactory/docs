@@ -180,7 +180,7 @@ For webhooks per project, repeat steps 2 to 5 for each project Erpy works on.
 
 A user that is in no project yet, or whose projects can't be linked yet, shows as a card marked "Waiting for access", with what to change on GitLab. Erpy checks again every hour and links the group of its first projects by itself.
 
-On the setup page, the **Link code host** step shows the waiting card, and for a user in no project it reads "Waiting for access: make Erpy's user Developer of a project." A Builder or an Admin can select **Check again**: the page says "Erpy is checking GitLab now. This page shows the link once acme-erpy is Developer of a project." The page reads again by itself. Erpy links the group with its hourly check, so the link can take up to an hour to show after you give the user access.
+On the setup page, the **Link code host** step shows the waiting card, and for a user in no project it reads "Waiting for access: make Erpy's user Developer of a project." Once you have given the user access on GitLab, a Builder or an Admin can select **Check again**: the page says "Erpy is checking GitLab now. This page shows the link once acme-erpy is Developer of a project." Erpy then links the group, and the page, which reads again by itself, shows the link within a minute. Without **Check again**, Erpy links it with its hourly check, within the hour.
 
 | What you see | What to do |
 |---|---|
