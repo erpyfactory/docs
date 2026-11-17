@@ -18,7 +18,10 @@ nothing else opens until the key is saved.
 1. Sign in at [openrouter.ai](https://openrouter.ai) and add credit at
    [openrouter.ai/settings/credits](https://openrouter.ai/settings/credits): at least 1 USD.
 2. At [openrouter.ai/settings/keys](https://openrouter.ai/settings/keys), create an API key and give it
-   a spend limit. Use an API key, not a provisioning key. A key without a spend limit is refused.
+   a spend limit. Use an API key, not a provisioning key. A key without a spend limit is refused. You
+   choose the limit: any amount works, and an Admin can raise it at OpenRouter later. When the key
+   reaches its limit, its status reads **Limit reached**, and your DeepSeek tickets wait until an Admin
+   raises the limit.
 3. Copy the key. It starts with `sk-or-v1-`.
 4. In Erpy Factory, on the page "Add your OpenRouter key", paste the key in **OpenRouter API key**.
 5. Select **Save**. The button reads "Checking…" while Factory checks the key with OpenRouter. Factory
