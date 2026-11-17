@@ -25,7 +25,7 @@ Erpy works on GitLab as a user you create for it. You make that user a Developer
 
 On a new organization, the setup page's **Link code host** step shows two cards, **GitLab** and **GitHub**. The **GitLab** card shows the form. Once setup is over, you link on **Settings → Links**: when something is already linked, select **Link GitLab** to open the form.
 
-The form shows three numbered cards and a token field numbered 4. Steps 1 to 4 below follow them.
+The form shows a numbered list of three steps, one per row, and a token field numbered 4. Steps 1 to 4 below follow them.
 
 ## Steps
 
@@ -38,7 +38,7 @@ The form shows three numbered cards and a token field numbered 4. Steps 1 to 4 b
    - Projects of one top-level group only.
 
    Do this before you link. If you link a user that is in no project yet, the step waits until Erpy's user is Developer of a project: see [Waiting for access](#waiting-for-access). If your group has no project yet, see [If your group has no project yet](#if-your-group-has-no-project-yet).
-3. **Create its token.** Sign in to GitLab as Erpy's user, for example in a private window. Create a personal access token with:
+3. **Create its token.** Sign in to GitLab as Erpy's user, for example in a private window. Create a legacy personal access token (**Generate token** → **Legacy token**, not **Fine-grained token**) with:
    - the scopes `api` and `self_rotate`;
    - an expiry date.
 
