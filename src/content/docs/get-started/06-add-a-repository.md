@@ -125,7 +125,7 @@ Your own `.claude` folder, `AGENTS.md` and `CLAUDE.md` are left as they are. If 
 
 ## Check
 
-- The setup merge request is titled "Configure this repository for Erpy Factory", from a branch named `erpy/configure-` followed by the setup ticket's number.
+- The setup merge request is titled "Configure this repository for Erpy Factory", from a branch named `erpy/configure-` followed by a number.
 - It adds `harness.yaml` and a `.harness` folder, and changes nothing under `.github/workflows`.
 - After you merge it, `harness.yaml` is on the default branch, and the repository is set up. Its board no longer shows **Set up my repo**.
 

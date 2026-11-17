@@ -53,8 +53,13 @@ The email says which organization you were added to and with which role, for exa
 It has a **Sign in to Erpy Factory** button. The button only opens the sign-in page. There is
 nothing to accept, and the invitation does not expire.
 
-Its last line says why you got it: "You got this email because Erpy set up Acme on Erpy Factory and
-invited you@example.com to it. If you did not expect it, you can ignore it."
+Its last line says why you got it:
+
+- If you are the first Admin of an organization Erpy set up: "You got this email because Erpy set up
+  Acme on Erpy Factory and invited you@example.com to it. If you did not expect it, you can ignore it."
+- If an Admin of your organization invited you, or sent your invitation again: "You got this email
+  because an admin of Acme invited you@example.com to Erpy Factory. If you did not expect it, you can
+  ignore it."
 
 ## If you are refused
 
