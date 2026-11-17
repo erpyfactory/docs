@@ -256,7 +256,7 @@ Your script that loads one dataset into a database, relative to your repository'
 odoo_image_access: public
 ```
 
-`public`, `ecr` or `registry`. Erpy always writes it commented out. Without it, an image in Amazon ECR is read as `ecr`, and an image anywhere else, ghcr.io included, as `public`. Leave it commented out, unless your image is in a private registry other than ECR, for example a private package on ghcr.io or your own self-hosted registry: then write `odoo_image_access: registry` and ask Erpy to store a login for that registry, a username and a token that can pull the image. Erpy pulls the image with that login.
+`public`, `ecr` or `registry`. Erpy always writes it commented out. Without it, an image in Amazon ECR is read as `ecr`, and an image anywhere else, ghcr.io included, as `public`. Leave it commented out, unless your image is in a private registry other than ECR, for example a private package on ghcr.io or your own self-hosted registry: then write `odoo_image_access: registry` and send a login for that registry to support@erpy.dev: a username and a token that can pull the image. Erpy stores it. Erpy pulls the image with that login.
 
 ### `odoo_aws_role`
 
@@ -357,7 +357,7 @@ Erpy reads a private Odoo image from your Amazon ECR, or a database dump from yo
 
 **On GitHub:**
 
-1. Open the setup ticket in Factory. When your image is in ECR or your dump is in S3, its configuration plan shows the role's trust policy, with Erpy's role and your installation's id filled in, and the permissions the role needs.
+1. Open the setup ticket in Factory. When your image is in ECR or your dump is in S3, its configuration plan shows the role's trust policy, with Erpy's role and your installation's id filled in, and the permissions the role needs. If you don't see it there, write to support@erpy.dev for the trust policy.
 2. Create the role with that trust policy. The external id in it is your installation's id: the number at the end of the address of the Erpy app's page in your GitHub settings, under **GitHub Apps** → **Configure**.
 3. Give the role only the read access it needs:
    - For an image in ECR: `ecr:GetAuthorizationToken`, `ecr:BatchCheckLayerAvailability`, `ecr:GetDownloadUrlForLayer` and `ecr:BatchGetImage`.

@@ -13,6 +13,7 @@ export default defineConfig({
 			description: 'A factory for Odoo projects on GitLab or GitHub: turn tickets into merge requests and pull requests.',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/erpyfactory/docs' }],
 			editLink: { baseUrl: 'https://github.com/erpyfactory/docs/edit/main/' },
+			components: { Footer: './src/components/Footer.astro' },
 			sidebar: [
 				{ label: 'What is Erpy Factory', slug: 'index' },
 				{ label: 'Before you start', slug: 'reference/onboarding-checklist' },

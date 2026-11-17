@@ -66,5 +66,5 @@ Its last line says why you got it:
 
 | What you see | What to do |
 | --- | --- |
-| "You need an invitation", with "Please ask your administrator to add you to their organisation." | You signed in with a Google account that has no invitation. Select **Sign out**, then sign in again with the Google account whose address got the invitation. If you have no invitation, ask an Admin of your organization to invite you. |
-| The same card, with the right Google account | The invitation may have been sent to another address, or cancelled. Ask whoever invited you to check the address they used. Once you've been added, sign in again. |
+| "You need an invitation", with "Please ask your administrator to add you to their organisation." | You signed in with a Google account that has no invitation. Select **Sign out**, then sign in again with the Google account whose address got the invitation. If you have no invitation, ask an Admin of your organization to invite you. If you are your organization's first Admin, write to support@erpy.dev. |
+| The same card, with the right Google account | The invitation may have been sent to another address, or cancelled. Ask whoever invited you to check the address they used; if Erpy invited you as the first Admin, write to support@erpy.dev. Once you've been added, sign in again. |
