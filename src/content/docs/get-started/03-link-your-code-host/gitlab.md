@@ -51,7 +51,7 @@ The form shows three numbered cards and a token field numbered 4. Steps 1 to 4 b
 5. **Read the preview.** The page shows "Token accepted" and what the token reaches (see [The preview](#the-preview)).
 6. **Link.** Select **Link acme**, where `acme` is your group (or the user's name, when it is in no project yet). The button reads "Linking…", then the page says "acme is linked. Erpy lists its projects within a few minutes." Erpy lists them with its hourly check, so the projects can take up to an hour to show on [4. Add a repository](../../04-add-a-repository/).
 
-   On the setup page, the **Link code host** step then shows the link's card, marked "Active", with its **Webhooks** section: see [Add the webhooks](#add-the-webhooks). For an Admin, the step offers **Skip for now** while no webhook is saved, and **Continue** once one is. A Builder sees **Continue**. Both open **Add repository**.
+   On the setup page, the **Link code host** step first says "Erpy is saving the GitLab link. This step shows it once it is saved." It reads again by itself until the link shows, and doesn't offer GitLab or GitHub again meanwhile. It then shows the link's card, marked "Active", with its **Webhooks** section, or the waiting card of a user in no project yet: see [Add the webhooks](#add-the-webhooks). For an Admin, the step offers **Skip for now** while no webhook is saved, and **Continue** once one is. A Builder sees **Continue**. Both open **Add repository**.
 
    Link within 10 minutes of the check. After that, check the token again.
 
