@@ -12,7 +12,7 @@ You choose which repositories Erpy works on, and Erpy sets each one up. The setu
 
 ## Open Add repository
 
-On a new organization, right after the link, the setup page stays on **Link code host** and offers **Continue**, or **Skip for now** while no GitLab webhook is saved. Either opens the **Add repository** step, which shows the list below in place. A Viewer sees "An Admin or Builder of Acme adds its first repository." instead. It also names your Admins after "Admins:" when Erpy Factory can list them.
+On a new organization, right after the link, the setup page stays on **Link code host** and offers **Continue**, or **Skip for now** while no GitLab webhook is saved. Either opens the **Add repository** step, which shows the list below in place. The sidebar ticks **Link code host** only once someone has selected one of them. A Viewer sees "An Admin or Builder of Acme adds its first repository." instead. It also names your Admins after "Admins:" when Erpy Factory can list them.
 
 - On GitLab, once you add projects and nothing went wrong, your organization's board opens. Setup is over, and the organization's pages, Settings included, open as usual. If setup did not start, or GitLab refused Erpy's labels, the step stays open with the reason: see [What happens after Add](#what-happens-after-add).
 - On GitHub, the repositories come from the Erpy app's access. If you chose repositories when you installed the app, GitHub sends you straight to the board. Otherwise the step reads again by itself, and once the first repository shows, the board opens.
@@ -53,7 +53,7 @@ Next to the button, a line says what is missing:
 
 The list shows only the projects Erpy's user is a member of. In GitLab, invite Erpy's user to the project as Developer, or to a group. Erpy checks GitLab every hour, so a new project shows in the list within the hour: reload the page.
 
-To see why a project is missing, select **Check again** under "Not in the list?". The page then says "Erpy is listing acme now. New projects show in the list above within a minute: reload the page." On a GitLab link, new projects still show only with Erpy's hourly check, within the hour. Under **Not usable** the page lists each project Erpy's user reaches but Erpy can't use, with the fix. Here `acme-erpy` stands for Erpy's user and `acme` for your group.
+To see why a project is missing, select **Check again** under "Not in the list?". The page then says "Erpy is listing acme now. New projects show in the list above within a minute: reload the page." Under **Not usable** the page lists each project Erpy's user reaches but Erpy can't use, with the fix. Here `acme-erpy` stands for Erpy's user and `acme` for your group.
 
 | What you see | What to do |
 |---|---|
