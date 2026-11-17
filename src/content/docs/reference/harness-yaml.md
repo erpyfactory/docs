@@ -3,7 +3,7 @@ title: harness.yaml settings
 description: Every setting in harness.yaml, in file order, with what it does, its default and the values it accepts.
 ---
 
-`harness.yaml` tells Erpy how to work on your repository. Erpy writes it in the setup merge request (a pull request on GitHub), see [Add a repository](../../get-started/06-add-a-repository/). This page explains each setting, in the order the file holds them, for when your repository is more than a simple Odoo add-ons repository: Odoo Enterprise, your own Docker Compose setup, a database dump, an image in your own AWS account.
+`harness.yaml` tells Erpy how to work on your repository. Erpy writes it in the setup merge request (a pull request on GitHub), see [Add a repository](../../get-started/04-add-a-repository/). This page explains each setting, in the order the file holds them, for when your repository is more than a simple Odoo add-ons repository: Odoo Enterprise, your own Docker Compose setup, a database dump, an image in your own AWS account.
 
 ## How Erpy writes the file
 

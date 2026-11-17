@@ -1,39 +1,45 @@
 ---
+title: '3. Link your code host: GitHub'
+description: Link your GitHub account or organization to Erpy Factory by installing the Erpy app.
+sidebar:
+  label: GitHub
 prev:
-  link: ../02-add-your-openrouter-key/
+  link: ../../02-add-your-openrouter-key/
   label: 2. Add your OpenRouter key
-title: 5. Link GitHub
-description: Link your GitHub account or organization to Erpy Factory by installing the Erpy app from Settings → Links.
+next:
+  link: ../../04-add-a-repository/
+  label: 4. Add a repository
 ---
 
-This step is for code on GitHub. If your code is on GitHub, do this step instead of steps 3 and 4. If it is on GitLab, skip it and go on to [Add a repository](../06-add-a-repository/).
+You link one code host: the one your code is on. This page is for GitHub. For GitLab, see
+[3. Link your code host: GitLab](../gitlab/).
 
 You install the Erpy app on your GitHub account or organization, from Factory, and choose the repositories Erpy may see. Erpy sees only those repositories.
 
 ## Before you start
 
-- You are an Admin of your organization in Erpy Factory. Only an Admin can link GitHub. While nothing is linked, anyone else sees "Acme has no link yet. An Admin of Acme links its GitHub account or GitLab group here." Once something is linked, they see the link cards and no **Link GitHub** button.
+- You are an Admin of your organization in Erpy Factory. Only an Admin can link GitHub. On the setup page, anyone else sees "An Admin of Acme links its code host: GitLab or GitHub." and the names of your Admins, after "Admins:". Later, on Settings → Links, they see "Acme has no link yet. An Admin of Acme links its GitHub account or GitLab group here." while nothing is linked, and the link cards with no **Link GitHub** button once something is.
 - You can sign in to GitHub as an owner of the GitHub account or organization that holds the repositories.
-- Start from Settings → Links in Factory, not from GitHub. An install you start on GitHub is not linked to your organization.
+- Start from Erpy Factory, not from GitHub. An install you start on GitHub is not linked to your organization.
 
 ## Steps
 
-1. In Factory, open Settings → Links.
-2. Under **GitHub**, select **Link GitHub**. If something is already linked, **Link GitHub** sits above the list of links.
+1. On a new organization, open the setup page's **Link code host** step. It shows two cards, **GitLab** and **GitHub**. Once setup is over, you link on Settings → Links instead.
+2. On the **GitHub** card, which says "Install the Erpy app on your GitHub account or organization, and choose its repositories.", select **Install the Erpy app**. On Settings → Links, the button is **Link GitHub**; if something is already linked, it sits above the list of links.
 3. GitHub opens the Erpy app's install page. Choose the GitHub account or organization that holds your repositories.
 4. Under **Repository access**, choose **All repositories**, or **Only select repositories** and pick the ones Erpy may work on. Then install the app.
 5. GitHub opens its authorize page. Authorize Erpy with the same GitHub account that installed the app. Erpy uses this only to check who installed it.
-6. GitHub sends you back to Settings → Links in Factory. A message at the top of the page says how it went. See [What the message says](#what-the-message-says).
+6. GitHub sends you back to Factory, to the page you started from: the **Link code host** step, or Settings → Links. A message at the top says how it went. See [What the message says](#what-the-message-says). If the app already brought repositories, setup is over, and your organization's board opens instead.
 
-Finish within thirty minutes of selecting **Link GitHub**. After that, the link can't be checked and you start again.
+Finish within thirty minutes of selecting the button. After that, the link can't be checked and you start again.
 
 ## Check
 
-On Settings → Links, your GitHub account is a card with the line "GitHub account · GitHub account, through the Erpy app" and the first repositories Erpy sees. The card's status says where the link stands:
+On the **Link code host** step, and later on Settings → Links, your GitHub account is a card with the line "GitHub account · GitHub account, through the Erpy app" and the first repositories Erpy sees. The card's status says where the link stands:
 
 | Status | What it means |
 |---|---|
-| "Waiting for approval" | The app is installed. Erpy activates the installation on its side. While this is your organization's only link, nobody in your organization can open it in Erpy Factory, you included: signing in shows "You need an invitation". If it stays like this, write to support@erpy.dev. |
+| "Waiting for approval" | The app is installed. Erpy activates the installation on its side. On the setup page, the step shows the card and reads again by itself until it is active. If it stays like this, write to support@erpy.dev. |
 | "Active" | Erpy can work on the repositories you chose. |
 
 If the message said "The account appears on this page within a minute", refresh the page after a minute to see the card.
@@ -41,12 +47,12 @@ If the message said "The account appears on this page within a minute", refresh 
 ## What to expect
 
 - Erpy reads the code in the repositories you chose, and opens branches and pull requests for your tickets. It sees nothing else.
-- To give Erpy more or fewer repositories later, change the app's **Repository access** on GitHub. [Add a repository](../06-add-a-repository/) shows where.
+- To give Erpy more or fewer repositories later, change the app's **Repository access** on GitHub. [Add a repository](../../04-add-a-repository/) shows where.
 - If you came from **Add repository**, Settings → Links says "Link GitHub or GitLab to add a repository." and offers a way back to **Add repository** after the link.
 
 ## What the message says
 
-After GitHub sends you back, one of these messages shows at the top of Settings → Links. "Acme" stands for your organization's name.
+After GitHub sends you back, one of these messages shows at the top of the page. "Acme" stands for your organization's name. On the setup page, the messages name the button **Install the Erpy app** where the table says **Link GitHub**: select that button instead.
 
 | What you see | What to do |
 |---|---|
@@ -69,4 +75,4 @@ Uninstall the Erpy app in the account's settings on GitHub. Factory has no butto
 
 ## Next step
 
-[Add a repository](../06-add-a-repository/).
+[Add a repository](../../04-add-a-repository/).

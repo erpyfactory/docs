@@ -1,5 +1,5 @@
 ---
-title: 7. Invite your team
+title: 5. Invite your team
 description: Invite the people of your organization by email, and give each one a role.
 ---
 
@@ -9,14 +9,11 @@ Google, using the address you enter.
 ## Before you start
 
 - You are an Admin of the organization, and you signed in with Google.
-- Your GitLab group or GitHub account is linked, and the link is **Active**: see
-  [3. Link GitLab](../03-link-gitlab/) or [5. Link GitHub](../05-link-github/). Settings → Users opens
-  only once a link is Active. A GitLab link that still says "Waiting for access", or a GitHub link that
-  still says "Waiting for approval", does not count yet. With more than one link, the page goes by one
-  of them: the one named like your organization's address, else GitHub first: a GitLab link that is Active and a GitHub link still waiting can still keep the
-  page closed.
-- While your organization's only link is still waiting, nobody can open the organization, you
-  included. See [3. Link GitLab](../03-link-gitlab/#waiting-for-access).
+- Setup is over: your code host is linked and your first repository is added. See
+  [4. Add a repository](../04-add-a-repository/). Until then, Settings → Users, like every other page
+  of the organization, opens the setup page.
+- Your GitLab group or GitHub account's link is **Active**. With more than one link, Settings → Users
+  goes by one of them: the one named like your organization's address, else GitHub first.
 
 While the link the page goes by is not Active, Settings → Users shows this message to everyone, Admins included: "Only an
 admin of this organization can invite people or change their access. Ask your admin." Wait for the
@@ -57,13 +54,13 @@ Each role can do everything the role below it can.
 | Role | What it can do |
 | --- | --- |
 | Viewer | Read the boards and the tickets. |
-| Builder | Everything a Viewer can. Create tickets, edit them, reply and comment on them, and close them. Write and approve PRDs (the requirements Erpy writes for a ticket, see [8. Write your first ticket](../08-write-your-first-ticket/)). Set up a repository. Attach files. |
+| Builder | Everything a Viewer can. Create tickets, edit them, reply and comment on them, and close them. Write and approve PRDs (the requirements Erpy writes for a ticket, see [6. Write your first ticket](../06-write-your-first-ticket/)). Set up a repository. Attach files. |
 | Admin | Everything a Builder can. Invite people and change their roles. Create API keys. Manage webhooks. Add, replace and remove the OpenRouter key. |
 
 - **API keys** (Settings → API keys) let your own programs manage your tickets through Erpy Factory's
   REST API. See [erpy.dev/docs/api](https://erpy.dev/docs/api).
 - **Webhooks** (Settings → Webhooks) tell your own system when a ticket needs you. They are not the
-  GitLab webhooks of [4. Add GitLab webhooks](../04-add-gitlab-webhooks/).
+  GitLab webhooks of [Add the webhooks](../03-link-your-code-host/gitlab/#add-the-webhooks).
 
 When someone tries something their role does not allow, the page names the role it needs, for example
 "Approving a PRD needs the Builder role in Acme."

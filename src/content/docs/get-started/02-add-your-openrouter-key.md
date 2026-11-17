@@ -4,8 +4,8 @@ description: Save your organization's own OpenRouter API key, the first page of 
 ---
 
 Your organization's own [OpenRouter](https://openrouter.ai) key pays for your DeepSeek tickets: see
-[What the key pays for](#what-the-key-pays-for). On a new organization, the key page is the first page:
-nothing else opens until the key is saved.
+[What the key pays for](#what-the-key-pays-for). On a new organization, the key is the first step of
+the setup page, **OpenRouter key**: the next steps open once the key is saved.
 
 ## Before you start
 
@@ -24,23 +24,29 @@ nothing else opens until the key is saved.
    reaches its limit, its status reads **Limit reached**, and your DeepSeek tickets wait until the limit
    is raised.
 3. Copy the key. It starts with `sk-or-v1-`.
-4. In Erpy Factory, on the page "Add your OpenRouter key", paste the key in **OpenRouter API key**.
+4. In Erpy Factory, on the setup page's **OpenRouter key** step, paste the key in **OpenRouter API
+   key**. The step says "Erpy works on Acme's DeepSeek tickets with models it reaches through
+   OpenRouter, and your organization's own OpenRouter key pays for them." Under the field: "Set a
+   credit limit on the key, for example $10. Factory refuses a key without one, and DeepSeek tickets
+   wait once it's used up. You can raise it at OpenRouter at any time."
 5. Select **Save**. The button reads "Checking…" while Factory checks the key with OpenRouter. Factory
    saves the key only once OpenRouter accepts it.
-6. The page says "Key saved" and "This key pays for Acme's DeepSeek tickets. Next, link GitLab or GitHub."
-   Select **Continue**.
+6. The page opens the **Link code host** step and says "This key pays for Acme's DeepSeek tickets.
+   Next, link your code host."
 
 ## Check
 
-- The page said "Key saved", and **Continue** opened your organization.
-- Open Settings → Model key. Under **OpenRouter key**, **Status** reads **Active**. The page shows
-  only the key's last four characters, as `sk-or-…` and the four characters.
+- The sidebar marks **OpenRouter key** as done, and the **Link code host** step is open.
+- Select **OpenRouter key** in the sidebar to open the step again. It shows the key's facts, as
+  Settings → Model key does once setup is over: **Status** reads **Active**, and the key shows only its
+  last four characters, as `sk-or-…` and the four characters. **Continue** opens the first step not
+  done.
 
 ## What to expect
 
-**Next step.** On a new organization, the key page names "Link GitLab or GitHub" as the next step. On GitLab, go on to
-[3. Link GitLab](../03-link-gitlab/). On GitHub, go on to [5. Link GitHub](../05-link-github/)
-instead.
+**Next step.** The setup page goes on to **Link code host**. If your code is on GitLab, go on to
+[3. Link your code host: GitLab](../03-link-your-code-host/gitlab/). If it is on GitHub, go on to
+[3. Link your code host: GitHub](../03-link-your-code-host/github/).
 
 ### What the key pays for
 
@@ -72,8 +78,8 @@ The key stays unsaved, and the page shows one of these messages beside **Save**.
 | --- | --- |
 | "This is not an OpenRouter API key. A key starts with sk-or-v1- followed by 64 characters 0-9 and a-f." | Copy the whole key again from OpenRouter, with nothing before or after it, and paste it. |
 | "OpenRouter did not accept this key. Check that it is an API key, not a provisioning key, and that it is not deleted or disabled." | Create a new API key at openrouter.ai/settings/keys, not a provisioning key, and save it. |
-| "This key has no spend limit. Set a limit on it at openrouter.ai/settings/keys, then save it again." | Set a spend limit on the key at OpenRouter, then select **Save** again. |
-| "This key has used up its spend limit. Raise the limit at openrouter.ai/settings/keys, then save it again." | Raise the key's limit at OpenRouter, then save it again. |
+| "This key has no credit limit. Set one on OpenRouter's API Keys page, then save it again." | Set a **Credit limit** on the key at OpenRouter, then select **Save** again. "OpenRouter's API Keys page" links to openrouter.ai/settings/keys. |
+| "This key has used up its credit limit. Raise it on OpenRouter's API Keys page, then save it again." | Raise the key's credit limit at OpenRouter, then save it again. |
 | "The OpenRouter account of this key has less than 1 USD of credit. Add credit at openrouter.ai/settings/credits, then save it again." | Add credit at OpenRouter, then save it again. |
 | "This organization has no OpenRouter key. Reload the page." | Reload the page. |
 | "This organization is not known to Factory. Reload the page and try again." | Reload the page and try again. |
@@ -84,10 +90,10 @@ The key stays unsaved, and the page shows one of these messages beside **Save**.
 
 Only an Admin can add, replace or remove the key.
 
-- On a new organization, you see "Waiting for the OpenRouter key", with "An Admin of Acme adds the
-  organization's OpenRouter key first. This page opens the organization once the key is saved." and
-  the names of your Admins. Ask one of them, then reload the page once they have saved it.
-- On Settings → Model key, you read the key's facts and "Only an Admin of this organization can change
+- On a new organization's setup page, the **OpenRouter key** step says "An Admin of Acme sets its
+  OpenRouter key." and names your Admins after "Admins:". Ask one of them, then reload the page once
+  they have saved it.
+- Once setup is over, on Settings → Model key, you read the key's facts and "Only an Admin of this organization can change
   this." When no key is set, the page says "No key is set. DeepSeek tickets wait until an Admin sets
   one."
 
@@ -98,7 +104,7 @@ Factory checks the key with OpenRouter. **Status** on Settings → Model key sho
 | What you see | What to do |
 | --- | --- |
 | **Active** | Nothing. The key works. |
-| **Invalid** | OpenRouter refuses the key, or the key no longer has a spend limit. If the limit was removed at OpenRouter, set one again at openrouter.ai/settings/keys, then select **Check again**. Otherwise select **Replace** and save a new API key. |
+| **Invalid** | OpenRouter refuses the key, or the key no longer has a credit limit. If the limit was removed at OpenRouter, set one again at openrouter.ai/settings/keys, then select **Check again**. Otherwise select **Replace** and save a new API key. |
 | **No credit** | Add credit at openrouter.ai/settings/credits, then select **Check again**. |
 | **Limit reached** | Raise the key's limit at openrouter.ai/settings/keys, then select **Check again**. |
 

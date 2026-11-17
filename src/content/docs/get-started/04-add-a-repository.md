@@ -1,5 +1,5 @@
 ---
-title: 6. Add a repository
+title: 4. Add a repository
 description: Bring a GitLab project or a GitHub repository into Erpy Factory, and let Erpy set it up with harness.yaml.
 ---
 
@@ -7,12 +7,17 @@ You choose which repositories Erpy works on, and Erpy sets each one up. The setu
 
 ## Before you start
 
-- Your organization has a link: [Link GitLab](../03-link-gitlab/) or [Link GitHub](../05-link-github/). On GitLab, the link's card in **Settings → Links** must be "Active". A card marked "Waiting for access" doesn't count: until it is "Active", **Add repository** says your organization has no link yet. See [If your group has no project yet](../03-link-gitlab/#if-your-group-has-no-project-yet).
+- Your code host is linked, and its card is "Active": see [3. Link your code host](../03-link-your-code-host/gitlab/) for GitLab or [for GitHub](../03-link-your-code-host/github/). A GitLab card marked "Waiting for access" doesn't count yet.
 - You are a Builder or an Admin. On GitLab, a Viewer sees the list but cannot add: "A Viewer cannot add a repository. Ask a Builder or an Admin."
 
 ## Open Add repository
 
-Select **Add repository**, on the home page's Repositories card or at the foot of the repository switcher.
+On a new organization, the setup page opens the **Add repository** step once the code host is linked. It shows the list below in place. A Viewer sees "An Admin or Builder of Acme adds its first repository." and the names of your Admins instead.
+
+- On GitLab, once you add projects and nothing went wrong, your organization's board opens. Setup is over, and the organization's pages, Settings included, open as usual. If setup did not start, or GitLab refused Erpy's labels, the step stays open with the reason: see [What happens after Add](#what-happens-after-add).
+- On GitHub, the repositories come from the Erpy app's access. The step reads again by itself, and once the first repository shows, the board opens.
+
+Later, select **Add repository** on the home page's Repositories card or at the foot of the repository switcher.
 
 - With a link to both GitLab and GitHub, the page asks "Where is the repository?". Choose **GitHub** or **GitLab**.
 - With more than one GitLab group, it asks "Which GitLab group?". Choose the group.
@@ -69,7 +74,7 @@ If nothing is wrong, the page says "acme-erpy reaches no project that Erpy canno
 3. Create the project.
 4. Invite Erpy's user to the project as Developer, unless it is already a member of the whole group.
 5. Back in Factory, reload the page within the hour. The project shows in the list, as **Empty** if you left the README off. Add it as in the steps above.
-6. If you use one webhook per project (the only kind on GitLab Free), add one for the new project now that it is listed: its URL shows under its name in the link's **Webhooks** section. See [4. Add GitLab webhooks](../04-add-gitlab-webhooks/). Without a webhook, Erpy still checks GitLab every 5 minutes for the projects you added.
+6. If you use one webhook per project (the only kind on GitLab Free), add one for the new project now that it is listed: its URL shows under its name in the link's **Webhooks** section. See [Add the webhooks](../03-link-your-code-host/gitlab/#add-the-webhooks). Without a webhook, Erpy still checks GitLab every 5 minutes for the projects you added.
 
 ## On GitHub
 
@@ -149,4 +154,4 @@ Your own `.claude` folder, `AGENTS.md` and `CLAUDE.md` are left as they are. If 
 
 ## Next step
 
-[Invite your team](../07-invite-your-team/).
+[Invite your team](../05-invite-your-team/).

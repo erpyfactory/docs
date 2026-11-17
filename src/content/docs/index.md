@@ -34,20 +34,21 @@ Google.
 1. [Your invitation and Google sign-in](get-started/01-your-invitation/): sign in with Google, using the
    address the invitation was sent to.
 2. [Add your OpenRouter key](get-started/02-add-your-openrouter-key/): your organization's own
-   OpenRouter key. Nothing else opens until it is saved.
-3. [Link GitLab](get-started/03-link-gitlab/): give Erpy its own GitLab user and a token. GitLab only.
-4. [Add GitLab webhooks](get-started/04-add-gitlab-webhooks/): let GitLab tell Erpy what happens in
-   your projects. GitLab only.
-5. [Link GitHub](get-started/05-link-github/): install the Erpy app on your repositories. GitHub only,
-   instead of steps 3 and 4.
-6. [Add a repository](get-started/06-add-a-repository/): choose the repositories Erpy works on, and
+   OpenRouter key.
+3. Link your code host, the one your code is on:
+   - [GitLab](get-started/03-link-your-code-host/gitlab/): give Erpy its own GitLab user and a token,
+     then add the webhooks;
+   - [GitHub](get-started/03-link-your-code-host/github/): install the Erpy app on your repositories.
+4. [Add a repository](get-started/04-add-a-repository/): choose the repositories Erpy works on, and
    merge the setup merge request or pull request.
-7. [Invite your team](get-started/07-invite-your-team/): invite people by email and give each one a
+5. [Invite your team](get-started/05-invite-your-team/): invite people by email and give each one a
    role.
-8. [Write your first ticket](get-started/08-write-your-first-ticket/): write a ticket, approve the
+6. [Write your first ticket](get-started/06-write-your-first-ticket/): write a ticket, approve the
    requirements, and review what Erpy builds.
 
-On GitLab, you walk steps 1, 2, 3, 4, 6, 7 and 8. On GitHub, you walk steps 1, 2, 5, 6, 7 and 8.
+Steps 2 to 4 are the steps of the setup page Erpy Factory shows a new organization: **OpenRouter key**,
+**Link code host** and **Add repository**. Once the first repository is added, the organization's
+pages open.
 
 ## Work with Erpy
 

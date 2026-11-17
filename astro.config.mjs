@@ -7,6 +7,15 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	site: 'https://erpyfactory.github.io',
 	base: '/docs',
+	// The addresses the site had before Get started: each one opens its page today.
+	redirects: {
+		'/quickstart/01-install-the-app': '/docs/get-started/03-link-your-code-host/github/',
+		'/quickstart/02-configure-your-repository': '/docs/get-started/04-add-a-repository/',
+		'/quickstart/03-advanced-settings': '/docs/reference/harness-yaml/',
+		'/quickstart/04-use-erpy-factory': '/docs/work-with-erpy/ask-erpy-from-gitlab-or-github/',
+		'/quickstart/05-automatic-work': '/docs/work-with-erpy/automatic-work/',
+		'/onboarding-checklist': '/docs/reference/onboarding-checklist/',
+	},
 	integrations: [
 		starlight({
 			title: 'Erpy Factory',
@@ -17,7 +26,23 @@ export default defineConfig({
 			sidebar: [
 				{ label: 'What is Erpy Factory', slug: 'index' },
 				{ label: 'Before you start', slug: 'reference/onboarding-checklist' },
-				{ label: 'Get started', items: [{ autogenerate: { directory: 'get-started' } }] },
+				{
+					label: 'Get started',
+					items: [
+						{ slug: 'get-started/01-your-invitation' },
+						{ slug: 'get-started/02-add-your-openrouter-key' },
+						{
+							label: '3. Link your code host',
+							items: [
+								{ slug: 'get-started/03-link-your-code-host/gitlab' },
+								{ slug: 'get-started/03-link-your-code-host/github' },
+							],
+						},
+						{ slug: 'get-started/04-add-a-repository' },
+						{ slug: 'get-started/05-invite-your-team' },
+						{ slug: 'get-started/06-write-your-first-ticket' },
+					],
+				},
 				{
 					label: 'Work with Erpy',
 					items: [

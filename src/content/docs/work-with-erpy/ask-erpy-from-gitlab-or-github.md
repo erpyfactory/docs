@@ -92,11 +92,11 @@ On GitHub, Erpy turns an issue into a pull request in two stages: it writes the 
 
 - Erpy starts the pull request as a draft, and writes its description when the change is ready for review. The description starts with `Closes #N`, and has a summary, the acceptance criteria and an overview of the changes.
 - If you ask Erpy to build an issue whose requirements wait for review, or an issue with no requirements yet, your request counts as the approval: Erpy adds `erpy-prd-ready` and builds.
-- If your organization uses Factory tickets, the same flow runs on the board with buttons, see [Write your first ticket](../../get-started/08-write-your-first-ticket/).
+- If your organization uses Factory tickets, the same flow runs on the board with buttons, see [Write your first ticket](../../get-started/06-write-your-first-ticket/).
 
 ## On GitLab: tickets in Erpy Factory, comments on merge requests
 
-On GitLab, write your tickets in Erpy Factory, see [Write your first ticket](../../get-started/08-write-your-first-ticket/). Requirements written on a GitLab issue cannot be approved, so write your tickets in Erpy Factory. Keep **Factory tickets** under Settings → Tickets.
+On GitLab, write your tickets in Erpy Factory, see [Write your first ticket](../../get-started/06-write-your-first-ticket/). Requirements written on a GitLab issue cannot be approved, so write your tickets in Erpy Factory. Keep **Factory tickets** under Settings → Tickets.
 
 On GitLab, use comments to:
 

@@ -1,5 +1,5 @@
 ---
-title: 8. Write your first ticket
+title: 6. Write your first ticket
 description: Choose where your tickets live, write a ticket, read and approve its PRD, and review the merge request or pull request Erpy opens.
 ---
 
@@ -7,7 +7,7 @@ A ticket describes one change you want. Erpy writes its requirements, you approv
 
 ## Before you start
 
-- Your repository is added and set up: its board shows no **Set up my repo** button. See [Add a repository](../06-add-a-repository/).
+- Your repository is added and set up: its board shows no **Set up my repo** button. See [Add a repository](../04-add-a-repository/).
 - You have the Builder or Admin role in your organization. A Viewer can read tickets, but cannot write, approve or close them.
 - An Admin chose where your tickets live, or left the default. See [Choose where your tickets live](#choose-where-your-tickets-live).
 
