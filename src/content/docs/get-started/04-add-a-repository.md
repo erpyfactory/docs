@@ -105,7 +105,7 @@ If GitLab refused Erpy's labels, the page also says "GitLab refused Erpy’s lab
 
 The answer stays above the list until you reload or leave the page, also once every project is in Factory and the page says "Every project Erpy reaches here is in Factory." Tick more projects to add them.
 
-On Settings → Add repository, each project's name in the answer opens its board. On the setup page, the names are not links: select **Finish**, then open a board from the home. Later, choose the project in the repository switcher in the top bar, next to your organization's name, and open **Board**.
+On the Add repository page you open later, from the home or the repository switcher, each project's name in the answer opens its board. On the setup page, the names are not links: select **Finish**, then open a board from the home. Later, choose the project in the repository switcher in the top bar, next to your organization's name, and open **Board**.
 
 If setup of an empty GitLab project did not start, and the reason is "Something changed while the set-up ran. Try again.", the usual cause is your group's default branch protection: it keeps a Developer from making the first push to an empty project. Don't try again from the board while the project is still empty: there, **Set up my repo** sets up an empty project without the starter you chose. Instead:
 
