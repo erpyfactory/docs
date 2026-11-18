@@ -45,6 +45,7 @@ Erpy replies in the same thread.
 | What you see | What to do |
 |---|---|
 | "I don't know your GitLab account in Erpy for Acme, so I cannot act on your request. If you already use Erpy, connect your GitLab account under Connected accounts in Erpy's account menu. Otherwise ask your Erpy administrator to invite you by email." (On GitHub, it names your GitHub account.) | [Connect your account](#connect-your-account), or ask an Admin to invite you. Then comment again. |
+| "Your access to Erpy for Acme was taken away, so I cannot act on your request. Ask your Erpy administrator if you need it back." | An Admin removed your access. Ask an Admin to give it back. Then comment again. |
 | "Your role in Acme in Erpy is Viewer. Only a Builder or an Admin can ask me to do work. Ask your Erpy administrator to change your role." | Ask an Admin to give you the Builder role. Then comment again. |
 
 Erpy posts one of these once per person on a thread. After that, it says nothing more to that person on the thread, even when the reason changes: fix the cause, then comment again.
