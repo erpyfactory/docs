@@ -89,6 +89,10 @@ The key stays unsaved, and the page shows one of these messages beside **Save**.
 | "OpenRouter did not answer. Try again in a few minutes." | Wait a few minutes, then save it again. |
 | "The key could not be checked. Try again in a few minutes." | Wait a few minutes, then save it again. |
 
+When **Check again** answers that the key has no credit limit, has used up its limit or has too little
+credit, the message ends in "then select Check again." instead of "then save it again.": the key is
+already saved, so fix it at OpenRouter and select **Check again**.
+
 ## If you are not an Admin
 
 Only an Admin can add, replace or remove the key.
@@ -107,7 +111,7 @@ Factory checks the key with OpenRouter. **Status** shows one of these, on Settin
 | What you see | What to do |
 | --- | --- |
 | **Active** | Nothing. The key works. |
-| **Invalid** | OpenRouter refuses the key, or the key no longer has a credit limit. If the limit was removed at OpenRouter, set one again at openrouter.ai/settings/keys, then select **Check again**. Otherwise select **Replace** and save a new API key. |
+| **Invalid** | OpenRouter refuses the key, or the key no longer has a credit limit. The line beside the status says which. "The key has no credit limit at OpenRouter. Set a limit on the key, then select Check again." means the key works: set a limit at openrouter.ai/settings/keys, then select **Check again**. Otherwise select **Replace** and save a new API key. |
 | **No credit** | Add credit at openrouter.ai/settings/credits, then select **Check again**. |
 | **Limit reached** | Raise the key's limit at openrouter.ai/settings/keys, then select **Check again**. |
 
@@ -123,6 +127,8 @@ The reason after "waits:" is one of these:
 
 - "the organization has no OpenRouter key saved";
 - "OpenRouter refuses the organization’s key";
+- "the organization’s OpenRouter key has no credit limit". This line ends "An Admin sets one at
+  OpenRouter, then selects Check again on Settings → Model key." instead;
 - "the organization’s OpenRouter account has no credit left";
 - "the organization’s OpenRouter key has reached its limit".
 
