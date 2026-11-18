@@ -208,6 +208,7 @@ A refused check clears the token field. Fix the cause on GitLab, then paste the 
 | "acme/team is not a top-level group." | Erpy links a top-level group. Check which groups the user is a member of. |
 | "The token's user reaches more than 100 projects. A link covers at most 100." | Make the user Developer of fewer projects on GitLab, 100 at most, then check the token again. |
 | "This group is linked to another organization. It must be removed there first." | An Admin of that organization removes the link first. |
+| "This GitLab user is already linked to another organization. Create another GitLab user for Erpy, or remove that link there first." | The user is in no project yet, and another organization already links it. Create another GitLab user for Erpy and use its token, or ask an Admin of that organization to remove its link first. |
 | "This group is already linked to this organization, through another user. Replace that link's token instead." | Use **Replace token** on the existing link, with a token of that link's user. |
 | "This group is already linked through GitLab's approval screen. Remove that link first." | Remove the existing link of this group, then link it with the token. |
 | "What the token reaches changed since the check. Check the token again." | The user's projects changed in the meantime. Select **Check token** again and read the new preview. |
@@ -236,16 +237,16 @@ Once you have fixed the cause, [replace the token](#replace-the-token): the mark
 Replace the token when the card asks for it, or when you want a fresh one.
 
 1. On GitLab, sign in as Erpy's user and create a new personal access token, as in step 3.
-2. On the link's card, select **Replace token**: on the setup page's **Link code host** step during setup, or on Settings → Links after. The form says "A new token of the same user, or of another user made for Erpy, for acme. The webhooks you added stay."
+2. On the link's card, select **Replace token**: on the setup page's **Link code host** step during setup, or on Settings → Links after. The form says "A new token of acme-erpy, this link's user. The webhooks you added stay."
 3. Paste the new token, select **Check token**, read the preview, and confirm.
 
-Use a token of this link's user. Although the form mentions another user, Erpy accepts only this link's user, and refuses other tokens:
+Use a token of this link's user. Erpy refuses a token of any other user:
 
 | What you see | What to do |
 |---|---|
-| "This token reaches acme-labs, not the group whose token you are replacing. Paste a token of a user in that group." | Create the token as the user of this link. |
-| "This token's user, other-user, is not the user of the link you are replacing, and is in no project yet. Paste a token of that link's user." | Create the token as the user of this link. |
-| "This group is already linked to this organization, through another user. Replace that link's token instead." | The token is another user's. Create the token as the user of this link. |
+| "This token reaches acme-labs, not the group whose token you are replacing. Paste a token of acme-erpy." | Create the token as the user of this link. |
+| "This token's user, other-user, is not the user of the link you are replacing, and is in no project yet. Paste a token of acme-erpy." | Create the token as the user of this link. |
+| "This token's user, other-user, is not the user of the link you are replacing. Paste a token of acme-erpy." | Create the token as the user of this link. |
 
 ## Remove the link
 
