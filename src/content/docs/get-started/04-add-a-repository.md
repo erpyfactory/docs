@@ -14,8 +14,8 @@ You choose which repositories Erpy works on, and Erpy sets each one up. The setu
 
 On a new organization, right after the link, the setup page stays on **Link code host** and offers **Continue**, or **Skip for now** while no GitLab webhook is saved. Either opens the **Add repository** step, which shows the list below in place. The sidebar ticks **Link code host** only once someone has selected one of them. A Viewer sees "An Admin or Builder of Acme adds its first repository." instead. It also names your Admins after "Admins:" when Erpy Factory can list them.
 
-- On GitLab, once you add projects and nothing went wrong, your organization's board opens. Setup is over, and the organization's pages, Settings included, open as usual. If setup did not start, or GitLab refused Erpy's labels, the step stays open with the reason: see [What happens after Add](#what-happens-after-add).
-- On GitHub, the repositories come from the Erpy app's access. If you chose repositories when you installed the app, GitHub sends you straight to the board. Otherwise the step reads again by itself, and once the first repository shows, the board opens.
+- On GitLab, once you add projects, the step stays open with what was added, for example "Added acme/shop to Factory.", and each project's next step: see [What happens after Add](#what-happens-after-add). The sidebar shows all three steps as done. Select **Finish** to open your organization's home. Setup is over, and the organization's pages, Settings included, open as usual. Reloading the step, or opening any setup step's address later, opens the home.
+- On GitHub, the repositories come from the Erpy app's access. If you chose repositories when you installed the app, GitHub sends you straight to your organization's home. Otherwise the step reads again by itself, and once the first repository shows, the home opens.
 
 Later, select **Add repository** on the home page's Repositories card or at the foot of the repository switcher. An organization that removes every repository goes back to the setup page, at its first step not done.
 
@@ -53,7 +53,9 @@ Next to the button, a line says what is missing:
 
 The list shows only the projects Erpy's user is a member of. In GitLab, invite Erpy's user to the project as Developer, or to a group. Erpy checks GitLab every hour, so a new project shows in the list within the hour: reload the page.
 
-To see why a project is missing, select **Check again** under "Not in the list?". The page then says "Erpy is listing acme now. New projects show in the list above within a minute: reload the page." Under **Not usable** the page lists each project Erpy's user reaches but Erpy can't use, with the fix. Here `acme-erpy` stands for Erpy's user and `acme` for your group.
+A group linked through GitLab's approval screen with chosen projects lists only those. The page says "Factory lists only the projects chosen for this link. To add another, install Erpy on acme again and choose it. Factory reads the list again within the hour, or now with Check again." A Viewer reads it without ", or now with Check again".
+
+To see why a project is missing, select **Check again** under "Not in the list?". The page then says "Erpy is listing acme now. New projects show in the list above within a minute: reload the page." For a link with chosen projects, it says "Erpy is listing acme now. This link has chosen projects: install Erpy on acme again and choose a new project to add it." Under **Not usable** the page lists each project Erpy's user reaches but Erpy can't use, with the fix. Here `acme-erpy` stands for Erpy's user and `acme` for your group.
 
 | What you see | What to do |
 |---|---|
@@ -89,7 +91,7 @@ To create a new repository, select **Create a new one on GitHub**, create it, th
 
 ## What happens after Add
 
-On GitLab, the page lists each project you added with what happens next:
+On GitLab, the page says what was added, in green, for example "Added acme/shop to Factory.", "Added acme/shop and acme/crm to Factory." or "Added acme/shop, acme/crm and acme/web to Factory." Below, it lists each project you added with what happens next:
 
 | What you see | What it means |
 |---|---|
@@ -101,9 +103,9 @@ On GitLab, the page lists each project you added with what happens next:
 
 If GitLab refused Erpy's labels, the page also says "GitLab refused Erpy’s labels on one repository: Erpy’s user needs the Developer role there. Erpy tries again every hour." Make Erpy's user Developer of that project.
 
-Select **Add more** to add other projects.
+The answer stays above the list until you reload or leave the page, also once every project is in Factory and the page says "Every project Erpy reaches here is in Factory." Tick more projects to add them.
 
-Each project's name in the list opens its board. Later, choose the project in the repository switcher in the top bar, next to your organization's name, and open **Board**.
+On Settings → Add repository, each project's name in the answer opens its board. On the setup page, the names are not links: select **Finish**, then open a board from the home. Later, choose the project in the repository switcher in the top bar, next to your organization's name, and open **Board**.
 
 If setup of an empty GitLab project did not start, and the reason is "Something changed while the set-up ran. Try again.", the usual cause is your group's default branch protection: it keeps a Developer from making the first push to an empty project. Don't try again from the board while the project is still empty: there, **Set up my repo** sets up an empty project without the starter you chose. Instead:
 
