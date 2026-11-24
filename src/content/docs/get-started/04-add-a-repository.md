@@ -122,7 +122,7 @@ If the reason reads "GitLab did not let Erpy open the starter merge request in g
 2. Erpy then plans the configuration and opens the setup merge request, titled "Configure this repository for Erpy Factory".
 3. You review the merge request and merge it.
 
-On GitLab, the starter's CI is a `.gitlab-ci.yml` whose job has no runner tags. gitlab.com runs untagged jobs on its hosted runners, unless your group has runners of its own that take them, and that time counts toward your group's compute minutes.
+On GitLab, the starter's CI is a `.gitlab-ci.yml` whose job has no runner tags. gitlab.com runs untagged jobs on its hosted runners, unless your group has runners of its own that take them, and that time counts toward your group's compute minutes. If its pipeline fails without running a job, GitLab may be asking Erpy's user to verify its account: see [Create a user for Erpy](../03-link-your-code-host/gitlab/#steps).
 
 Watch the progress on the project's board: once Erpy has opened the setup ticket, the board shows "Setup in progress — view ticket". Select it to follow the ticket.
 
