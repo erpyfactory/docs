@@ -33,7 +33,7 @@ The form shows a numbered list of three steps, one per row, and a token field nu
    - It needs its own email address, one no other GitLab account uses.
    - On a paid GitLab plan, it takes a seat in your group, like any member with the Developer role.
    - If your group enforces two-factor authentication, set it up for this user too, with an authenticator app or a security key. Email codes don't count.
-   - On GitLab's Free plan, when your CI runs on GitLab's own runners, GitLab may ask this user to verify its account: an email address, a phone number or a payment method, depending on the account. If it does, this user's pipelines fail without running a job until the account is verified. GitLab shows a banner with **Verify my account**: sign in as Erpy's user and follow it. Then push a commit, or run a new pipeline on the merge request. A paid plan, bought compute minutes, or your own runners avoid it.
+   - On GitLab's Free plan, when your CI runs on GitLab's own runners, GitLab may ask this user to verify its account: an email address, a phone number or a payment method, depending on the account. If it does, this user's pipelines fail without running a job until the account is verified. GitLab shows a banner with **Verify my account**: sign in as Erpy's user and follow it. Then push a commit, or run a new pipeline on the merge request's branch. A paid plan, bought compute minutes, or your own runners avoid it.
 2. **Make it Developer.** Add the user as **Developer** to a group, which gives it every project in the group and its subgroups, or to single projects (**Manage → Members** in GitLab). Keep these rules:
    - Developer only, never Maintainer or Owner.
    - Projects of one top-level group only.
@@ -145,7 +145,7 @@ On the link's card, open the **Webhooks** section. It is open by itself while no
 
    Then select **Add webhook**.
 4. **Paste the signing token in Erpy Factory.** Under "3. Paste its signing token here":
-   - In **Webhook**, choose **Group webhook**, or the project the webhook belongs to. **Webhook** lists at most 50 projects. To choose any project, select **Paste its signing token** next to it in the list above.
+   - In **Webhook**, choose **Group webhook**, or the project the webhook belongs to. **Webhook** lists at most 50 projects. To choose one it doesn't list, select **Paste its signing token** next to it in the list above.
    - Paste the token into **Signing token** and select **Save**.
 
    The page says "Signing token saved for the group webhook. Erpy accepts its deliveries now. Use GitLab's Test button to send one." For a project webhook, it names the project as **Webhook** does, for example "Signing token saved for acme/shop. Erpy accepts its deliveries now. Use GitLab's Test button to send one." **Webhook** stays on the saved webhook, and the **Signing token** field then reads "Saved. Paste a new token only to replace it."
