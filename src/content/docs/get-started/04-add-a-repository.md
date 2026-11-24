@@ -141,7 +141,7 @@ While the setup ticket is open, the board shows "Setup in progress — view tick
 On GitLab, a project that holds only a README, a licence file (`LICENSE`, `LICENCE` or `COPYING`, with any ending) or the git files `.gitignore`, `.gitattributes` and `.editorconfig` has no code yet. Any directory counts as code.
 
 1. Select **Set up my repo** on the project's board. If the project was listed as empty and had a README by the time you selected **Add**, Erpy does this at once and the page says "No code yet: …".
-2. Erpy opens a merge request with a starter: one test and CI. The board shows "Waiting for merge request !12" and "Erpy opened a merge request with a starter. Merge it on GitLab; setup then starts by itself." There is no **Set up my repo** button while it waits.
+2. Erpy opens a merge request with a starter: one test and CI. The board shows "Waiting for merge request !12" and "Erpy opened a merge request with a starter. Merge it on GitLab; setup then starts by itself." There is no **Set up my repo** button while it waits. If that merge request's pipeline fails without running a job, see [Create a user for Erpy](../03-link-your-code-host/gitlab/#steps).
 3. Merge the merge request. Setup then starts by itself, and opens the setup merge request.
 
 ## What the setup merge request holds
