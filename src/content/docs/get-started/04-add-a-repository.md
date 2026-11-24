@@ -122,7 +122,7 @@ If the reason reads "GitLab did not let Erpy open the starter merge request in g
 2. Erpy then plans the configuration and opens the setup merge request, titled "Configure this repository for Erpy Factory".
 3. You review the merge request and merge it.
 
-On GitLab, the starter's CI is a `.gitlab-ci.yml` whose job has no runner tags. gitlab.com runs untagged jobs on its hosted runners, unless your group has runners of its own that take them, and that time counts toward your group's compute minutes.
+On GitLab, the starter's CI is a `.gitlab-ci.yml` whose job has no runner tags. gitlab.com runs untagged jobs on its hosted runners, unless your group has runners of its own that take them, and that time counts toward your group's compute minutes. If its pipeline fails without running a job, GitLab may be asking Erpy's user to verify its account: see [Create a user for Erpy](../03-link-your-code-host/gitlab/#steps).
 
 Watch the progress on the project's board: once Erpy has opened the setup ticket, the board shows "Setup in progress — view ticket". Select it to follow the ticket.
 
@@ -141,7 +141,7 @@ While the setup ticket is open, the board shows "Setup in progress — view tick
 On GitLab, a project that holds only a README, a licence file (`LICENSE`, `LICENCE` or `COPYING`, with any ending) or the git files `.gitignore`, `.gitattributes` and `.editorconfig` has no code yet. Any directory counts as code.
 
 1. Select **Set up my repo** on the project's board. If the project was listed as empty and had a README by the time you selected **Add**, Erpy does this at once and the page says "No code yet: …".
-2. Erpy opens a merge request with a starter: one test and CI. The board shows "Waiting for merge request !12" and "Erpy opened a merge request with a starter. Merge it on GitLab; setup then starts by itself." There is no **Set up my repo** button while it waits.
+2. Erpy opens a merge request with a starter: one test and CI. The board shows "Waiting for merge request !12" and "Erpy opened a merge request with a starter. Merge it on GitLab; setup then starts by itself." There is no **Set up my repo** button while it waits. If that merge request's pipeline fails without running a job, see [Create a user for Erpy](../03-link-your-code-host/gitlab/#steps).
 3. Merge the merge request. Setup then starts by itself, and opens the setup merge request.
 
 ## What the setup merge request holds

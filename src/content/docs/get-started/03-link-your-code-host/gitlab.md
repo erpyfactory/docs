@@ -33,6 +33,7 @@ The form shows a numbered list of three steps, one per row, and a token field nu
    - It needs its own email address, one no other GitLab account uses.
    - On a paid GitLab plan, it takes a seat in your group, like any member with the Developer role.
    - If your group enforces two-factor authentication, set it up for this user too, with an authenticator app or a security key. Email codes don't count.
+   - On GitLab's Free plan, when your CI runs on GitLab's own runners, GitLab may ask this user to verify its account: an email address, a phone number or a payment method, depending on the account. If it does, this user's pipelines fail without running a job until the account is verified. GitLab shows a banner with **Verify my account**: sign in as Erpy's user and follow it. Then push a commit, or run a new pipeline on the merge request. A paid plan, bought compute minutes, or your own runners avoid it.
 2. **Make it Developer.** Add the user as **Developer** to a group, which gives it every project in the group and its subgroups, or to single projects (**Manage → Members** in GitLab). Keep these rules:
    - Developer only, never Maintainer or Owner.
    - Projects of one top-level group only.
