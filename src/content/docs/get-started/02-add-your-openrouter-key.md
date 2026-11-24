@@ -88,6 +88,7 @@ The key stays unsaved, and the page shows one of these messages beside **Save**.
 | "This organization is not known to Factory. Reload the page and try again." | Reload the page and try again. |
 | "OpenRouter did not answer. Try again in a few minutes." | Wait a few minutes, then save it again. |
 | "The key could not be checked. Try again in a few minutes." | Wait a few minutes, then save it again. |
+| "Another admin changed this key at the same moment, and their change is the one in use. Reload the page to see it." | Reload the page. The key it shows is the one in use. |
 
 When **Check again** answers that the key has no credit limit, has used up its limit or has too little
 credit, the message ends in "then select Check again." instead of "then save it again.": the key is
@@ -142,5 +143,5 @@ Once setup is over, an Admin has three buttons on Settings → Model key. During
 - **Check again**: Factory asks OpenRouter about the key now, and the page updates its facts. Use it
   after you add credit or raise the limit.
 - **Replace**: the key field comes back. Paste the new key and select **Save**, or **Cancel**.
-- **Remove**: the dialog asks "Remove the OpenRouter key?" and says "Factory deletes the key at once.
-  DeepSeek tickets wait until a new key is set." Select **Remove** to confirm.
+- **Remove**: the dialog asks "Remove the OpenRouter key?" and says "DeepSeek tickets wait until a new key is set.
+  Builds already running finish on this key; Factory deletes it 12 hours later. To stop them at once, revoke the key at OpenRouter." Select **Remove** to confirm.

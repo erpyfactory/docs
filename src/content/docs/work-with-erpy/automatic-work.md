@@ -29,11 +29,9 @@ To give it back to Erpy, add the `erpy-factory` label again. Erpy then repairs o
 
 ## How long it lasts
 
-**On GitLab**, the `erpy-factory` label stays on a merge request until you remove it, and Erpy keeps working on it on its own while it carries the label.
+Pull requests and merge requests are meant to be merged. Erpy keeps working on one on its own, while it carries the `erpy-factory` label, for seven days after the last time it worked on the change itself: building it, following up on a review that asks for changes, filming its screen recordings or revising its design. Repairing checks and resolving conflicts do not start the seven days again, and neither does a push or a comment from you, unless it leads Erpy to one of those. So a pull request or merge request that is still going through review rounds stays with Erpy.
 
-**On GitHub**, pull requests are meant to be merged. Erpy keeps working on a pull request on its own for seven days after the last time it worked on the change itself: building it, following up on a review that asks for changes, filming its screen recordings or revising its design. Repairing checks and resolving conflicts do not start the seven days again, and neither does a push or a comment from you, unless it leads Erpy to one of those. So a pull request that is still going through review rounds stays with Erpy.
-
-On GitHub, a pull request that is not merged in that time is treated as no longer important. The `erpy-factory` label comes off it, within about an hour, and Erpy stops its automatic work on it. The pull request stays open, and its ticket shows "Stopped" on the board. You can bring the pull request back to Erpy.
+A pull request or merge request that is not merged in that time is treated as no longer important. The `erpy-factory` label comes off it, within about an hour, and Erpy stops its automatic work on it. It stays open. On GitHub, its ticket shows "Stopped" on the board. On GitLab, the ticket shows "Stopped" only in a project with a webhook; without one the label still comes off, but the card shows no "Stopped". On GitHub, you can bring the pull request back to Erpy.
 
 ## Bring a pull request back to Erpy (GitHub)
 

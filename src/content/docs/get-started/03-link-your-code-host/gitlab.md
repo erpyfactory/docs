@@ -79,7 +79,7 @@ The form shows a numbered list of three steps, one per row, and a token field nu
 Erpy's user is Developer of projects, so create the first project before you link:
 
 1. **Create the project in GitLab**, in your group.
-   - On GitLab Free, tick "Initialize repository with a README". On Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project already has its first commit, and you set it up with **Set up my repo**, without a starter.
+   - On GitLab Free, tick "Initialize repository with a README". On Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project already has its first commit. Add lists it as "No harness.yaml yet", and **Set up my repo** on its board opens a merge request with a starter: merge it, and setup then starts by itself.
    - On GitLab Premium or Ultimate, you can leave "Initialize repository with a README" off, so Erpy sets the empty project up with a starter. First check the group's **Settings → Repository → Default branch → Initial default branch protection**: **Fully protected after initial push**, **Partially protected** or **Not protected** lets a Developer make the first push. With **Fully protected**, tick the README box, as on Free.
 2. **Make Erpy's user Developer** of the group, or of the new project, as in step 2.
 3. **Link** as in steps 3 to 6. The preview's **Group** row now shows your group, and the card is marked "Active".
@@ -157,7 +157,7 @@ For webhooks per project, repeat steps 2 to 5 for each project Erpy works on.
 ### Check the webhooks
 
 - As soon as you save, the **Webhooks** line on the card says "A group webhook is saved." or "Project webhooks are saved. Add one for each project Erpy works on." Before you save one it says "No webhook yet. Until you add one, Erpy checks GitLab every 5 minutes."
-- Each project in the list shows "Waiting for first event. Erpy checks GitLab every 5 minutes meanwhile." until a webhook has delivered an event for that project, then "Receiving events". Only events of projects you have added in [4. Add a repository](../../04-add-a-repository/) count, so a test sent before you add the project gets a `200` on GitLab but doesn't change this line. The list is refreshed every hour, so "Receiving events" can take up to an hour to show.
+- Each project in the list shows "Waiting for first event. Erpy checks GitLab every 5 minutes meanwhile." until a webhook has delivered an event for that project, then "Receiving events". Only events of projects you have added in [4. Add a repository](../../04-add-a-repository/) count, so a test sent before you add the project gets a `200` on GitLab but doesn't change this line. A project you have not added reads "Not in Factory yet: Erpy ignores its events until you add it on Add repository." The list is refreshed every hour, so "Receiving events" can take up to an hour to show.
 - A test sends one event, so it turns one project at most. With a group webhook, each other project turns to "Receiving events" after something happens in it, such as a push or a comment.
 
 ### What to expect from webhooks
@@ -206,7 +206,6 @@ A refused check clears the token field. Fix the cause on GitLab, then paste the 
 | "The token's user is Reporter or Guest of its projects. Make it Developer of the projects Erpy should work on, then check again." | Raise the user to Developer on the projects Erpy should work on. |
 | "The token's user is in projects of more than one top-level group (acme, acme-labs). A link covers one group: keep the user in one." | Remove the user from the projects of every top-level group but one. |
 | "acme/team is not a top-level group." | Erpy links a top-level group. Check which groups the user is a member of. |
-| "The token's user reaches more than 100 projects. A link covers at most 100." | Make the user Developer of fewer projects on GitLab, 100 at most, then check the token again. |
 | "This group is linked to another organization. It must be removed there first." | An Admin of that organization removes the link first. |
 | "This GitLab user is already linked to another organization. Create another GitLab user for Erpy, or remove that link there first." | The user is in no project yet, and another organization already links it. Create another GitLab user for Erpy and use its token, or ask an Admin of that organization to remove its link first. |
 | "This group is already linked to this organization, through another user. Replace that link's token instead." | Use **Replace token** on the existing link, with a token of that link's user. |
@@ -222,15 +221,16 @@ A refused check clears the token field. Fix the cause on GitLab, then paste the 
 
 Erpy checks every link each hour. When something is wrong, the card is marked "Needs attention" and says what to do. Your organization's home page shows the same line; with more than one link, it shows only one link's line.
 
-Once you have fixed the cause, [replace the token](#replace-the-token): the mark stays until you do. The Maintainer or Owner warning is the exception: it clears by itself within the hour.
+Four of these clear by themselves once the cause is fixed: a blocked or deactivated user, a user who is Maintainer or Owner, a user who is no longer Developer of any project, and silent webhooks. Only a token GitLab no longer accepts, or one it did not let Erpy renew, needs [Replace token](#replace-the-token).
 
 | What you see | What to do |
 |---|---|
 | "Erpy's GitLab user is Maintainer or Owner somewhere. Lower it to Developer; Erpy checks again each hour and starts again by itself." | Change the user's role to Developer on GitLab. Erpy clears the warning within the hour, with no new token. |
 | "GitLab did not let Erpy renew the token, which expires within 60 days. Replace it before then." | [Replace the token](#replace-the-token) before it expires. |
-| "Erpy's GitLab user is no longer Developer of any project in the group. Add it back to the projects, or replace the token." | Add the user back as Developer on GitLab, then [replace the token](#replace-the-token). Adding the user back alone doesn't clear the mark. |
-| "GitLab has stopped sending webhooks. Check the webhooks below on GitLab." | Open the group's or projects' **Settings → Webhooks** on GitLab and check that the webhooks are still there and enabled. See [Add the webhooks](#add-the-webhooks). Then [replace the token](#replace-the-token): fixing the webhooks alone doesn't clear the mark. |
+| "Erpy's GitLab user is no longer Developer of any project in the group. Add it back as Developer; Erpy checks again each hour and starts again by itself." | Add the user back as Developer on GitLab. Erpy clears the warning within the hour, with no new token. |
+| "GitLab has stopped sending webhooks." | Open the group's or projects' **Settings → Webhooks** on GitLab and check that the webhooks are still there and enabled. See [Add the webhooks](#add-the-webhooks). The warning clears by itself once they deliver again, with no new token. |
 | "GitLab no longer accepts the token. Replace it." | [Replace the token](#replace-the-token). |
+| "GitLab has blocked or deactivated Erpy's GitLab user. Get it unblocked, or sign in to GitLab as that user to reactivate it; Erpy checks again each hour and starts again by itself." | Get the user unblocked in GitLab, or sign in as that user to reactivate it. Erpy clears the warning within the hour, with no new token. |
 
 ## Replace the token
 

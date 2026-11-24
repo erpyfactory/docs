@@ -38,7 +38,7 @@ The page lists the projects in your group that Erpy's user reaches as Developer 
    | **Python service** | "FastAPI, tested with pytest" |
    | **Something else** | "Say what in one line" |
 
-   The configuration covers Odoo projects today. For an Odoo project, choose **Odoo module**. Erpy then lays out one Odoo module at the root of the project, in a folder named after the project (for example `coffee_rental` for `coffee-rental`), with its manifest and one test.
+   Only **Odoo module** can be chosen today: the other three are greyed out and say "Coming soon". Erpy lays out one Odoo module at the root of the project, in a folder named after the project (for example `coffee_rental` for `coffee-rental`), with its manifest and one test.
 3. Select **Add** (or **Add 3 repositories**, with the number you ticked).
 
 Next to the button, a line says what is missing:
@@ -70,7 +70,7 @@ If nothing is wrong, the page says "acme-erpy reaches no project that Erpy canno
 
 1. On the Add repository page, select **Create a new one on GitLab**. GitLab's new-project page opens in a new tab.
 2. Decide on the README box. The Add repository page says to leave "Initialize repository with a README" off; that works only where Erpy's user may make the first push.
-   - On GitLab Free, tick "Initialize repository with a README". On Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project has its first commit, so it shows without the **Empty** badge, and you set it up with **Set up my repo**, without a starter.
+   - On GitLab Free, tick "Initialize repository with a README". On Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project has its first commit, so it shows without the **Empty** badge. Add lists it as "No harness.yaml yet", and **Set up my repo** on its board opens a merge request with a starter: merge it, and setup then starts by itself.
    - On GitLab Premium or Ultimate, check your group's **Settings → Repository → Default branch → Initial default branch protection**. **Fully protected after initial push**, **Partially protected** or **Not protected** lets Erpy's user, a Developer, make the first commit: leave the README off, and Erpy sets the empty project up with a starter. With **Fully protected**, tick the README box, as on Free.
 3. Create the project.
 4. Invite Erpy's user to the project as Developer, unless it is already a member of the whole group.
@@ -97,7 +97,9 @@ On GitLab, the page says what was added, in green, for example "Added acme/shop 
 |---|---|
 | "Has harness.yaml: ready for tickets." | The project is set up. Write a ticket. |
 | "No harness.yaml yet: its board shows Set up my repo." | Open its board and select **Set up my repo**. See [An existing project](#an-existing-project). |
-| "Empty: Factory is setting it up as Odoo module: a first commit with a test and CI, then a setup pull request with harness.yaml." (a merge request on GitLab) | Erpy is setting up the empty project. See [An empty project](#an-empty-project). |
+| "Empty: Factory committed a starter for Odoo module (one test and CI). A setup merge request with harness.yaml follows." | Erpy is setting up the empty project. See [An empty project](#an-empty-project). |
+| "No code yet: Erpy opened merge request !12 with a starter for Odoo module (one test and CI). Merge it; setup then starts by itself." | The project had only a README when you added it. Merge the starter's merge request. See [A project with no code yet](#a-project-with-no-code-yet). |
+| "Already has code: Factory sets it up from what is there, then a setup merge request with harness.yaml." | Erpy is setting up the project. See [An existing project](#an-existing-project). |
 | "Empty: setup did not start." followed by the reason | Do what the reason says. |
 | "Its board says whether it needs setup." | Open its board. |
 
@@ -107,10 +109,12 @@ The answer stays above the list until you reload or leave the page, also once ev
 
 On the Add repository page you open later, from the home or the repository switcher, each project's name in the answer opens its board. On the setup page, the names are not links: select **Finish**, then open a board from the home. Later, choose the project in the repository switcher in the top bar, next to your organization's name, and open **Board**.
 
-If setup of an empty GitLab project did not start, and the reason is "Something changed while the set-up ran. Try again.", the usual cause is your group's default branch protection: it keeps a Developer from making the first push to an empty project. Don't try again from the board while the project is still empty: there, **Set up my repo** sets up an empty project without the starter you chose. Instead:
+If setup of an empty GitLab project did not start, the reason usually reads "GitLab did not let Erpy make the first commit in gitlab.com/acme/shop. Add a README on GitLab (Add file → New file, README.md), then select Set up my repo on its board; Erpy then opens a merge request with the starter." The usual cause is your group's default branch protection: it keeps a Developer from making the first push to an empty project. Do what the reason says:
 
 1. On GitLab, add a README to the project (**Add file → New file**, `README.md`), and commit it.
-2. Open the project's board and select **Set up my repo**. The project is set up without a starter.
+2. Open the project's board and select **Set up my repo**. Erpy opens a merge request with a starter. Merge it, and setup then starts by itself.
+
+If the reason reads "GitLab did not let Erpy open the starter merge request in gitlab.com/acme/shop: Erpy's user needs the Developer role there.", make Erpy's user Developer of the project.
 
 ### An empty project
 
@@ -124,13 +128,21 @@ Watch the progress on the project's board: once Erpy has opened the setup ticket
 
 ### An existing project
 
-A project with code and no `harness.yaml` shows **Set up my repo** on its board: "Erpy reads your repository and opens a merge request that adds its settings. You merge it." (a pull request on GitHub).
+A project with code and no `harness.yaml` shows **Set up my repo** on its board: "Erpy reads your repository and opens a merge request that adds its settings. You merge it." (a pull request on GitHub). A project with only a README, a licence file or git files has no code yet: see [A project with no code yet](#a-project-with-no-code-yet). (a pull request on GitHub).
 
 1. Select **Set up my repo**. Factory opens the setup ticket, "Set up" followed by the project's name.
 2. Erpy reads the repository and plans its configuration (Configuration planning), then opens the setup merge request (Repository configuration). You don't approve the plan first.
 3. Review the merge request, and merge it when it looks right.
 
 While the setup ticket is open, the board shows "Setup in progress — view ticket" instead of the button.
+
+### A project with no code yet
+
+On GitLab, a project that holds only a README, a licence file (`LICENSE`, `LICENCE` or `COPYING`, with any ending) or the git files `.gitignore`, `.gitattributes` and `.editorconfig` has no code yet. Any directory counts as code.
+
+1. Select **Set up my repo** on the project's board. If the project was listed as empty and had a README by the time you selected **Add**, Erpy does this at once and the page says "No code yet: …".
+2. Erpy opens a merge request with a starter: one test and CI. The board shows "Waiting for merge request !12" and "Erpy opened a merge request with a starter. Merge it on GitLab; setup then starts by itself." There is no **Set up my repo** button while it waits.
+3. Merge the merge request. Setup then starts by itself, and opens the setup merge request.
 
 ## What the setup merge request holds
 

@@ -1,6 +1,6 @@
 ---
 title: 6. Write your first ticket
-description: Choose where your tickets live, write a ticket, read and approve its PRD, and review the merge request or pull request Erpy opens.
+description: Write a ticket, read and approve its PRD, and review the merge request or pull request Erpy opens.
 ---
 
 A ticket describes one change you want. Erpy writes its requirements, you approve them, and Erpy builds the change and opens a merge request (on GitLab) or a pull request (on GitHub). You review it and you merge it.
@@ -9,26 +9,8 @@ A ticket describes one change you want. Erpy writes its requirements, you approv
 
 - Your repository is added and set up: its board shows no **Set up my repo** button. See [Add a repository](../04-add-a-repository/).
 - You have the Builder or Admin role in your organization. A Viewer can read tickets, but cannot write, approve or close them.
-- An Admin chose where your tickets live, or left the default. See [Choose where your tickets live](#choose-where-your-tickets-live).
 
-## Choose where your tickets live
-
-Settings → Tickets sets where people in your organization file and follow their work. It shows two choices:
-
-| Choice | What the screen says |
-|---|---|
-| **Factory tickets** | "People file work in Factory, as T-1, T-2 and so on. Nothing appears in the forge’s issues." |
-| **GitLab issues** (on GitHub: **GitHub issues**) | "People file and discuss work as GitLab issues. Factory reads and writes them there." |
-
-Factory tickets are the default. Until an Admin saves a choice, the page says "Not chosen yet. Until an Admin saves a choice, the organization uses Factory tickets."
-
-Only an Admin can change the choice: choose one and select **Save**. The page says "Saved." Everyone else sees the choice, with "Only an Admin of this organization can change this."
-
-**On GitLab, keep Factory tickets.** Requirements written on a GitLab issue cannot be approved, not on GitLab and not in Erpy Factory, and without an approval Erpy builds nothing. Requirements on a Factory ticket are approved with **Approve PRD**. So on GitLab, write your tickets in Erpy Factory, and use GitLab comments for questions and for more work on a merge request, see [Ask Erpy from GitLab or GitHub](../../work-with-erpy/ask-erpy-from-gitlab-or-github/).
-
-**On GitHub**, both choices work. With GitHub issues, you approve the requirements in a comment on the issue, see [Ask Erpy from GitLab or GitHub](../../work-with-erpy/ask-erpy-from-gitlab-or-github/).
-
-Whatever the choice, **New ticket** on the board always makes a Factory ticket (T-1, T-2 and so on).
+**New ticket** on the board makes a Factory ticket (T-1, T-2 and so on). You approve its requirements with **Approve PRD**. On GitLab, use comments for questions and for more work on a merge request, see [Ask Erpy from GitLab or GitHub](../../work-with-erpy/ask-erpy-from-gitlab-or-github/).
 
 ## Steps
 
@@ -104,7 +86,7 @@ Above the board, **All**, **Blocking**, **Needs you** and **Fixes** choose which
 |---|---|---|
 | A task marked "paused", with "Resumes automatically" | The work is paused on Erpy's side. It continues on its own. | Nothing. |
 | "Paused until {branch}'s tests are fixed" on a card, where `{branch}` is your base branch, for example "Paused until 19.0's tests are fixed" | The base branch already fails these tests. Erpy fixes the base branch in a separate merge request or pull request, and continues here on its own once that is merged. | Review and merge the fix. See [Automatic work](../../work-with-erpy/automatic-work/). |
-| "Stopped" and a date on a card, under the **Stopped** heading | GitHub only. The ticket's open pull requests no longer carry the `erpy-factory` label: someone removed it, or Erpy had not worked on the change itself for seven days. Erpy does no automatic work on them. On GitLab, a card shows no "Stopped", also after you remove the label. | Add the `erpy-factory` label again, or ask for work in a comment that mentions `@erpyai`. See [Automatic work](../../work-with-erpy/automatic-work/). |
+| "Stopped" and a date on a card, under the **Stopped** heading | The ticket's open pull requests or merge requests no longer carry the `erpy-factory` label: someone removed it, or Erpy had not worked on the change itself for seven days. Erpy does no automatic work on them. On GitLab, the card shows "Stopped" only in a project with a webhook. Without one the label still comes off, but the card shows no "Stopped". The card's hint reads "Stopped on {date}. Hand back with an @erpyai comment." | Add the `erpy-factory` label again, or ask for work in a comment that mentions `@erpyai`. See [Automatic work](../../work-with-erpy/automatic-work/). |
 | "Snoozed until" and a date on a card | Someone snoozed the ticket off the board until that date. | Select **Unsnooze** to bring it back now. |
 
 Stopped cards show only while the **Stopped** chip above the board is on. Snoozed cards show only while the **Snoozed** chip is on.
