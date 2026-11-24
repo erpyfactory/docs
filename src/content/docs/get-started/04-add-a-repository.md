@@ -124,7 +124,7 @@ If the reason reads "GitLab did not let Erpy open the starter merge request in g
 
 On GitLab, the starter's CI is a `.gitlab-ci.yml` whose job has no runner tags. gitlab.com runs untagged jobs on its hosted runners, unless your group has runners of its own that take them, and that time counts toward your group's compute minutes. If its pipeline fails without running a job, GitLab may be asking Erpy's user to verify its account: see [Create a user for Erpy](../03-link-your-code-host/gitlab/#steps).
 
-Watch the progress on the project's board: once Erpy has opened the setup ticket, the board shows "Setup in progress — view ticket". Select it to follow the ticket.
+Watch the progress on the project's board: once Erpy has opened the setup ticket, the board shows "Setup in progress — view ticket". Select it to follow the ticket. If the board keeps showing "Setup hasn't started — view ticket", open the ticket and select **Set up my repo**.
 
 ### An existing project
 
@@ -134,7 +134,7 @@ A project with code and no `harness.yaml` shows **Set up my repo** on its board:
 2. Erpy reads the repository and plans its configuration (Configuration planning), then opens the setup merge request (Repository configuration). You don't approve the plan first.
 3. Review the merge request, and merge it when it looks right.
 
-While the setup ticket is open, the board shows "Setup in progress — view ticket" instead of the button.
+While the setup ticket is open, the board shows "Setup in progress — view ticket" instead of the button, or "Setup hasn't started — view ticket" while no work was started for the ticket.
 
 ### A project with no code yet
 
