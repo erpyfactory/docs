@@ -79,7 +79,7 @@ The form shows a numbered list of three steps, one per row, and a token field nu
 Erpy's user is Developer of projects, so create the first project before you link:
 
 1. **Create the project in GitLab**, in your group.
-   - On GitLab Free, tick "Initialize repository with a README". On Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project already has its first commit. Add lists it as "No harness.yaml yet", and **Set up my repo** on its board opens a merge request with a starter: merge it, and setup then starts by itself.
+   - On GitLab Free, tick "Initialize repository with a README". On Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project already has its first commit. Add answers "No harness.yaml yet: its board shows Set up my repo.", and **Set up my repo** on its board opens a merge request with a starter: merge it, and setup then starts by itself.
    - On GitLab Premium or Ultimate, you can leave "Initialize repository with a README" off, so Erpy sets the empty project up with a starter. First check the group's **Settings → Repository → Default branch → Initial default branch protection**: **Fully protected after initial push**, **Partially protected** or **Not protected** lets a Developer make the first push. With **Fully protected**, tick the README box, as on Free.
 2. **Make Erpy's user Developer** of the group, or of the new project, as in step 2.
 3. **Link** as in steps 3 to 6. The preview's **Group** row now shows your group, and the card is marked "Active".
@@ -228,7 +228,7 @@ Four of these clear by themselves once the cause is fixed: a blocked or deactiva
 | "Erpy's GitLab user is Maintainer or Owner somewhere. Lower it to Developer; Erpy checks again each hour and starts again by itself." | Change the user's role to Developer on GitLab. Erpy clears the warning within the hour, with no new token. |
 | "GitLab did not let Erpy renew the token, which expires within 60 days. Replace it before then." | [Replace the token](#replace-the-token) before it expires. |
 | "Erpy's GitLab user is no longer Developer of any project in the group. Add it back as Developer; Erpy checks again each hour and starts again by itself." | Add the user back as Developer on GitLab. Erpy clears the warning within the hour, with no new token. |
-| "GitLab has stopped sending webhooks." | Open the group's or projects' **Settings → Webhooks** on GitLab and check that the webhooks are still there and enabled. See [Add the webhooks](#add-the-webhooks). The warning clears by itself once they deliver again, with no new token. |
+| "GitLab has stopped sending webhooks. …" | Open the group's or projects' **Settings → Webhooks** on GitLab and check that the webhooks are still there and enabled. See [Add the webhooks](#add-the-webhooks). The warning clears by itself once they deliver again, with no new token. |
 | "GitLab no longer accepts the token. Replace it." | [Replace the token](#replace-the-token). |
 | "GitLab has blocked or deactivated Erpy's GitLab user. Get it unblocked, or sign in to GitLab as that user to reactivate it; Erpy checks again each hour and starts again by itself." | Get the user unblocked in GitLab, or sign in as that user to reactivate it. Erpy clears the warning within the hour, with no new token. |
 
