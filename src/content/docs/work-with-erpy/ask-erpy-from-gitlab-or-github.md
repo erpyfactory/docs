@@ -33,7 +33,7 @@ To undo it, select **Disconnect**.
 
 Mention Erpy in a comment on an issue, or on a merge request (GitLab) or pull request (GitHub), in a repository Erpy works on.
 
-- **On GitLab**, write `@erpyai`, or the username of your organization's own Erpy user, the GitLab user you created for Erpy. Write it exactly: on GitLab, Erpy does not answer a misspelled name.
+- **On GitLab**, write `@erpyai`, or the username of your organization's own Erpy user, the GitLab user you created for Erpy. A misspelt name, such as `@erpyd` or `@erpy`, is answered too, with a last line that asks you to write `@erpyai`.
 - **On GitHub**, write `@erpyai`.
 
 On GitLab, `@erpyai` needs no GitLab user: it is not the Erpy user you created, and you add no user for it. Erpy reads the text of each comment, through your webhooks as soon as you post it, or within 5 minutes in a project that has no webhook yet. GitLab may not show `@erpyai` as a link; Erpy reads the comment all the same.
@@ -97,7 +97,7 @@ On GitHub, Erpy turns an issue into a pull request in two stages: it writes the 
 
 ## On GitLab: tickets in Erpy Factory, comments on merge requests
 
-On GitLab, write your tickets in Erpy Factory, see [Write your first ticket](../../get-started/06-write-your-first-ticket/). Requirements written on a GitLab issue cannot be approved, so write your tickets in Erpy Factory. Keep **Factory tickets** under Settings → Tickets.
+On GitLab, write your tickets in Erpy Factory, see [Write your first ticket](../../get-started/06-write-your-first-ticket/).
 
 On GitLab, use comments to:
 
@@ -154,18 +154,18 @@ On a closed or merged merge request or pull request, or a closed issue, Erpy sta
 
 | Where | What Erpy replies |
 |---|---|
-| A merged merge request | "Merge request !12 is already merged, so I start no new work on it. Open an issue for the change you need, or ask me here how or why it was done." |
+| A merged merge request | "Merge request !12 is already merged, so I start no new work on it. Write a new ticket on the board for the change you need, or ask me here how or why it was done." |
 | A closed merge request | "Merge request !12 is closed, so I start no work on it. Reopen it and ask again, or ask me here how or why it was done." |
 | A merged pull request | "Pull request #12 is already merged, so I start no new work on it. Open an issue for the change you need, or ask me here how or why it was done." |
 | A closed pull request | "Pull request #12 is closed, so I start no work on it. Reopen it and ask again, or ask me here how or why it was done." |
 | A closed issue | "Issue #12 is closed, so I start no work on it. Reopen it and ask again, or ask me here how or why it was done." |
 
-The reply says to open an issue. On GitLab, write a new ticket on the board instead: requirements on a GitLab issue cannot be approved.
+On GitHub, the reply to a merged pull request says to open an issue. On GitLab, it says to write a new ticket on the board.
 
 ## What to expect
 
 - If the change touches code that is broken, Erpy fixes it in the same merge request or pull request, and opens no follow-up issue for it. A test that already fails on the base branch is the exception: Erpy fixes it in a separate merge request or pull request onto the base branch, see [Automatic work](../automatic-work/).
-- Erpy runs one piece of work at a time on each ticket, issue, merge request or pull request. If you ask for more on one while Erpy is still working on it, your request waits and starts when that work ends. If your earlier request has not started yet, Erpy works on your newest request in its place: put everything you need in one comment. Work on different ones can run at the same time. When many requests are waiting, they start when there is capacity.
+- Erpy runs one piece of work at a time on each ticket, issue, merge request or pull request. If you ask for more on one while Erpy is still working on it, your request waits and starts when that work ends. If your earlier request has not started yet and you asked for a change, for the merge conflicts to be resolved or for a design revision, Erpy reads all the waiting requests together, oldest first, with yours last. For any other request, it works on your newest request in its place: put everything you need in one comment. Work on different ones can run at the same time. When many requests are waiting, they start when there is capacity.
 - Erpy never merges: you do. While it builds a change, it does not change your workflows, `harness.yaml` or `.harness` folder.
 - Erpy does not deploy. After you merge, install or upgrade the module in your Odoo as you do today.
 - A merge request or pull request that Erpy opens carries the `erpy-factory` label, and Erpy keeps it in order on its own, see [Automatic work](../automatic-work/).

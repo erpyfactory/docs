@@ -12,12 +12,7 @@ Google, using the address you enter.
 - Setup is over: your code host is linked and your first repository is added. See
   [4. Add a repository](../04-add-a-repository/). Until then, Settings → Users, like every other page
   of the organization, opens the setup page.
-- Your GitLab group or GitHub account's link is **Active**. With more than one link, Settings → Users
-  goes by one of them: the one named like your organization's address, else GitHub first.
-
-While the link the page goes by is not Active, Settings → Users shows this message to everyone, Admins included: "Only an
-admin of this organization can invite people or change their access. Ask your admin." Wait for the
-link to turn Active, then open the page again.
+- Your GitLab group or GitHub account's link is **Active**.
 
 ## Steps
 
@@ -76,12 +71,14 @@ Your own row shows "(you)" and has no buttons: you cannot change your own access
 - **Revoke**: on a person who **Joined**, takes their access away. Their row stays, with **No access**.
 - **Grant Builder**: on a row with **No access**, gives the person access again, as a Builder. Change
   the role afterwards if they need another one.
+- **Invite again**: on a row with **No access**, makes the row a fresh invitation and keeps the role. The page says "Invitation saved. The email goes out within a minute." Use it when the person's Google account was deleted and made again on the same address: the new account cannot take over a row that has joined until an Admin does **Revoke** and then **Invite again**.
 
 ## If it is refused
 
 | What you see | What to do |
 | --- | --- |
 | "Enter a valid email address." | Check the address for typos, then select **Send invite** again. |
-| "This person is already on the list." | The address is already listed. Find its row. If it reads **Invited**, use **Resend** if they did not get the email. If it reads **No access**, use **Grant Builder**. |
+| "This person is already on the list." | The address is already listed. Find its row. If it reads **Invited**, use **Resend** if they did not get the email. |
+| "This person is already on the list, with no access. Press Invite again on their row." | The row reads **No access**. Use **Invite again**, or **Grant Builder** to give access again as a Builder. |
 | "The invitation was saved, but the email could not be queued. They can still sign in with Google; try Resend later." | The invitation stands. Tell the person to sign in with Google, or select **Resend** later. |
 | "Only an open invitation can be resent." | The person has already joined, or the invitation was cancelled. Reload the page. |
