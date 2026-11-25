@@ -114,9 +114,12 @@ odoo_enterprise_source: "image:/opt/odoo/enterprise"
 
 # Enterprise is in a GitHub repository, at a branch or tag
 odoo_enterprise_source: "github:acme/enterprise@19.0"
+
+# Enterprise is in a GitLab project of your group
+odoo_enterprise_source: "gitlab:acme/odoo-enterprise"
 ```
 
-Required when `odoo_enterprise` is `true`. Without `@<ref>`, a GitHub repository is read at your `odoo_version`. A repository source is read from GitHub only. A private one must be in the same GitHub account or organization as your repository, with the Erpy app installed on it. On GitLab, there is no GitLab repository source: put Enterprise in your image and use `image:<path>`.
+Required when `odoo_enterprise` is `true`. Without `@<ref>`, a GitHub repository is read at your `odoo_version`. A private GitHub repository must be in the same GitHub account or organization as your repository, with the Erpy app installed on it. On GitLab, use `gitlab:<path>` for a project of your linked group that Erpy's user reaches as Developer, or `image:<path>`. In that project's **Settings → CI/CD → Job token permissions** on GitLab, allow your group, so your CI can read it. For new Enterprise modules, an Admin selects the project in Erpy Factory under **Settings → Odoo Enterprise**.
 
 ### `odoo_source`
 

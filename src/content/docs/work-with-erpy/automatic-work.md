@@ -31,12 +31,14 @@ To give it back to Erpy, add the `erpy-factory` label again. Erpy then repairs o
 
 Pull requests and merge requests are meant to be merged. Erpy keeps working on one on its own, while it carries the `erpy-factory` label, for seven days after the last time it worked on the change itself: building it, following up on a review that asks for changes, filming its screen recordings or revising its design. Repairing checks and resolving conflicts do not start the seven days again, and neither does a push or a comment from you, unless it leads Erpy to one of those. So a pull request or merge request that is still going through review rounds stays with Erpy.
 
-A pull request or merge request that is not merged in that time is treated as no longer important. The `erpy-factory` label comes off it, within about an hour, and Erpy stops its automatic work on it. It stays open. On GitHub, its ticket shows "Stopped" on the board. On GitLab, the ticket shows "Stopped" only in a project with a webhook; without one the label still comes off, but the card shows no "Stopped". You can give it back to Erpy by adding the label again, see [Take a merge request or pull request back from Erpy](#take-a-merge-request-or-pull-request-back-from-erpy). On GitHub, a comment that mentions `@erpyai` works too.
+A pull request or merge request that is not merged in that time is treated as no longer important. The `erpy-factory` label comes off it, within about an hour, and Erpy stops its automatic work on it. It stays open. On GitHub, its ticket shows "Stopped" on the board. On GitLab, the ticket shows "Stopped" only in a project with a webhook; without one the label still comes off, but the card shows no "Stopped". You can give it back to Erpy by adding the label again, or in a comment, see [Bring a merge request or pull request back to Erpy](#bring-a-merge-request-or-pull-request-back-to-erpy).
 
-## Bring a pull request back to Erpy (GitHub)
+## Bring a merge request or pull request back to Erpy
+
+On the board, a stopped ticket's card shows "Stopped" and the date. Its hint, on hover or keyboard focus, says how to hand it back, for example on GitLab "Stopped on 24 November 2026. Hand back with an @erpyai comment."
 
 - Add the `erpy-factory` label again. The seven days start again. Erpy then repairs on the next run of your checks, and resolves conflicts on its next check for them.
-- Or ask Erpy for work on the pull request, in a comment that mentions `@erpyai`. It works with or without the label, puts the label back and starts the seven days again. For example:
+- Or ask Erpy for work on the merge request or pull request, in a comment on it that mentions `@erpyai`. It works with or without the label, puts the label back and starts the seven days again. On GitLab, Erpy reads the comment through your webhooks, or within 5 minutes in a project that has none. For example:
 
   ```text
   @erpyai please work through the review

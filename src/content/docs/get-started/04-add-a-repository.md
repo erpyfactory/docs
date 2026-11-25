@@ -28,17 +28,20 @@ The page lists the projects in your group that Erpy's user reaches as Developer 
 
 ### Steps
 
-1. Tick the projects to add. You can tick 20 at most at once. Use **Search** to find a project by its path. A project with no commit yet carries the **Empty** badge.
-2. For each empty project you tick, the page asks "It is empty. What will it be?". Choose one:
+1. Tick the projects to add. You can tick 20 at most at once. Use **Search** to find a project by its path. A project with no commit yet carries the **Empty** badge. When you tick a project that has commits, the page looks at what it holds first: "Looking at what the project holds…".
+2. For each empty project you tick, the page asks "It is empty. What will it be?". For a project that holds only a README, it asks "It has a README and no code yet. What will it be?". The choices:
 
    | Choice | What the screen says |
    |---|---|
    | **Odoo module** | "Odoo 19, with tests in the module" |
+   | **Odoo module (Enterprise)** | "Odoo 19 with your Enterprise code". Once an Enterprise repository is selected, it names it, for example "Odoo 19 with acme/odoo-enterprise" |
    | **Next.js app** | "TypeScript, tested with Vitest" |
    | **Python service** | "FastAPI, tested with pytest" |
    | **Something else** | "Say what in one line" |
 
-   Only **Odoo module** can be chosen today: the other three are greyed out and say "Coming soon". Erpy lays out one Odoo module at the root of the project, in a folder named after the project (for example `coffee_rental` for `coffee-rental`), with its manifest and one test.
+   **Odoo module** is chosen to start with. **Next.js app**, **Python service** and **Something else** are greyed out, say "Coming soon", and can't be chosen. For **Odoo module**, Erpy lays out one Odoo module at the root of the project, in a folder named after the project (for example `coffee_rental` for `coffee-rental`), with its manifest and one test.
+
+   **Odoo module (Enterprise)** needs your group's Enterprise repository. Until an Admin has selected it in **Settings → Odoo Enterprise**, the choice says "Select your Enterprise repository for this group first." with a link to that page, and **Add** stays greyed out while it is chosen.
 3. Select **Add** (or **Add 3 repositories**, with the number you ticked).
 
 Next to the button, a line says what is missing:
@@ -46,8 +49,9 @@ Next to the button, a line says what is missing:
 | What you see | What it means |
 |---|---|
 | "20 at most at once." | You ticked 20. Add these first, then add more. |
-| "Say what each empty repository will be." | An empty project you ticked has no choice yet. |
-| "Adding starts no run, except the setup of an empty repository." | You can add. |
+| "Looking at what the ticked projects hold…" | Wait a moment: **Add** is greyed out until the page knows which projects have no code yet. |
+| "An Enterprise module needs an Enterprise repository selected for this group in Settings." | You chose **Odoo module (Enterprise)**, and no Enterprise repository is selected for the group. Select it in **Settings → Odoo Enterprise**, or choose **Odoo module**. |
+| "Adding starts no run, except the setup of a repository with no code." | You can add. |
 
 ### Not in the list?
 
@@ -70,7 +74,7 @@ If nothing is wrong, the page says "acme-erpy reaches no project that Erpy canno
 
 1. On the Add repository page, select **Create a new one on GitLab**. GitLab's new-project page opens in a new tab.
 2. Decide on the README box. The Add repository page says to leave "Initialize repository with a README" off; that works only where Erpy's user may make the first push.
-   - On GitLab Free, tick "Initialize repository with a README". On Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project has its first commit, so it shows without the **Empty** badge. Add answers "No harness.yaml yet: its board shows Set up my repo.", and **Set up my repo** on its board opens a merge request with a starter: merge it, and setup then starts by itself.
+   - On GitLab Free, tick "Initialize repository with a README", or add a README right after you create the project. Erpy's user can't make the first commit otherwise: on Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project has its first commit, so it shows without the **Empty** badge. When you tick it, the page asks "It has a README and no code yet. What will it be?". After **Add**, Erpy opens a merge request with a starter: see [A project with no code yet](#a-project-with-no-code-yet). Merge it, and setup then starts by itself.
    - On GitLab Premium or Ultimate, check your group's **Settings → Repository → Default branch → Initial default branch protection**. **Fully protected after initial push**, **Partially protected** or **Not protected** lets Erpy's user, a Developer, make the first commit: leave the README off, and Erpy sets the empty project up with a starter. With **Fully protected**, tick the README box, as on Free.
 3. Create the project.
 4. Invite Erpy's user to the project as Developer, unless it is already a member of the whole group.
@@ -118,7 +122,7 @@ If the reason reads "GitLab did not let Erpy open the starter merge request in g
 
 ### An empty project
 
-1. Erpy commits a starter straight to the default branch: a README, a starting layout, one test, and CI that runs the test. For **Something else**, the starter is the README alone.
+1. Erpy commits a starter straight to the default branch: a README, a starting layout, one test, and CI that runs the test.
 2. Erpy then plans the configuration and opens the setup merge request, titled "Configure this repository for Erpy Factory".
 3. You review the merge request and merge it.
 
@@ -140,7 +144,7 @@ While the setup ticket is open, the board shows "Setup in progress — view tick
 
 On GitLab, a project that holds only a README, a licence file (`LICENSE`, `LICENCE` or `COPYING`, with any ending) or the git files `.gitignore`, `.gitattributes` and `.editorconfig` has no code yet. Any directory counts as code.
 
-1. Select **Set up my repo** on the project's board. If the project was listed as empty and had a README by the time you selected **Add**, Erpy does this at once and the page says "No code yet: …".
+1. On Add repository, the page asks "It has a README and no code yet. What will it be?" when you tick the project. Choose, then select **Add**: Erpy does step 2 at once, and the page says "No code yet: …". For a project already in Factory, select **Set up my repo** on its board. If the board asks the same question, choose and select **Set up my repo** again.
 2. Erpy opens a merge request with a starter: one test and CI. The board shows "Waiting for merge request !12" and "Erpy opened a merge request with a starter. Merge it on GitLab; setup then starts by itself." There is no **Set up my repo** button while it waits. If that merge request's pipeline fails without running a job, see [Create a user for Erpy](../03-link-your-code-host/gitlab/#steps).
 3. Merge the merge request. Setup then starts by itself, and opens the setup merge request.
 
