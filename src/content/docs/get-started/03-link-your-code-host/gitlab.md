@@ -33,7 +33,7 @@ The form shows a numbered list of three steps, one per row, and a token field nu
    - It needs its own email address, one no other GitLab account uses.
    - On a paid GitLab plan, it takes a seat in your group, like any member with the Developer role.
    - If your group enforces two-factor authentication, set it up for this user too, with an authenticator app or a security key. Email codes don't count.
-   - On GitLab's Free plan, when your CI runs on GitLab's own runners, GitLab may ask this user to verify its account: an email address, a phone number or a payment method, depending on the account. If it does, this user's pipelines fail without running a job until the account is verified. GitLab shows a banner with **Verify my account**: sign in as Erpy's user and follow it. Then open the merge request's **Pipelines** tab and select **Run pipeline**, or push a new commit to its branch. A pipeline you run on the branch itself, from **Build → Pipelines**, does not count as the merge request's pipeline. A paid plan, bought compute minutes, or your own runners avoid it.
+   - On GitLab's Free plan, when your CI runs on GitLab's own runners, GitLab may ask this user to verify its account: an email address, a phone number or a payment method, depending on the account. If it does, this user's pipelines fail without running a job until the account is verified. GitLab shows a banner with **Verify my account**: sign in as Erpy's user and follow it. Then run the pipeline again. The CI in Erpy's starter runs on every push to a branch: open **Build → Pipelines**, select **Run pipeline**, choose the merge request's branch and run it. If your own CI runs merge request pipelines instead, select **Run pipeline** on the merge request's **Pipelines** tab. Pushing a new commit to the branch works in both cases. A paid plan, bought compute minutes, or your own runners avoid it.
 2. **Make it Developer.** Add the user as **Developer** to a group, which gives it every project in the group and its subgroups, or to single projects (**Manage → Members** in GitLab). Keep these rules:
    - Developer only, never Maintainer or Owner.
    - Projects of one top-level group only.
@@ -80,7 +80,7 @@ The form shows a numbered list of three steps, one per row, and a token field nu
 Erpy's user is Developer of projects, so create the first project before you link:
 
 1. **Create the project in GitLab**, in your group.
-   - On GitLab Free, tick "Initialize repository with a README" when you create the project, or add a README right after. Erpy's user can't make the first commit otherwise: on Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project already has its first commit. When you tick it on Add repository, the page asks "It has a README and no code yet. What will it be?". Choose **Odoo module** and select **Add**: Erpy opens a merge request with a starter. Merge it, and setup then starts by itself.
+   - On GitLab Free, tick "Initialize repository with a README" when you create the project, or add a README right after. Erpy's user can't make the first commit otherwise: on Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project already has its first commit. When you tick the project on Add repository, the page asks "It has a README and no code yet. What will it be?". Choose **Odoo module** and select **Add**: Erpy opens a merge request with a starter. Merge it, and setup then starts by itself.
    - On GitLab Premium or Ultimate, you can leave "Initialize repository with a README" off, so Erpy sets the empty project up with a starter. First check the group's **Settings → Repository → Default branch → Initial default branch protection**: **Fully protected after initial push**, **Partially protected** or **Not protected** lets a Developer make the first push. With **Fully protected**, tick the README box, as on Free.
 2. **Make Erpy's user Developer** of the group, or of the new project, as in step 2.
 3. **Link** as in steps 3 to 6. The preview's **Group** row now shows your group, and the card is marked "Active".
@@ -148,12 +148,14 @@ On the link's card, open the **Webhooks** section. It is open by itself while no
    - In **Webhook**, choose **Group webhook**, or the project the webhook belongs to. **Webhook** lists at most 50 projects. To choose one it doesn't list, select **Paste its signing token** next to it in the list above.
    - Paste the token into **Signing token** and select **Save**.
 
-   The page says "Signing token saved for the group webhook. Use GitLab's Test button now: 200 under Recent events means Erpy accepts it, 401 means this token doesn't match the webhook." For a project webhook, it names the project as **Webhook** does, for example "Signing token saved for acme/shop. Use GitLab's Test button now: 200 under Recent events means Erpy accepts it, 401 means this token doesn't match the webhook." Saving checks only that the token looks like a signing token, so the test in step 5 is what shows that it is the right one. **Webhook** stays on the saved webhook, and the **Signing token** field then reads "Saved. Paste a new token only to replace it."
+   The page says "Signing token saved for the group webhook. Use GitLab's Test button now: 200 under Recent events means Erpy accepts it, 401 means this token doesn't match the webhook." For a project webhook, it names the project as **Webhook** does, for example "Signing token saved for acme/shop. Use GitLab's Test button now: 200 under Recent events means Erpy accepts it, 401 means this token doesn't match the webhook." Saving checks only that the token looks like a signing token. The test in step 5 shows whether it is the right one. **Webhook** stays on the saved webhook, and the **Signing token** field then reads "Saved. Paste a new token only to replace it."
 5. **Send a test.** On GitLab, open the webhook's **Test** list and choose **Push events**. GitLab can send it only once the project has at least one commit. For a project that is still empty, send the test after its first commit, for example after you add it in [4. Add a repository](../../04-add-a-repository/) and Erpy commits the starter.
 
    GitLab shows the result at once: edit the webhook and look under **Recent events**. A `200` status means Erpy accepted the delivery. A `401` means the signature didn't match: check that you saved this webhook's signing token in step 4.
 
-   A `200` is not proof in two cases. Erpy also answers `200` when it drops the delivery: for a project webhook while a group webhook is saved, and for a project you have not added in [4. Add a repository](../../04-add-a-repository/). In both cases the project's line under **Webhooks** doesn't change.
+   Erpy checks the signing token before anything else. So a `200` always means the token is right, also for a project you have not added yet. You can send the test before you add the project.
+
+   A `200` does not always mean Erpy uses the event. Erpy drops it, and still answers `200`, for a project you have not added in [4. Add a repository](../../04-add-a-repository/), and for a project webhook while a group webhook is saved. In both cases the project's line under **Webhooks** doesn't change.
 
 For webhooks per project, repeat steps 2 to 5 for each project Erpy works on.
 
@@ -165,11 +167,19 @@ For webhooks per project, repeat steps 2 to 5 for each project Erpy works on.
 
 ### If a signing token no longer matches
 
+#### A project webhook
+
 If a project's webhook gets a new signing token on GitLab, for example after someone selects **Generate signing token** again, Erpy refuses its deliveries until you paste the new token. The project's line under **Webhooks** says "Signing token no longer matches. GitLab's deliveries are refused: paste the new signing token. Erpy checks GitLab every 5 minutes meanwhile." Such projects are listed first.
 
 The link's card is marked "Needs attention" and says "The webhook of shop uses a signing token Erpy no longer has. Paste its new signing token under Webhooks on Settings → Links.", with the project's name. With more than one such project, it says "2 project webhooks use a signing token Erpy no longer has. Paste their new signing tokens under Webhooks on Settings → Links." Your organization's home page shows the same line.
 
 To fix it, copy the webhook's current signing token on GitLab. GitLab shows a signing token only once: if you no longer have it, select **Generate signing token** on the webhook again and copy the new one. Paste it as in step 4, and send a test as in step 5. Erpy accepts the webhook's deliveries again as soon as the token is saved. The project list is refreshed every hour, so the line and the card's warning can take up to an hour to go. While a group webhook is in use, the project webhooks are not used, and their lines don't ask for a token.
+
+#### The group webhook
+
+If the group webhook gets a new signing token on GitLab, Erpy refuses its deliveries for every project. The page has no warning that names the signing token in this case, and the project lines don't change at once. Erpy notices that events stop arriving. Once an issue or merge request changes in a project that received events before, and no event comes for it, the card is marked "Needs attention" within about two hours. It says "GitLab has stopped sending webhooks. Check the group's webhooks on GitLab; this clears by itself once they deliver again." From the first hourly check that notices it, Erpy checks GitLab every 5 minutes for that project.
+
+To fix it, copy the group webhook's current signing token on GitLab, or select **Generate signing token** again and copy the new one. Paste it as in step 4, with **Group webhook** chosen in **Webhook**, and send a test as in step 5. The warning clears by itself once the webhook delivers again.
 
 ### What to expect from webhooks
 
@@ -239,7 +249,7 @@ Four of these clear by themselves once the cause is fixed: a blocked or deactiva
 | "Erpy's GitLab user is Maintainer or Owner somewhere. Lower it to Developer; Erpy checks again each hour and starts again by itself." | Change the user's role to Developer on GitLab. Erpy clears the warning within the hour, with no new token. |
 | "GitLab did not let Erpy renew the token, which expires within 60 days. Replace it before then." | [Replace the token](#replace-the-token) before it expires. |
 | "Erpy's GitLab user is no longer Developer of any project in the group. Add it back as Developer; Erpy checks again each hour and starts again by itself." | Add the user back as Developer on GitLab. Erpy clears the warning within the hour, with no new token. |
-| "GitLab has stopped sending webhooks. …" | Open the group's or projects' **Settings → Webhooks** on GitLab and check that the webhooks are still there and enabled. See [Add the webhooks](#add-the-webhooks). The warning clears by itself once they deliver again, with no new token. |
+| "GitLab has stopped sending webhooks. …" | Open the group's or projects' **Settings → Webhooks** on GitLab and check that the webhooks are still there and enabled. See [Add the webhooks](#add-the-webhooks). If someone made a new signing token for the group webhook, paste it: see [The group webhook](#the-group-webhook). The warning clears by itself once they deliver again, with no new token. |
 | "GitLab no longer accepts the token. Replace it." | [Replace the token](#replace-the-token). |
 | "The webhook of shop uses a signing token Erpy no longer has. Paste its new signing token under Webhooks on Settings → Links." | Paste the webhook's new signing token. See [If a signing token no longer matches](#if-a-signing-token-no-longer-matches). The warning clears within the hour, with no new personal access token. |
 | "GitLab has blocked or deactivated Erpy's GitLab user. Get it unblocked, or sign in to GitLab as that user to reactivate it; Erpy checks again each hour and starts again by itself." | Get the user unblocked in GitLab, or sign in as that user to reactivate it. Erpy clears the warning within the hour, with no new token. |

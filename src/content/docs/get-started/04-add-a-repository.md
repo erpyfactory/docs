@@ -74,7 +74,7 @@ If nothing is wrong, the page says "acme-erpy reaches no project that Erpy canno
 
 1. On the Add repository page, select **Create a new one on GitLab**. GitLab's new-project page opens in a new tab.
 2. Decide on the README box. The Add repository page says to leave "Initialize repository with a README" off; that works only where Erpy's user may make the first push.
-   - On GitLab Free, tick "Initialize repository with a README", or add a README right after you create the project. Erpy's user can't make the first commit otherwise: on Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project has its first commit, so it shows without the **Empty** badge. When you tick it, the page asks "It has a README and no code yet. What will it be?". After **Add**, Erpy opens a merge request with a starter: see [A project with no code yet](#a-project-with-no-code-yet). Merge it, and setup then starts by itself.
+   - On GitLab Free, tick "Initialize repository with a README", or add a README right after you create the project. Erpy's user can't make the first commit otherwise: on Free, GitLab's default branch protection, **Fully protected**, doesn't let a Developer make the first push, and a group Owner can't change it. With the README, the project has its first commit, so it shows without the **Empty** badge. When you tick the project on Add repository, the page asks "It has a README and no code yet. What will it be?". After **Add**, Erpy opens a merge request with a starter: see [A project with no code yet](#a-project-with-no-code-yet). Merge it, and setup then starts by itself.
    - On GitLab Premium or Ultimate, check your group's **Settings → Repository → Default branch → Initial default branch protection**. **Fully protected after initial push**, **Partially protected** or **Not protected** lets Erpy's user, a Developer, make the first commit: leave the README off, and Erpy sets the empty project up with a starter. With **Fully protected**, tick the README box, as on Free.
 3. Create the project.
 4. Invite Erpy's user to the project as Developer, unless it is already a member of the whole group.
@@ -107,6 +107,8 @@ On GitLab, the page says what was added, in green, for example "Added acme/shop 
 | "Empty: setup did not start." followed by the reason | Do what the reason says. |
 | "Its board says whether it needs setup." | Open its board. |
 
+The "Empty" and "No code yet" lines name the choice you made. For **Odoo module (Enterprise)**, they say "a starter for Odoo module (Enterprise)", for example "Empty: Factory committed a starter for Odoo module (Enterprise) (one test and CI). A setup merge request with harness.yaml follows."
+
 If GitLab refused Erpy's labels, the page also says "GitLab refused Erpy’s labels on one repository: Erpy’s user needs the Developer role there. Erpy tries again every hour." Make Erpy's user Developer of that project.
 
 The answer stays above the list until you reload or leave the page, also once every project is in Factory and the page says "Every project Erpy reaches here is in Factory." Tick more projects to add them.
@@ -126,7 +128,9 @@ If the reason reads "GitLab did not let Erpy open the starter merge request in g
 2. Erpy then plans the configuration and opens the setup merge request, titled "Configure this repository for Erpy Factory".
 3. You review the merge request and merge it.
 
-On GitLab, the starter's CI is a `.gitlab-ci.yml` whose job has no runner tags. gitlab.com runs untagged jobs on its hosted runners, unless your group has runners of its own that take them, and that time counts toward your group's compute minutes. If its pipeline fails without running a job, GitLab may be asking Erpy's user to verify its account: see [Create a user for Erpy](../03-link-your-code-host/gitlab/#steps).
+The **Odoo module (Enterprise)** starter holds the same module, with `OEEL-1` as the licence in its manifest. Its README says which Enterprise project and branch it reads: the project selected in **Settings → Odoo Enterprise**, at branch `19.0`. Its CI has two jobs. The first checks that CI can read that project and that the project has the `19.0` branch. The second downloads the Enterprise code, runs the module's test with it, and keeps no copy. In GitLab, the Enterprise project's **Settings → CI/CD → Job token permissions** must allow your group, or the first job fails and says so.
+
+On GitLab, the starter's CI is a `.gitlab-ci.yml` whose jobs have no runner tags. gitlab.com runs untagged jobs on its hosted runners, unless your group has runners of its own that take them, and that time counts toward your group's compute minutes. If its pipeline fails without running a job, GitLab may be asking Erpy's user to verify its account: see [Create a user for Erpy](../03-link-your-code-host/gitlab/#steps).
 
 Watch the progress on the project's board: once Erpy has opened the setup ticket, the board shows "Setup in progress — view ticket". Select it to follow the ticket. If the board keeps showing "Setup hasn't started — view ticket", open the ticket and select **Set up my repo**.
 

@@ -35,7 +35,7 @@ A pull request or merge request that is not merged in that time is treated as no
 
 ## Bring a merge request or pull request back to Erpy
 
-On the board, a stopped ticket's card shows "Stopped" and the date. Its hint, on hover or keyboard focus, says how to hand it back, for example on GitLab "Stopped on 24 November 2026. Hand back with an @erpyai comment."
+On the board, a stopped ticket's card shows "Stopped" and the date. On GitLab, this is only in a project with a webhook, as said above. Its hint, on hover or keyboard focus, says how to hand it back, for example on GitLab "Stopped on 24 November 2026. Hand back with an @erpyai comment."
 
 - Add the `erpy-factory` label again. The seven days start again. Erpy then repairs on the next run of your checks, and resolves conflicts on its next check for them.
 - Or ask Erpy for work on the merge request or pull request, in a comment on it that mentions `@erpyai`. It works with or without the label, puts the label back and starts the seven days again. On GitLab, Erpy reads the comment through your webhooks, or within 5 minutes in a project that has none. For example:
