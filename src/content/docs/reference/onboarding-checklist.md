@@ -18,7 +18,7 @@ Most projects can give the simple answer to every row, and then need only the [G
 
 | Question | Simple | More setup |
 | --- | --- | --- |
-| Do you run Community or Enterprise? | Community | Enterprise: where does its code live, in your image or in a GitHub repository Erpy can reach? On GitLab, it must be in your image |
+| Do you run Community or Enterprise? | Community | Enterprise: where does its code live, in your image or in a repository Erpy can reach? On GitLab, it can be a project of your group: an Admin selects it in Erpy Factory under **Settings → Odoo Enterprise**, and in that project's **Settings → CI/CD → Job token permissions** on GitLab, you allow your group |
 | Where does your Odoo source come from? | The Odoo image you use | A GitHub repository: the official one, a fork or your own. On GitLab, use the source in your image |
 | Where are your add-ons? | At the top of the repository | In other folders, or with your own `odoo.conf` |
 | Which languages besides English do new terms need? | None, or a short list | A long list: translation work grows with it |

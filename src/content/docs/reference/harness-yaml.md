@@ -114,9 +114,12 @@ odoo_enterprise_source: "image:/opt/odoo/enterprise"
 
 # Enterprise is in a GitHub repository, at a branch or tag
 odoo_enterprise_source: "github:acme/enterprise@19.0"
+
+# Enterprise is in a GitLab project of your group, at a branch or tag
+odoo_enterprise_source: "gitlab:acme/odoo-enterprise@19.0"
 ```
 
-Required when `odoo_enterprise` is `true`. Without `@<ref>`, a GitHub repository is read at your `odoo_version`. A repository source is read from GitHub only. A private one must be in the same GitHub account or organization as your repository, with the Erpy app installed on it. On GitLab, there is no GitLab repository source: put Enterprise in your image and use `image:<path>`.
+Required when `odoo_enterprise` is `true`. Without `@<ref>`, a GitHub repository or a GitLab project is read at the branch or tag named after your `odoo_version`, for example `19.0`. A private GitHub repository must be in the same GitHub account or organization as your repository, with the Erpy app installed on it. On GitLab, use `gitlab:<path>` for a project of your linked group that Erpy's user reaches as Developer, or `image:<path>`. In that project's **Settings → CI/CD → Job token permissions** on GitLab, allow your group, so your CI can read it. For new Enterprise modules, an Admin selects the project in Erpy Factory under **Settings → Odoo Enterprise**.
 
 ### `odoo_source`
 
@@ -133,7 +136,7 @@ odoo_source: "image:/usr/lib/python3/dist-packages"
 odoo_source: "github:odoo/odoo@19.0"
 ```
 
-Erpy finds it in your CI, Docker files or `.gitmodules`. With a repository, it reads it at the branch you name, or at your `odoo_version` without one. A repository source is read from GitHub only. A private one must be in the same GitHub account or organization as your repository, with the Erpy app installed on it. On GitLab, there is no GitLab repository source: use the Odoo source in your image.
+Erpy finds it in your CI, Docker files or `.gitmodules`. With a repository, it reads it at the branch you name, or at your `odoo_version` without one. A private GitHub repository must be in the same GitHub account or organization as your repository, with the Erpy app installed on it. On GitLab, use a public GitHub repository such as `github:odoo/odoo@19.0`, `gitlab:<path>` for a project of your linked group that Erpy's user reaches as Developer, or the Odoo source in your image.
 
 ## Your development stack
 
